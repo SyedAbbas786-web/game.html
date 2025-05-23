@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tic Tac Toe - Improved</title>
+<title>Tic Tac Toe - Improved AI</title>
 <style>
     * {
         margin: 0; padding: 0; box-sizing: border-box;
@@ -159,7 +159,6 @@
         ];
         for (let [a, b, c] of winPatterns) {
             if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                // Highlight winning cells
                 cells[a].style.backgroundColor = '#90ee90';
                 cells[b].style.backgroundColor = '#90ee90';
                 cells[c].style.backgroundColor = '#90ee90';
@@ -185,15 +184,88 @@
         return false;
     }
 
+    // Minimax algorithm for perfect AI move
+    function minimax(board, isMaximizing) {
+        const winner = evaluateBoard(board);
+        if (winner !== null) {
+            return { score: winner };
+        }
+
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            let bestMove = -1;
+            for (let i = 0; i < 9; i++) {
+                if (board[i] === '') {
+                    board[i] = 'O';
+                    const result = minimax(board, false);
+                    board[i] = '';
+                    if (result.score > bestScore) {
+                        bestScore = result.score;
+                        bestMove = i;
+                    }
+                }
+            }
+            return { score: bestScore, move: bestMove };
+        } else {
+            let bestScore = Infinity;
+            let bestMove = -1;
+            for (let i = 0; i < 9; i++) {
+                if (board[i] === '') {
+                    board[i] = 'X';
+                    const result = minimax(board, true);
+                    board[i] = '';
+                    if (result.score < bestScore) {
+                        bestScore = result.score;
+                        bestMove = i;
+                    }
+                }
+            }
+            return { score: bestScore, move: bestMove };
+        }
+    }
+
+    // Evaluate board for minimax scoring
+    function evaluateBoard(board) {
+        const winPatterns = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+        ];
+        for (let [a,b,c] of winPatterns) {
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                if (board[a] === 'O') return 10;
+                else if (board[a] === 'X') return -10;
+            }
+        }
+        if (!board.includes('')) return 0;
+        return null;
+    }
+
     function aiMove() {
         if (gameOver) return;
-        const emptyCells = gameBoard.map((val, i) => val === '' ? i : null).filter(i => i !== null);
-        const randIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-        gameBoard[randIndex] = 'O';
-        cells[randIndex].textContent = 'O';
-        if (!checkWinner()) {
-            currentPlayer = 'X';
-            updateTurnIndicator(currentPlayer);
+
+        // 50% chance perfect move, 50% chance random move
+        const randomChance = Math.random();
+        let move;
+
+        if (randomChance < 0.5) {
+            const result = minimax(gameBoard.slice(), true);
+            move = result.move;
+        } else {
+            // random move
+            const emptyIndices = gameBoard
+                .map((val, idx) => val === '' ? idx : null)
+                .filter(v => v !== null);
+            move = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+        }
+
+        if (move !== -1) {
+            gameBoard[move] = 'O';
+            cells[move].textContent = 'O';
+            if (!checkWinner()) {
+                currentPlayer = 'X';
+                updateTurnIndicator(currentPlayer);
+            }
         }
     }
 
@@ -207,46 +279,55 @@
         gameBoard[index] = currentPlayer;
         e.target.textContent = currentPlayer;
 
-        if (checkWinner()) return;
-
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        updateTurnIndicator(currentPlayer);
-
-        if (gameMode === 'pvc' && currentPlayer === 'O') {
-            // Delay AI move for better UX
-            setTimeout(aiMove, 500);
-        }
-    }
-
-    function updateTurnIndicator(player) {
-        if (player) {
-            turnIndicator.textContent = `Turn: Player ${player}`;
-        } else {
-            turnIndicator.textContent = '';
+        if (!checkWinner()) {
+            if (gameMode === 'pvp') {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                updateTurnIndicator(currentPlayer);
+            } else if (gameMode === 'pvc') {
+                currentPlayer = 'O';
+                updateTurnIndicator('Computer (O)');
+                aiMove();
+            }
         }
     }
 
     function resetGame() {
         gameBoard = ['', '', '', '', '', '', '', '', ''];
-        gameOver = false;
-        currentPlayer = 'X';
         cells.forEach(cell => {
             cell.textContent = '';
             cell.style.backgroundColor = '';
         });
+        gameOver = false;
+        currentPlayer = 'X';
         updateTurnIndicator(currentPlayer);
     }
 
-    resetButton.addEventListener('click', resetGame);
+    function updateTurnIndicator(player) {
+        if (player === '') {
+            turnIndicator.textContent = '';
+        } else if (player === 'X' || player === 'O') {
+            turnIndicator.textContent = `Turn: Player ${player}`;
+        } else {
+            turnIndicator.textContent = `Turn: ${player}`;
+        }
+    }
+
+    // Toggle Dark/Light Theme
     toggleThemeButton.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
     });
+
+    resetButton.addEventListener('click', resetGame);
+
     backToMenuButton.addEventListener('click', () => {
         game.style.display = 'none';
         menu.style.display = 'block';
     });
 
-    cells.forEach(cell => cell.addEventListener('click', handleClick));
+    cells.forEach(cell => {
+        cell.addEventListener('click', handleClick);
+    });
+
 </script>
 </body>
 </html>
