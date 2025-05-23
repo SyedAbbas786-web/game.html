@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Car Racing Game with Touch</title>
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    user-select: none;
+  }
+  canvas {
+    background: #222;
+    display: block;
+    margin: 20px auto;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    touch-action: none; /* important for touch */
+  }
+  #info {
+    margin-top: 10px;
+  }
+  button {
+    margin: 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Car Racing Game</h1>
+<canvas id="gameCanvas" width="400" height="500"></canvas>
+<div id="info">
+  <div>Score: <span id="score">0</span> | Lives: <span id="lives">3</span> | High Score: <span id="highScore">0</span></div>
+  <button id="startBtn">Start Game</button>
+  <button id="pauseBtn" disabled>Pause</button>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const laneX = [100, 160, 220, 280]; // lanes x positions
+  let carLane = 1; // start lane index
+  let carY = 420;
+  const carWidth = 40;
+  const carHeight = 60;
+
+  let obstacles = [];
+  let nitroItems = [];
+
+  let score = 0;
+  let lives = 3;
+  let highScore = localStorage.getItem('highScore') || 0;
+  let speed = 5;
+  let baseSpeed = speed;
+  let boostActive = false;
+  let boostTimer = 0;
+  let paused = false;
+  let gameStarted = false;
+
+  const maxLives = 3;
+  const numObstacles = 3;
+  const numNitro = 2;
+
+  // Draw the player's car
+  function drawCar() {
+    const x = laneX[carLane];
+    ctx.fillStyle = boostActive ? 'orange' : 'red';
+    ctx.fillRect(x, carY, carWidth, carHeight);
+
+    // Roof
+    ctx.fillStyle = 'darkgray';
+    ctx.fillRect(x + 10, carY + 15, 20, 30);
+
+    // Tires
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.ellipse(x + 8, carY + 10, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x + 32, carY + 10, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x + 8, carY + 50, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x + 32, carY + 50, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Flames if boost active
+    if (boostActive) {
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      ctx.ellipse(x + 20, carY + carHeight + 15, 10, 20, 0, 0, Math.PI);
+      ctx.fill();
+    }
+  }
+
+  // Draw obstacle cars
+  function drawObstacle(ob) {
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(ob.x, ob.y, carWidth, carHeight);
+    ctx.fillStyle = 'darkgray';
+    ctx.fillRect(ob.x + 10, ob.y + 15, 20, 30);
+
+    // Tires
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.ellipse(ob.x + 8, ob.y + 10, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(ob.x + 32, ob.y + 10, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(ob.x + 8, ob.y + 50, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(ob.x + 32, ob.y + 50, 6, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Draw Nitro items
+  function drawNitro(nitro) {
+    ctx.fillStyle = 'magenta';
+    ctx.fillRect(nitro.x, nitro.y, 30, 30);
+    ctx.fillStyle = 'white';
+    ctx.font = '20px Arial';
+    ctx.fillText('N', nitro.x + 8, nitro.y + 23);
+  }
+
+  // Draw lanes and road lines
+  function drawRoad() {
+    ctx.fillStyle = '#333';
+    ctx.fillRect(80, 0, 260, canvas.height);
+
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 4;
+    // Lane boundaries
+    ctx.beginPath();
+    ctx.moveTo(80, 0);
+    ctx.lineTo(80, canvas.height);
+    ctx.moveTo(340, 0);
+    ctx.lineTo(340, canvas.height);
+    ctx.stroke();
+
+    // Lane dividers
+    ctx.lineWidth = 2;
+    ctx.setLineDash([20, 20]);
+    for (let i = 1; i < laneX.length; i++) {
+      ctx.beginPath();
+      ctx.moveTo(laneX[i] - 30, 0);
+      ctx.lineTo(laneX[i] - 30, canvas.height);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+  }
+
+  // Update game objects positions
+  function updatePositions() {
+    obstacles.forEach(ob => {
+      ob.y += ob.speed;
+      if (ob.y > canvas.height) {
+        ob.y = -carHeight * 2;
+        ob.x = laneX[Math.floor(Math.random() * laneX.length)] - 20;
+        ob.speed = speed + Math.random() * 3;
+        score++;
+      }
+    });
+
+    nitroItems.forEach(nitro => {
+      nitro.y += speed;
+      if (nitro.y > canvas.height) {
+        nitro.y = -100 - Math.random() * 300;
+        nitro.x = laneX[Math.floor(Math.random() * laneX.length)] - 15;
+      }
+    });
+
+    // Boost timer decrease
+    if (boostActive) {
+      boostTimer--;
+      if (boostTimer <= 0) {
+        boostActive = false;
+        speed = baseSpeed;
+      }
+    }
+  }
+
+  // Check collisions between car and obstacles/nitro
+  function checkCollisions() {
+    const carRect = {
+      x: laneX[carLane] - 20,
+      y: carY,
+      width: carWidth,
+      height: carHeight,
+    };
+
+    // Obstacle collisions
+    obstacles.forEach(ob => {
+      if (
+        carRect.x < ob.x + carWidth &&
+        carRect.x + carWidth > ob.x &&
+        carRect.y < ob.y + carHeight &&
+        carRect.height + carRect.y > ob.y
+      ) {
+        if (!boostActive) {
+          lives--;
+          ob.y = -carHeight * 3;
+          ob.x = laneX[Math.floor(Math.random() * laneX.length)] - 20;
+          if (lives <= 0) {
+            gameOver();
+          }
+        }
+      }
+    });
+
+    // Nitro collisions
+    nitroItems.forEach(nitro => {
+      if (
+        carRect.x < nitro.x + 30 &&
+        carRect.x + carWidth > nitro.x &&
+        carRect.y < nitro.y + 30 &&
+        carRect.height + carRect.y > nitro.y
+      ) {
+        boostActive = true;
+        boostTimer = 150; // lasts for ~5 seconds
+        speed = baseSpeed + 5;
+        nitro.y = -100 - Math.random() * 300;
+        nitro.x = laneX[Math.floor(Math.random() * laneX.length)] - 15;
+      }
+    });
+  }
+
+  // Draw boost bar
+  function drawBoostBar() {
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(10, 10, 150, 20);
+    if (boostActive) {
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(10, 10, (boostTimer / 150) * 150, 20);
+    }
+  }
+
+  // Draw score and lives
+  function drawStats() {
+    document.getElementById('score').textContent = score;
+    document.getElementById('lives').textContent = lives;
+    document.getElementById('highScore').textContent = highScore;
+  }
+
+  // Game over screen
+  function gameOver() {
+    gameStarted = false;
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('highScore', highScore);
+    }
+    alert(`Game Over!\nScore: ${score}\nHigh Score: ${highScore}`);
+    resetGame();
+  }
+
+  // Reset game state
+  function resetGame() {
+    score = 0;
+    lives = maxLives;
+    boostActive = false;
+    speed = baseSpeed;
+    carLane = 1;
+    obstacles = [];
+    nitroItems = [];
+    initObstacles();
+    initNitro();
+  }
+
+  // Initialize obstacles
+  function initObstacles() {
+    for (let i = 0; i < numObstacles; i++) {
+      obstacles.push({
+        x: laneX[Math.floor(Math.random() * laneX.length)] - 20,
+        y: -i * 150,
+        speed: speed + Math.random() * 3,
+      });
+    }
+  }
+
+  // Initialize nitro items
+  function initNitro() {
+    for (let i = 0; i < numNitro; i++) {
+      nitroItems.push({
+        x: laneX[Math.floor(Math.random() * laneX.length)] - 15,
+        y: -100 - i * 250,
+      });
+    }
+  }
+
+  // Main game loop
+  function gameLoop() {
+    if (!paused && gameStarted) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawRoad();
+      drawCar();
+      obstacles.forEach(drawObstacle);
+      nitroItems.forEach(drawNitro);
+      drawBoostBar();
+
+      updatePositions();
+      checkCollisions();
+      drawStats();
+    }
+    requestAnimationFrame(gameLoop);
+  }
+
+  // Keyboard controls
+  window.addEventListener('keydown', e => {
+    if (!gameStarted) return;
+    if (e.key === 'ArrowLeft' && carLane > 0) {
+      carLane--;
+    } else if (e.key === 'ArrowRight' && carLane < laneX.length - 1) {
+      carLane++;
+    } else if (e.key === 'ArrowUp') {
+      speed = baseSpeed + 3;
+    } else if (e.key === 'ArrowDown') {
+      speed = baseSpeed - 2;
+    } else if (e.key.toLowerCase() === 'p') {
+      paused = !paused;
+      document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause';
+    }
+  });
+
+  window.addEventListener('keyup', e => {
+    if (!gameStarted) return;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      speed = baseSpeed;
+    }
+  });
+
+  // Touch controls:
+  // Tap left half of canvas to move left, right half to move right
+  canvas.addEventListener('touchstart', e => {
+    if (!gameStarted) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+
+    if (x < canvas.width / 2 && carLane > 0) {
+      carLane--;
+    } else if (x >= canvas.width / 2 && carLane < laneX.length - 1) {
+      carLane++;
+    }
+  }, {passive: false});
+
+  // Start button logic
+  document.getElementById('startBtn').addEventListener('click', () => {
+    resetGame();
+    gameStarted = true;
+    paused = false;
+    document.getElementById('pauseBtn').disabled = false;
+  });
+
+  // Pause button logic
+  document.getElementById('pauseBtn').addEventListener('click', () => {
+    paused = !paused;
+    document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause';
+  });
+
+  // Initialize first obstacles and nitro
+  initObstacles();
+  initNitro();
+  drawStats();
+  gameLoop();
+})();
+</script>
+
+</body>
+</html>
