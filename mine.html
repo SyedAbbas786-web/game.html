@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I ❤️ YOU Animation - Advanced</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: peachpuff;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #i-love-you-container {
+      display: flex;
+      font-size: 5rem;
+      gap: 1rem;
+      color: rgb(244, 173, 66);
+    }
+
+    .text-char, .heart-shape {
+      opacity: 0;
+      position: relative;
+    }
+
+    .heart-shape {
+      color: red;
+      transform: rotate(-45deg) scale(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="i-love-you-container">
+    <span class="text-char">I</span>
+    <span class="heart-shape">❤️</span>
+    <span class="text-char">Y</span>
+    <span class="text-char">O</span>
+    <span class="text-char">U</span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('i-love-you-container');
+      const letters = document.querySelectorAll('.text-char');
+      const heart = document.querySelector('.heart-shape');
+
+      const timeline = new mojs.Timeline();
+
+      // Animate each letter
+      letters.forEach((char, index) => {
+        const startX = Math.random() * window.innerWidth - window.innerWidth / 2;
+        const startY = Math.random() * window.innerHeight - window.innerHeight / 2;
+
+        const tween = new mojs.Tween({
+          duration: 1000,
+          delay: index * 200,
+          onUpdate: (progress) => {
+            const scale = 0.3 + 0.7 * progress;
+            const rotate = (1 - progress) * 360;
+            const x = startX * (1 - progress);
+            const y = startY * (1 - progress);
+            char.style.transform = `translate(${x}px, ${y}px) scale(${scale}) rotate(${rotate}deg)`;
+            char.style.opacity = progress;
+          },
+          onComplete: () => {
+            // Mini burst on landing
+            const rect = char.getBoundingClientRect();
+            new mojs.Burst({
+              left: 0, top: 0,
+              x: rect.left + rect.width / 2,
+              y: rect.top + rect.height / 2,
+              radius: { 0: 40 },
+              count: 6,
+              children: {
+                shape: 'circle',
+                fill: { 'deeppink': '#FCE4A6' },
+                radius: 'rand(5, 10)',
+                duration: 600,
+                stroke: 'white',
+                strokeWidth: 2
+              }
+            }).play();
+          }
+        });
+        timeline.add(tween);
+      });
+
+      // Heart bounce and burst
+      const heartTween = new mojs.Tween({
+        duration: 1000,
+        delay: letters.length * 200,
+        easing: 'elastic.out',
+        onUpdate: (p) => {
+          heart.style.opacity = p;
+          heart.style.transform = `rotate(-45deg) scale(${p})`;
+        },
+        onComplete: () => {
+          const rect = heart.getBoundingClientRect();
+          new mojs.Burst({
+            left: 0, top: 0,
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+            radius: { 0: 80 },
+            count: 10,
+            children: {
+              shape: 'circle',
+              fill: { 'deeppink': '#FCE4A6' },
+              radius: 'rand(8, 16)',
+              duration: 1000,
+              stroke: 'white',
+              strokeWidth: 3
+            }
+          }).play();
+        }
+      });
+
+      timeline.add(heartTween);
+      timeline.play();
+    });
+  </script>
+
+</body>
+</html>
