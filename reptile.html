@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reptile Cursor</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #111;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="reptileCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('reptileCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const segmentCount = 20;
+    const segmentLength = 20;
+    const segments = [];
+
+    for (let i = 0; i < segmentCount; i++) {
+      segments.push({ x: canvas.width / 2, y: canvas.height / 2 });
+    }
+
+    let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    function follow(i, targetX, targetY) {
+      const dx = targetX - segments[i].x;
+      const dy = targetY - segments[i].y;
+      const angle = Math.atan2(dy, dx);
+      segments[i].x = targetX - Math.cos(angle) * segmentLength;
+      segments[i].y = targetY - Math.sin(angle) * segmentLength;
+    }
+
+    function drawSegment(i) {
+      if (i === 0) return;
+      ctx.beginPath();
+     ctx.strokeStyle = `hsl(${i * 10}, 100%, 70%)`;
+      ctx.lineWidth = 8 - i * 0.3;
+      ctx.moveTo(segments[i].x, segments[i].y);
+      ctx.lineTo(segments[i - 1].x, segments[i - 1].y);
+      ctx.stroke();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      follow(0, mouse.x, mouse.y);
+      for (let i = 1; i < segments.length; i++) {
+        follow(i, segments[i - 1].x, segments[i - 1].y);
+      }
+      for (let i = segments.length - 1; i > 0; i--) {
+        drawSegment(i);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>

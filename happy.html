@@ -1,0 +1,210 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Birthday Canvas Animation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000000; /* dark black */
+    }
+    canvas {
+      display: block;
+      background: #000000; /* dark black */
+    }
+  </style>
+</head>
+<body>
+<canvas id="birthdayCanvas"></canvas>
+<script>
+const canvas = document.getElementById('birthdayCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const text = " HAPPY BIRTHDAY \nTo YOU!";
+let letters = [];
+let particles = [];
+let balloons = [];
+
+const opts = {
+    fontSize: Math.min(canvas.width / 10, 100),
+    fontFamily: "'Fredoka One', cursive",
+    spacing: 1.0,
+    yellowColor: 'rgb(244, 173, 66)',  // golden color
+    balloonColor: '#FF0000',           // red balloons
+    particleCount: 50,
+    particleSize: 2,
+    particleSpeed: 4,
+    burstTime: 1500,
+    burstRadius: 100,
+    letterAppearInterval: 200,
+};
+
+class Letter {
+    constructor(char, x, y) {
+        this.char = char;
+        this.baseX = x;
+        this.baseY = y;
+        this.x = x;
+        this.y = y;
+        this.alpha = 0;      // start invisible
+        this.visible = false;
+        this.rise = false;   // flag when balloon lifts it
+    }
+    appear() {
+        this.alpha += 0.05;
+        if(this.alpha >= 1) {
+            this.alpha = 1;
+            this.visible = true;
+        }
+    }
+    lift() {
+        this.rise = true;
+    }
+    update() {
+        if(!this.visible) {
+            this.appear();
+        } else if(this.rise) {
+            this.y -= 2; // move up by 2 px
+            this.x += Math.sin(this.y * 0.05) * 0.5; // slight horizontal sway
+            this.alpha -= 0.01; // fade out slowly
+            if(this.alpha < 0) this.alpha = 0;
+        }
+    }
+    draw() {
+        if(this.alpha > 0){
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.font = `${opts.fontSize}px ${opts.fontFamily}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = opts.yellowColor;
+            ctx.shadowColor = opts.yellowColor;
+            ctx.shadowBlur = 20;
+            ctx.fillText(this.char, this.x, this.y);
+            ctx.restore();
+        }
+    }
+}
+
+class Balloon {
+    constructor(letter) {
+        this.letter = letter;
+        this.x = letter.x;
+        this.y = letter.y + opts.fontSize / 1.5;
+        this.size = opts.fontSize / 3;
+        this.floatSpeed = 2 + Math.random() * 1;
+        this.oscillation = Math.random() * 0.05;
+        this.oscillationPhase = Math.random() * 2 * Math.PI;
+    }
+    update() {
+        this.y -= this.floatSpeed;
+        this.x += Math.sin(this.y * this.oscillation + this.oscillationPhase) * 0.5;
+        if(this.y < -this.size) {
+            this.y = canvas.height + this.size;
+            this.x = this.letter.x;
+        }
+    }
+    draw() {
+        ctx.save();
+        ctx.fillStyle = opts.balloonColor;
+        ctx.shadowColor = opts.balloonColor;
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.ellipse(this.x, this.y, this.size * 0.7, this.size, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.beginPath();
+        ctx.ellipse(this.x - this.size * 0.25, this.y - this.size * 0.4, this.size * 0.2, this.size * 0.3, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = '#FF4444';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y + this.size);
+        ctx.lineTo(this.x, this.y + this.size + 20);
+        ctx.stroke();
+        ctx.restore();
+    }
+}
+
+function initLetters() {
+    letters = [];
+    const lines = text.split('\n');
+    ctx.font = `${opts.fontSize}px ${opts.fontFamily}`;
+    let totalHeight = lines.length * opts.fontSize * opts.spacing;
+    let startY = canvas.height / 2 - totalHeight / 2 + opts.fontSize / 2;
+    let charIndex = 0;
+
+    lines.forEach((line, lineIndex) => {
+        const lineWidth = ctx.measureText(line).width;
+        let startX = canvas.width / 2 - lineWidth / 2;
+
+        for(let i=0; i < line.length; i++) {
+            let char = line[i];
+            let charWidth = ctx.measureText(char).width;
+            letters.push(new Letter(char, startX + charWidth / 2, startY + lineIndex * opts.fontSize * opts.spacing));
+            startX += charWidth * opts.spacing;
+            charIndex++;
+        }
+    });
+}
+
+let letterAppearCounter = 0;
+let letterAppearTimer = 0;
+let balloonsReleased = false;
+
+function animate(time = 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw all letters
+    letters.forEach((letter, idx) => {
+        if(idx <= letterAppearCounter) {
+            letter.update();
+        }
+        letter.draw();
+    });
+
+    // Show letters one by one in the middle at interval
+    if(letterAppearTimer <= 0 && letterAppearCounter < letters.length - 1) {
+        letterAppearCounter++;
+        letterAppearTimer = opts.letterAppearInterval;
+    } else {
+        letterAppearTimer -= 16;
+    }
+
+    // When all letters visible, release balloons to lift letters up
+    if(letterAppearCounter === letters.length -1 && !balloonsReleased) {
+        balloonsReleased = true;
+        letters.forEach(letter => letter.lift());
+        balloons = letters.map(letter => new Balloon(letter));
+    }
+
+    // Update and draw balloons
+    if(balloonsReleased) {
+        balloons.forEach(balloon => {
+            balloon.update();
+            balloon.draw();
+        });
+    }
+
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initLetters();
+});
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+initLetters();
+animate();
+</script>
+</body>
+</html>
