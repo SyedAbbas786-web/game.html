@@ -54,10 +54,78 @@
                 <span class="play-btn">Learn More</span>
             </a>
         </section>
+
+        <!-- ADD THE CONTACT FORM RIGHT HERE -->
+        <section class="contact-form">
+            <h2>📧 Join My Gaming Community!</h2>
+            <p>Leave your details and I'll add you to my gaming updates list!</p>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <select id="favorite_game" name="favorite_game">
+                        <option value="">Select your favorite game</option>
+                        <option value="tic_tac_toe">Tic Tac Toe</option>
+                        <option value="car_racing">Car Racing</option>
+                        <option value="reptile_adventure">Reptile Adventure</option>
+                        <option value="happy_game">Happy Game</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your message or suggestions..." rows="4"></textarea>
+                </div>
+                <button type="submit" class="play-btn">Join Community</button>
+            </form>
+            
+            <div id="formMessage"></div>
+        </section>
+        <!-- END OF CONTACT FORM -->
+
     </main>
 
     <footer>
         <p>Made with ❤️ by Syed Abbas | Share with your friends! 🎉</p>
     </footer>
+
+    <script>
+        // Simple form handling with local storage (works on GitHub Pages)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                favorite_game: document.getElementById('favorite_game').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            // Save to localStorage (temporary solution)
+            let submissions = JSON.parse(localStorage.getItem('gameSubmissions')) || [];
+            submissions.push(formData);
+            localStorage.setItem('gameSubmissions', JSON.stringify(submissions));
+            
+            // Show success message
+            const messageDiv = document.getElementById('formMessage');
+            messageDiv.innerHTML = `
+                <div style="background: rgba(46, 204, 113, 0.2); color: #2ecc71; padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                    ✅ Thanks ${formData.name}! Your response has been recorded. I'll contact you at ${formData.email}!
+                </div>
+            `;
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
