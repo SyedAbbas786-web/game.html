@@ -144,6 +144,68 @@ main {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
 }
 
+/* Contact Form Styles */
+.contact-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 3rem auto;
+    max-width: 600px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.contact-form h2 {
+    color: #feca57;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.contact-form > p {
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    transform: scale(1.02);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #feca57;
+    font-weight: bold;
+}
+
+#formMessage {
+    transition: all 0.3s ease;
+}
+
 footer {
     text-align: center;
     padding: 2rem;
@@ -168,5 +230,11 @@ footer {
     
     main {
         padding: 0 1rem;
+    }
+    
+    /* Responsive form */
+    .contact-form {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
     }
 }
