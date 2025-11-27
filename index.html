@@ -42,6 +42,13 @@
                 <span class="play-btn">Be Happy</span>
             </a>
 
+            <!-- NEW SPACESHIP GAME -->
+            <a href="spaceship.exe" class="game-card" download>
+                <h3>🚀 Spaceship Adventure</h3>
+                <p>Epic space battle game! Download and play!</p>
+                <span class="play-btn">Download & Play</span>
+            </a>
+
             <a href="projects.html" class="game-card">
                 <h3>💼 My Projects</h3>
                 <p>Check out all my creative work!</p>
@@ -74,6 +81,7 @@
                         <option value="car_racing">Car Racing</option>
                         <option value="reptile_adventure">Reptile Adventure</option>
                         <option value="happy_game">Happy Game</option>
+                        <option value="spaceship">Spaceship Adventure</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -125,6 +133,15 @@
             setTimeout(() => {
                 messageDiv.innerHTML = '';
             }, 5000);
+        });
+
+        // Add download confirmation for the .exe file
+        document.querySelector('a[href="spaceship.exe"]').addEventListener('click', function(e) {
+            if(confirm('🚀 Ready for space adventure? This will download Spaceship.exe (Windows executable). Download and run the file to play!')) {
+                // Proceed with download
+            } else {
+                e.preventDefault();
+            }
         });
     </script>
 </body>
