@@ -42,11 +42,11 @@
                 <span class="play-btn">Be Happy</span>
             </a>
 
-            <!-- NEW SPACESHIP GAME -->
-            <a href="spaceship.exe" class="game-card" download>
+            <!-- UPDATED SPACESHIP GAME - Play Online -->
+            <a href="spaceship.html" class="game-card">
                 <h3>🚀 Spaceship Adventure</h3>
-                <p>Epic space battle game! Download and play!</p>
-                <span class="play-btn">Download & Play</span>
+                <p>Epic space battle game! Play directly in your browser!</p>
+                <span class="play-btn">Play Online</span>
             </a>
 
             <a href="projects.html" class="game-card">
@@ -62,7 +62,7 @@
             </a>
         </section>
 
-        <!-- ADD THE CONTACT FORM RIGHT HERE -->
+        <!-- CONTACT FORM SECTION -->
         <section class="contact-form">
             <h2>📧 Join My Gaming Community!</h2>
             <p>Leave your details and I'll add you to my gaming updates list!</p>
@@ -92,7 +92,6 @@
             
             <div id="formMessage"></div>
         </section>
-        <!-- END OF CONTACT FORM -->
 
     </main>
 
@@ -101,7 +100,7 @@
     </footer>
 
     <script>
-        // Simple form handling with local storage (works on GitHub Pages)
+        // Simple form handling with local storage
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -113,7 +112,7 @@
                 timestamp: new Date().toLocaleString()
             };
             
-            // Save to localStorage (temporary solution)
+            // Save to localStorage
             let submissions = JSON.parse(localStorage.getItem('gameSubmissions')) || [];
             submissions.push(formData);
             localStorage.setItem('gameSubmissions', JSON.stringify(submissions));
@@ -133,15 +132,6 @@
             setTimeout(() => {
                 messageDiv.innerHTML = '';
             }, 5000);
-        });
-
-        // Add download confirmation for the .exe file
-        document.querySelector('a[href="spaceship.exe"]').addEventListener('click', function(e) {
-            if(confirm('🚀 Ready for space adventure? This will download Spaceship.exe (Windows executable). Download and run the file to play!')) {
-                // Proceed with download
-            } else {
-                e.preventDefault();
-            }
         });
     </script>
 </body>
