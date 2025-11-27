@@ -153,19 +153,21 @@
             display: none;
         }
         
-        /* Touch Controls */
+        /* Touch Controls - FIXED */
         #touchControls {
             position: absolute;
-            bottom: 20px;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 150px;
+            height: 40%;
             display: none;
             z-index: 15;
+            touch-action: none;
         }
         
         .touch-area {
             position: absolute;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -174,50 +176,43 @@
             user-select: none;
             -webkit-user-select: none;
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            touch-action: none;
         }
         
-        #leftTouch {
-            width: 80px;
-            height: 80px;
-            bottom: 20px;
+        #leftArea {
+            width: 120px;
+            height: 120px;
+            bottom: 30px;
             left: 30px;
+            background: rgba(0, 255, 136, 0.3);
         }
         
-        #rightTouch {
-            width: 80px;
-            height: 80px;
+        #rightArea {
+            width: 120px;
+            height: 120px;
+            bottom: 30px;
+            left: 170px;
+            background: rgba(0, 255, 136, 0.3);
+        }
+        
+        #shootArea {
+            width: 140px;
+            height: 140px;
             bottom: 20px;
-            left: 130px;
-        }
-        
-        #shootTouch {
-            width: 100px;
-            height: 100px;
-            bottom: 10px;
             right: 30px;
-            background: rgba(255, 0, 0, 0.3);
+            background: rgba(255, 0, 0, 0.4);
             font-size: 20px;
         }
 
-        /* Movement joystick area */
-        #movementArea {
+        /* Control labels */
+        .control-label {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 200px;
-            height: 120px;
-            /* background: rgba(255, 0, 0, 0.1); */ /* For debugging */
-        }
-
-        /* Shooting area */
-        #shootArea {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 150px;
-            height: 120px;
-            /* background: rgba(0, 255, 0, 0.1); */ /* For debugging */
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px black;
         }
         
         /* Power-up indicators */
@@ -269,23 +264,26 @@
         }
 
         @media (max-width: 480px) {
-            #leftTouch, #rightTouch {
-                width: 70px;
-                height: 70px;
+            #leftArea, #rightArea {
+                width: 100px;
+                height: 100px;
             }
 
-            #leftTouch {
+            #leftArea {
                 left: 20px;
+                bottom: 25px;
             }
 
-            #rightTouch {
-                left: 110px;
+            #rightArea {
+                left: 140px;
+                bottom: 25px;
             }
 
-            #shootTouch {
-                width: 90px;
-                height: 90px;
+            #shootArea {
+                width: 110px;
+                height: 110px;
                 right: 20px;
+                bottom: 15px;
             }
 
             .screen-content {
@@ -294,6 +292,27 @@
 
             h1 {
                 font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            #leftArea, #rightArea {
+                width: 80px;
+                height: 80px;
+            }
+
+            #leftArea {
+                left: 15px;
+            }
+
+            #rightArea {
+                left: 115px;
+            }
+
+            #shootArea {
+                width: 90px;
+                height: 90px;
+                right: 15px;
             }
         }
     </style>
@@ -318,13 +337,17 @@
         
         <div id="comboDisplay"></div>
         
-        <!-- Touch Controls for Mobile -->
+        <!-- Touch Controls for Mobile - FIXED -->
         <div id="touchControls">
-            <div id="movementArea"></div>
-            <div id="shootArea"></div>
-            <div id="leftTouch" class="touch-area">←</div>
-            <div id="rightTouch" class="touch-area">→</div>
-            <div id="shootTouch" class="touch-area">FIRE</div>
+            <div id="leftArea" class="touch-area">
+                <div class="control-label">← MOVE</div>
+            </div>
+            <div id="rightArea" class="touch-area">
+                <div class="control-label">→ MOVE</div>
+            </div>
+            <div id="shootArea" class="touch-area">
+                <div class="control-label">FIRE</div>
+            </div>
         </div>
         
         <!-- Main Menu Screen -->
@@ -338,7 +361,7 @@
                 <div style="margin-top: 20px;">
                     <p>Controls:</p>
                     <p>← → Move | SPACE Shoot</p>
-                    <p>Touch: Left side - Move | Right side - Shoot</p>
+                    <p>Touch: Left buttons - Move | Right button - Shoot</p>
                 </div>
             </div>
         </div>
@@ -449,7 +472,7 @@
             rapid: { active: false, timer: 0 }
         };
 
-        // Input states
+        // Input states - SIMPLIFIED
         let keys = {};
         let touchState = {
             left: false,
@@ -874,100 +897,81 @@
             }
         }
 
-        // Enhanced Touch event handlers
+        // FIXED Touch event handlers - SIMPLE AND RELIABLE
         function setupTouchControls() {
-            const movementArea = document.getElementById('movementArea');
+            const leftArea = document.getElementById('leftArea');
+            const rightArea = document.getElementById('rightArea');
             const shootArea = document.getElementById('shootArea');
-            const leftTouch = document.getElementById('leftTouch');
-            const rightTouch = document.getElementById('rightTouch');
-            const shootTouch = document.getElementById('shootTouch');
 
-            // Movement area touch events
-            movementArea.addEventListener('touchstart', handleMovementTouch);
-            movementArea.addEventListener('touchmove', handleMovementTouch);
-            movementArea.addEventListener('touchend', clearMovementTouch);
+            // Left movement
+            leftArea.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                touchState.left = true;
+                leftArea.style.background = 'rgba(0, 255, 136, 0.6)';
+            });
 
-            // Shoot area touch events
+            leftArea.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                touchState.left = false;
+                leftArea.style.background = 'rgba(0, 255, 136, 0.3)';
+            });
+
+            // Right movement
+            rightArea.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                touchState.right = true;
+                rightArea.style.background = 'rgba(0, 255, 136, 0.6)';
+            });
+
+            rightArea.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                touchState.right = false;
+                rightArea.style.background = 'rgba(0, 255, 136, 0.3)';
+            });
+
+            // Shooting
             shootArea.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 touchState.shoot = true;
-                shootTouch.style.background = 'rgba(255, 0, 0, 0.6)';
+                shootArea.style.background = 'rgba(255, 0, 0, 0.7)';
             });
 
             shootArea.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 touchState.shoot = false;
-                shootTouch.style.background = 'rgba(255, 0, 0, 0.3)';
+                shootArea.style.background = 'rgba(255, 0, 0, 0.4)';
             });
-
-            function handleMovementTouch(e) {
-                e.preventDefault();
-                const touch = e.touches[0];
-                const rect = movementArea.getBoundingClientRect();
-                const touchX = touch.clientX - rect.left;
-                
-                // Determine if touch is on left or right side
-                if (touchX < rect.width / 2) {
-                    touchState.left = true;
-                    touchState.right = false;
-                    leftTouch.style.background = 'rgba(255, 255, 255, 0.4)';
-                    rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                } else {
-                    touchState.left = false;
-                    touchState.right = true;
-                    leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                    rightTouch.style.background = 'rgba(255, 255, 255, 0.4)';
-                }
-            }
-
-            function clearMovementTouch(e) {
-                e.preventDefault();
-                touchState.left = false;
-                touchState.right = false;
-                leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-            }
 
             // Mouse events for desktop testing
-            movementArea.addEventListener('mousedown', handleMouseMovement);
-            document.addEventListener('mouseup', clearMouseMovement);
-            
+            leftArea.addEventListener('mousedown', () => {
+                touchState.left = true;
+                leftArea.style.background = 'rgba(0, 255, 136, 0.6)';
+            });
+            leftArea.addEventListener('mouseup', () => {
+                touchState.left = false;
+                leftArea.style.background = 'rgba(0, 255, 136, 0.3)';
+            });
+
+            rightArea.addEventListener('mousedown', () => {
+                touchState.right = true;
+                rightArea.style.background = 'rgba(0, 255, 136, 0.6)';
+            });
+            rightArea.addEventListener('mouseup', () => {
+                touchState.right = false;
+                rightArea.style.background = 'rgba(0, 255, 136, 0.3)';
+            });
+
             shootArea.addEventListener('mousedown', () => {
                 touchState.shoot = true;
-                shootTouch.style.background = 'rgba(255, 0, 0, 0.6)';
+                shootArea.style.background = 'rgba(255, 0, 0, 0.7)';
             });
-            
             shootArea.addEventListener('mouseup', () => {
                 touchState.shoot = false;
-                shootTouch.style.background = 'rgba(255, 0, 0, 0.3)';
+                shootArea.style.background = 'rgba(255, 0, 0, 0.4)';
             });
 
-            function handleMouseMovement(e) {
-                const rect = movementArea.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                
-                if (mouseX < rect.width / 2) {
-                    touchState.left = true;
-                    touchState.right = false;
-                    leftTouch.style.background = 'rgba(255, 255, 255, 0.4)';
-                    rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                } else {
-                    touchState.left = false;
-                    touchState.right = true;
-                    leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                    rightTouch.style.background = 'rgba(255, 255, 255, 0.4)';
-                }
-            }
-
-            function clearMouseMovement() {
-                touchState.left = false;
-                touchState.right = false;
-                leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-                rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
-            }
-
             // Prevent context menu
-            [movementArea, shootArea, leftTouch, rightTouch, shootTouch].forEach(element => {
+            [leftArea, rightArea, shootArea].forEach(element => {
                 element.addEventListener('contextmenu', (e) => e.preventDefault());
             });
         }
