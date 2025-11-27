@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .container {
@@ -30,6 +30,8 @@
             flex-direction: column;
             align-items: center;
             gap: 40px;
+            min-height: 100vh;
+            justify-content: center;
         }
 
         header {
@@ -43,7 +45,9 @@
             margin-bottom: 10px;
             background: linear-gradient(90deg, #ff00cc, #3333ff);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
             text-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
             letter-spacing: 2px;
         }
@@ -98,7 +102,9 @@
             margin-bottom: 15px;
             background: linear-gradient(90deg, #00ffcc, #00ccff);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
             font-weight: 700;
         }
 
@@ -150,7 +156,7 @@
         }
 
         .particles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -215,6 +221,10 @@
             display: none;
             width: 100%;
             animation: fadeIn 0.5s ease-out;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .back-btn {
@@ -231,11 +241,43 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            z-index: 10;
         }
 
         .back-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
+        }
+
+        .game-canvas {
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            background: #000;
+            margin: 20px 0;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-label {
+            font-size: 1.5rem;
+            color: #00ffcc;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
         }
 
         @media (max-width: 1100px) {
@@ -249,7 +291,7 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
@@ -260,6 +302,43 @@
             
             .game-option {
                 padding: 30px 20px;
+            }
+            
+            .game-canvas {
+                width: 95%;
+                height: auto;
+            }
+            
+            .stats-container {
+                gap: 15px;
+            }
+            
+            .stat-box {
+                min-width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .game-title {
+                font-size: 1.8rem;
+            }
+            
+            .game-option {
+                padding: 20px 15px;
+            }
+            
+            .game-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -326,22 +405,20 @@
             <p class="subtitle">Control the snake with arrow keys. Eat apples and avoid collisions!</p>
         </header>
         
-        <div style="width: 100%; display: flex; justify-content: center;">
-            <canvas id="snake-canvas" width="600" height="400" style="border: 2px solid #00ffcc; border-radius: 10px; background: #000;"></canvas>
-        </div>
+        <canvas id="snake-canvas" class="game-canvas" width="600" height="400"></canvas>
         
-        <div style="display: flex; gap: 30px; margin-top: 20px;">
-            <div style="text-align: center;">
-                <div style="font-size: 1.5rem; color: #00ffcc;">Score</div>
-                <div id="snake-score" style="font-size: 2.5rem; font-weight: bold;">0</div>
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label">Score</div>
+                <div id="snake-score" class="stat-value">0</div>
             </div>
-            <div style="text-align: center;">
-                <div style="font-size: 1.5rem; color: #00ffcc;">Apples</div>
-                <div id="snake-apples" style="font-size: 2.5rem; font-weight: bold;">0</div>
+            <div class="stat-box">
+                <div class="stat-label">Apples</div>
+                <div id="snake-apples" class="stat-value">0</div>
             </div>
-            <div style="text-align: center;">
-                <div style="font-size: 1.5rem; color: #00ffcc;">Level</div>
-                <div id="snake-level" style="font-size: 2.5rem; font-weight: bold;">1</div>
+            <div class="stat-box">
+                <div class="stat-label">Level</div>
+                <div id="snake-level" class="stat-value">1</div>
             </div>
         </div>
     </div>
@@ -357,23 +434,25 @@
             <p class="subtitle">Use UP/DOWN arrows to move your paddle. First to 11 points wins!</p>
         </header>
         
-        <div style="width: 100%; display: flex; justify-content: center;">
-            <canvas id="pong-canvas" width="800" height="400" style="border: 2px solid #00ccff; border-radius: 10px; background: #000;"></canvas>
-        </div>
+        <canvas id="pong-canvas" class="game-canvas" width="800" height="400"></canvas>
         
-        <div style="display: flex; gap: 50px; margin-top: 20px;">
-            <div style="text-align: center;">
-                <div style="font-size: 1.5rem; color: #00ccff;">Player</div>
-                <div id="player-score" style="font-size: 2.5rem; font-weight: bold;">0</div>
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label">Player</div>
+                <div id="player-score" class="stat-value">0</div>
             </div>
-            <div style="text-align: center;">
-                <div style="font-size: 1.5rem; color: #ff00cc;">AI</div>
-                <div id="ai-score" style="font-size: 2.5rem; font-weight: bold;">0</div>
+            <div class="stat-box">
+                <div class="stat-label">AI</div>
+                <div id="ai-score" class="stat-value">0</div>
             </div>
         </div>
     </div>
 
     <script>
+        // Game state variables
+        let snakeGameInterval;
+        let pongGameInterval;
+        
         // Create background particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -425,8 +504,6 @@
         }
         
         // Snake Xenia Game
-        let snakeGameInterval;
-        
         function startSnakeGame() {
             const canvas = document.getElementById('snake-canvas');
             const ctx = canvas.getContext('2d');
@@ -443,6 +520,7 @@
             let apples = 0;
             let level = 1;
             let gameSpeed = 150;
+            let gameRunning = true;
             
             // Draw game elements
             function draw() {
@@ -468,6 +546,8 @@
             
             // Move snake
             function moveSnake() {
+                if (!gameRunning) return;
+                
                 const head = {x: snake[0].x + dx, y: snake[0].y + dy};
                 
                 // Check for wall collision
@@ -513,9 +593,12 @@
             
             // Game over function
             function gameOver() {
+                gameRunning = false;
                 clearInterval(snakeGameInterval);
-                alert(`Game Over! Your score: ${score}`);
-                showMainMenu();
+                setTimeout(() => {
+                    alert(`Game Over! Your score: ${score}`);
+                    showMainMenu();
+                }, 100);
             }
             
             // Game loop
@@ -524,7 +607,7 @@
             }
             
             // Keyboard controls
-            document.addEventListener('keydown', (e) => {
+            function handleKeyDown(e) {
                 // Prevent reverse direction
                 if (e.key === 'ArrowUp' && dy !== 1) {
                     dx = 0;
@@ -539,16 +622,15 @@
                     dx = 1;
                     dy = 0;
                 }
-            });
+            }
             
             // Initialize game
+            document.addEventListener('keydown', handleKeyDown);
             draw();
             snakeGameInterval = setInterval(gameLoop, gameSpeed);
         }
         
         // Pong Game
-        let pongGameInterval;
-        
         function startPongGame() {
             const canvas = document.getElementById('pong-canvas');
             const ctx = canvas.getContext('2d');
@@ -605,6 +687,8 @@
             
             // Move ball
             function moveBall() {
+                if (!gameRunning) return;
+                
                 ballX += ballSpeedX;
                 ballY += ballSpeedY;
                 
@@ -669,8 +753,10 @@
                 clearInterval(pongGameInterval);
                 
                 const winner = playerScore > aiScore ? "Player" : "AI";
-                alert(`Game Over! ${winner} wins!`);
-                showMainMenu();
+                setTimeout(() => {
+                    alert(`Game Over! ${winner} wins!`);
+                    showMainMenu();
+                }, 100);
             }
             
             // Game loop
@@ -681,15 +767,16 @@
             }
             
             // Keyboard controls
-            document.addEventListener('keydown', (e) => {
+            function handleKeyDown(e) {
                 if (e.key === 'ArrowUp') {
                     playerY = Math.max(0, playerY - 20);
                 } else if (e.key === 'ArrowDown') {
                     playerY = Math.min(canvas.height - paddleHeight, playerY + 20);
                 }
-            });
+            }
             
             // Initialize game
+            document.addEventListener('keydown', handleKeyDown);
             draw();
             pongGameInterval = setInterval(gameLoop, 1000/60);
         }
