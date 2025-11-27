@@ -41,26 +41,35 @@
             left: 10px;
             z-index: 10;
             pointer-events: none;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00ff88;
         }
         
         .ui-text {
             margin-bottom: 5px;
-            font-size: 14px;
+            font-size: 16px;
             text-shadow: 2px 2px 2px #000;
+            color: #00ff88;
         }
         
-        #gameOverScreen, #upgradeScreen {
+        #gameOverScreen, #upgradeScreen, #mainMenuScreen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 20;
+        }
+
+        #gameOverScreen, #upgradeScreen {
+            display: none;
         }
         
         .screen-content {
@@ -69,6 +78,7 @@
             padding: 30px;
             border-radius: 10px;
             border: 2px solid #00ff88;
+            max-width: 90%;
         }
         
         h1 {
@@ -92,10 +102,33 @@
             cursor: pointer;
             border-radius: 5px;
             font-weight: bold;
+            min-width: 150px;
         }
         
         button:hover {
             background: #ffff00;
+        }
+
+        .difficulty-btn {
+            background: #00aaff;
+            margin: 5px;
+            min-width: 120px;
+        }
+
+        .difficulty-btn:hover {
+            background: #ffff00;
+        }
+
+        .difficulty-btn.easy {
+            background: #00ff88;
+        }
+
+        .difficulty-btn.hard {
+            background: #ffaa00;
+        }
+
+        .difficulty-btn.extreme {
+            background: #ff4444;
         }
         
         .upgrade-option {
@@ -125,15 +158,13 @@
             position: absolute;
             bottom: 20px;
             width: 100%;
+            height: 150px;
             display: none;
-            justify-content: space-between;
-            padding: 0 20px;
             z-index: 15;
         }
         
         .touch-area {
-            width: 120px;
-            height: 120px;
+            position: absolute;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
@@ -142,46 +173,127 @@
             font-size: 24px;
             user-select: none;
             -webkit-user-select: none;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         #leftTouch {
-            margin-right: auto;
+            width: 80px;
+            height: 80px;
+            bottom: 20px;
+            left: 30px;
         }
         
         #rightTouch {
-            margin-left: auto;
+            width: 80px;
+            height: 80px;
+            bottom: 20px;
+            left: 130px;
         }
         
         #shootTouch {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 100px;
             height: 100px;
+            bottom: 10px;
+            right: 30px;
             background: rgba(255, 0, 0, 0.3);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-size: 20px;
-            user-select: none;
-            -webkit-user-select: none;
+        }
+
+        /* Movement joystick area */
+        #movementArea {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 200px;
+            height: 120px;
+            /* background: rgba(255, 0, 0, 0.1); */ /* For debugging */
+        }
+
+        /* Shooting area */
+        #shootArea {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            height: 120px;
+            /* background: rgba(0, 255, 0, 0.1); */ /* For debugging */
+        }
+        
+        /* Power-up indicators */
+        #powerupIndicators {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .powerup-indicator {
+            padding: 5px 10px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
         }
         
         /* Mobile detection */
         @media (max-width: 768px) {
             #touchControls {
-                display: flex;
+                display: block;
             }
             
             .ui-text {
-                font-size: 12px;
+                font-size: 14px;
             }
             
             #gameCanvas {
                 width: 100vw;
                 height: 70vh;
+            }
+
+            .screen-content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #leftTouch, #rightTouch {
+                width: 70px;
+                height: 70px;
+            }
+
+            #leftTouch {
+                left: 20px;
+            }
+
+            #rightTouch {
+                left: 110px;
+            }
+
+            #shootTouch {
+                width: 90px;
+                height: 90px;
+                right: 20px;
+            }
+
+            .screen-content {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
             }
         }
     </style>
@@ -194,22 +306,48 @@
             <div class="ui-text" id="score">Score: 0</div>
             <div class="ui-text" id="lives">Lives: 5</div>
             <div class="ui-text" id="wave">Wave: 1</div>
-            <div class="ui-text" id="powerups"></div>
+            <div class="ui-text" id="power">Power: 1</div>
+            <div class="ui-text" id="difficulty">Difficulty: Easy</div>
+        </div>
+        
+        <div id="powerupIndicators">
+            <div id="powerupSpeed" class="powerup-indicator" style="color: #ffff00;">⚡ SPEED BOOST</div>
+            <div id="powerupShield" class="powerup-indicator" style="color: #00ffff;">🛡️ SHIELD</div>
+            <div id="powerupRapid" class="powerup-indicator" style="color: #ff00ff;">🔫 RAPID FIRE</div>
         </div>
         
         <div id="comboDisplay"></div>
         
         <!-- Touch Controls for Mobile -->
         <div id="touchControls">
+            <div id="movementArea"></div>
+            <div id="shootArea"></div>
             <div id="leftTouch" class="touch-area">←</div>
-            <div id="shootTouch" class="touch-area">FIRE</div>
             <div id="rightTouch" class="touch-area">→</div>
+            <div id="shootTouch" class="touch-area">FIRE</div>
+        </div>
+        
+        <!-- Main Menu Screen -->
+        <div id="mainMenuScreen">
+            <div class="screen-content">
+                <h1>SPACE SHOOTER</h1>
+                <h2>Select Difficulty:</h2>
+                <button class="difficulty-btn easy" onclick="startGame('easy')">🌙 EASY</button>
+                <button class="difficulty-btn hard" onclick="startGame('hard')">🔥 HARD</button>
+                <button class="difficulty-btn extreme" onclick="startGame('extreme')">💀 EXTREME</button>
+                <div style="margin-top: 20px;">
+                    <p>Controls:</p>
+                    <p>← → Move | SPACE Shoot</p>
+                    <p>Touch: Left side - Move | Right side - Shoot</p>
+                </div>
+            </div>
         </div>
         
         <div id="gameOverScreen">
             <div class="screen-content">
                 <h1>GAME OVER</h1>
                 <h2 id="finalScore">Score: 0</h2>
+                <h3 id="finalDifficulty">Difficulty: Easy</h3>
                 <button onclick="restartGame()">Play Again</button>
                 <button onclick="showMainMenu()">Main Menu</button>
             </div>
@@ -236,18 +374,55 @@
     </div>
 
     <script>
-        // Game Constants - INCREASED SPEEDS
+        // Game Constants
         const CANVAS_WIDTH = 800;
         const CANVAS_HEIGHT = 600;
-        const PLAYER_SPEED = 12; // Increased from 6
-        const BULLET_SPEED = 15; // Increased from 10
-        const ENEMY_SPEED = 4;   // Increased from 2
+        const BASE_PLAYER_SPEED = 8;
+        const BASE_BULLET_SPEED = 12;
+        const BASE_ENEMY_SPEED = 3;
+        const BASE_ENEMY_BULLET_SPEED = 6;
         const MAX_LIVES = 5;
+        const POWERUP_DURATION = 300;
+
+        // Difficulty Settings
+        const DIFFICULTY_SETTINGS = {
+            easy: {
+                playerSpeed: BASE_PLAYER_SPEED,
+                bulletSpeed: BASE_BULLET_SPEED,
+                enemySpeed: BASE_ENEMY_SPEED,
+                enemyBulletSpeed: BASE_ENEMY_BULLET_SPEED,
+                enemySpawnRate: 60,
+                enemyHealthMultiplier: 1,
+                scoreMultiplier: 1,
+                lives: 5
+            },
+            hard: {
+                playerSpeed: BASE_PLAYER_SPEED * 0.9,
+                bulletSpeed: BASE_BULLET_SPEED,
+                enemySpeed: BASE_ENEMY_SPEED * 1.3,
+                enemyBulletSpeed: BASE_ENEMY_BULLET_SPEED * 1.2,
+                enemySpawnRate: 40,
+                enemyHealthMultiplier: 1.5,
+                scoreMultiplier: 1.5,
+                lives: 3
+            },
+            extreme: {
+                playerSpeed: BASE_PLAYER_SPEED * 0.8,
+                bulletSpeed: BASE_BULLET_SPEED,
+                enemySpeed: BASE_ENEMY_SPEED * 1.7,
+                enemyBulletSpeed: BASE_ENEMY_BULLET_SPEED * 1.5,
+                enemySpawnRate: 25,
+                enemyHealthMultiplier: 2,
+                scoreMultiplier: 2,
+                lives: 1
+            }
+        };
 
         // Game Variables
         let canvas, ctx;
         let player;
         let bullets = [];
+        let enemyBullets = [];
         let enemies = [];
         let particles = [];
         let powerUps = [];
@@ -258,12 +433,21 @@
         let gameOver = false;
         let gameRunning = false;
         let lastShotTime = 0;
-        let shootDelay = 150; // Reduced from 300 for faster shooting
+        let shootDelay = 200;
         let enemySpawnTimer = 0;
         let powerUpTimer = 0;
         let comboCount = 0;
         let comboTime = 0;
         let upgradePoints = 0;
+        let currentDifficulty = 'easy';
+        let difficultySettings = DIFFICULTY_SETTINGS.easy;
+
+        // Active power-ups
+        let activePowerUps = {
+            speed: { active: false, timer: 0 },
+            shield: { active: false, timer: 0 },
+            rapid: { active: false, timer: 0 }
+        };
 
         // Input states
         let keys = {};
@@ -301,14 +485,19 @@
                 this.height = 30;
                 this.x = CANVAS_WIDTH / 2 - this.width / 2;
                 this.y = CANVAS_HEIGHT - 80;
-                this.speed = PLAYER_SPEED * playerUpgrades.speed;
+                this.baseSpeed = difficultySettings.playerSpeed;
+                this.speed = this.baseSpeed * playerUpgrades.speed;
                 this.color = '#00ff88';
                 this.isInvincible = false;
                 this.invincibleTimer = 0;
             }
 
             update() {
-                this.speed = PLAYER_SPEED * playerUpgrades.speed;
+                // Apply speed boost if power-up is active
+                this.speed = this.baseSpeed * playerUpgrades.speed;
+                if (activePowerUps.speed.active) {
+                    this.speed *= 1.5;
+                }
                 
                 // Keyboard movement
                 if (keys['ArrowLeft'] || touchState.left) {
@@ -333,6 +522,15 @@
 
             draw() {
                 ctx.save();
+                
+                // Draw shield if active
+                if (activePowerUps.shield.active) {
+                    ctx.strokeStyle = '#00ffff';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
                 
                 if (this.isInvincible && Math.floor(Date.now() / 100) % 2 === 0) {
                     ctx.fillStyle = '#ffff00';
@@ -377,7 +575,14 @@
 
             shoot() {
                 const now = Date.now();
-                if (now - lastShotTime > shootDelay / playerUpgrades.fireRate) {
+                let currentShootDelay = shootDelay / playerUpgrades.fireRate;
+                
+                // Apply rapid fire if power-up is active
+                if (activePowerUps.rapid.active) {
+                    currentShootDelay /= 2;
+                }
+                
+                if (now - lastShotTime > currentShootDelay) {
                     bullets.push(new Bullet(this.x + this.width / 2, this.y, playerUpgrades.bulletPower));
                     lastShotTime = now;
                     
@@ -396,7 +601,7 @@
             }
 
             takeDamage() {
-                if (!this.isInvincible) {
+                if (!this.isInvincible && !activePowerUps.shield.active) {
                     lives--;
                     this.isInvincible = true;
                     this.invincibleTimer = 90;
@@ -428,7 +633,7 @@
                 this.y = y;
                 this.width = 4 * power;
                 this.height = 12;
-                this.speed = -BULLET_SPEED;
+                this.speed = -difficultySettings.bulletSpeed;
                 this.power = power;
                 this.color = power === 1 ? '#00ff00' : power === 2 ? '#ffff00' : '#ff0000';
             }
@@ -453,6 +658,38 @@
             }
         }
 
+        // Enemy Bullet class
+        class EnemyBullet {
+            constructor(x, y, type = 0) {
+                this.x = x;
+                this.y = y;
+                this.width = 6;
+                this.height = 12;
+                this.speed = difficultySettings.enemyBulletSpeed;
+                this.type = type;
+                this.color = type === 0 ? '#ff4444' : '#ffaa00';
+            }
+
+            update() {
+                this.y += this.speed;
+                return this.y < CANVAS_HEIGHT;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
+                
+                // Bullet tip
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.moveTo(this.x - this.width / 2, this.y + this.height);
+                ctx.lineTo(this.x + this.width / 2, this.y + this.height);
+                ctx.lineTo(this.x, this.y + this.height + 6);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
         // Enemy class
         class Enemy {
             constructor(type = 0) {
@@ -461,16 +698,19 @@
                 this.height = type === 0 ? 25 : type === 1 ? 30 : 40;
                 this.x = Math.random() * (CANVAS_WIDTH - this.width);
                 this.y = -this.height;
-                this.speed = ENEMY_SPEED + (wave * 0.3);
-                this.health = type === 0 ? 1 : type === 1 ? 3 : 10;
+                this.speed = difficultySettings.enemySpeed + (wave * 0.3);
+                this.health = (type === 0 ? 1 : type === 1 ? 3 : 10) * difficultySettings.enemyHealthMultiplier;
                 this.maxHealth = this.health;
                 this.color = type === 0 ? '#ff4444' : type === 1 ? '#ffff00' : '#ff00ff';
                 this.movePattern = Math.floor(Math.random() * 3);
                 this.moveTimer = 0;
+                this.shootTimer = Math.random() * 100;
+                this.shootDelay = type === 0 ? 120 : type === 1 ? 90 : 60;
             }
 
             update() {
                 this.moveTimer++;
+                this.shootTimer++;
                 
                 switch(this.movePattern) {
                     case 0:
@@ -486,26 +726,42 @@
                         break;
                 }
                 
+                // Enemy shooting logic
+                if (this.shootTimer > this.shootDelay && this.y > 0) {
+                    this.shoot();
+                    this.shootTimer = 0;
+                }
+                
                 return this.y < CANVAS_HEIGHT;
+            }
+
+            shoot() {
+                if (this.type === 0) {
+                    enemyBullets.push(new EnemyBullet(this.x + this.width / 2, this.y + this.height, 0));
+                } else if (this.type === 1) {
+                    enemyBullets.push(new EnemyBullet(this.x + this.width / 3, this.y + this.height, 0));
+                    enemyBullets.push(new EnemyBullet(this.x + 2 * this.width / 3, this.y + this.height, 0));
+                } else {
+                    enemyBullets.push(new EnemyBullet(this.x + this.width / 2, this.y + this.height, 1));
+                    enemyBullets.push(new EnemyBullet(this.x + this.width / 4, this.y + this.height, 1));
+                    enemyBullets.push(new EnemyBullet(this.x + 3 * this.width / 4, this.y + this.height, 1));
+                }
             }
 
             draw() {
                 ctx.fillStyle = this.color;
                 
                 if (this.type === 0) {
-                    // Basic enemy (circle)
                     ctx.beginPath();
                     ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, Math.PI * 2);
                     ctx.fill();
                     
-                    // Eyes
                     ctx.fillStyle = '#00ff00';
                     ctx.beginPath();
                     ctx.arc(this.x + this.width / 2 - 8, this.y + this.height / 2, 3, 0, Math.PI * 2);
                     ctx.arc(this.x + this.width / 2 + 8, this.y + this.height / 2, 3, 0, Math.PI * 2);
                     ctx.fill();
                 } else if (this.type === 1) {
-                    // Stronger enemy (diamond)
                     ctx.beginPath();
                     ctx.moveTo(this.x + this.width / 2, this.y);
                     ctx.lineTo(this.x + this.width, this.y + this.height / 2);
@@ -514,20 +770,16 @@
                     ctx.closePath();
                     ctx.fill();
                     
-                    // Core
                     ctx.fillStyle = '#ff0000';
                     ctx.beginPath();
                     ctx.arc(this.x + this.width / 2, this.y + this.height / 2, 6, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
-                    // Boss enemy (rectangle with turret)
                     ctx.fillRect(this.x, this.y, this.width, this.height);
                     
-                    // Turret
                     ctx.fillStyle = '#00ffff';
                     ctx.fillRect(this.x + this.width / 4, this.y - 10, this.width / 2, 10);
                     
-                    // Eyes
                     ctx.fillStyle = '#ffffff';
                     ctx.beginPath();
                     ctx.arc(this.x + this.width / 3, this.y + this.height / 2, 4, 0, Math.PI * 2);
@@ -535,7 +787,6 @@
                     ctx.fill();
                 }
                 
-                // Health bar for stronger enemies
                 if (this.type > 0) {
                     const barWidth = 40;
                     const healthPercent = this.health / this.maxHealth;
@@ -618,62 +869,115 @@
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 
-                const symbols = ['⚡', '🛡️', '❤️'];
+                const symbols = ['⚡', '🛡️', '🔫'];
                 ctx.fillText(symbols[this.type], this.x, floatY);
             }
         }
 
-        // Touch event handlers
+        // Enhanced Touch event handlers
         function setupTouchControls() {
+            const movementArea = document.getElementById('movementArea');
+            const shootArea = document.getElementById('shootArea');
             const leftTouch = document.getElementById('leftTouch');
             const rightTouch = document.getElementById('rightTouch');
             const shootTouch = document.getElementById('shootTouch');
 
-            // Touch start events
-            leftTouch.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                touchState.left = true;
-            });
+            // Movement area touch events
+            movementArea.addEventListener('touchstart', handleMovementTouch);
+            movementArea.addEventListener('touchmove', handleMovementTouch);
+            movementArea.addEventListener('touchend', clearMovementTouch);
 
-            rightTouch.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                touchState.right = true;
-            });
-
-            shootTouch.addEventListener('touchstart', (e) => {
+            // Shoot area touch events
+            shootArea.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 touchState.shoot = true;
+                shootTouch.style.background = 'rgba(255, 0, 0, 0.6)';
             });
 
-            // Touch end events
-            leftTouch.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                touchState.left = false;
-            });
-
-            rightTouch.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                touchState.right = false;
-            });
-
-            shootTouch.addEventListener('touchend', (e) => {
+            shootArea.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 touchState.shoot = false;
+                shootTouch.style.background = 'rgba(255, 0, 0, 0.3)';
             });
 
-            // Mouse events for testing on desktop
-            leftTouch.addEventListener('mousedown', () => touchState.left = true);
-            rightTouch.addEventListener('mousedown', () => touchState.right = true);
-            shootTouch.addEventListener('mousedown', () => touchState.shoot = true);
+            function handleMovementTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = movementArea.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                
+                // Determine if touch is on left or right side
+                if (touchX < rect.width / 2) {
+                    touchState.left = true;
+                    touchState.right = false;
+                    leftTouch.style.background = 'rgba(255, 255, 255, 0.4)';
+                    rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                } else {
+                    touchState.left = false;
+                    touchState.right = true;
+                    leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                    rightTouch.style.background = 'rgba(255, 255, 255, 0.4)';
+                }
+            }
 
-            leftTouch.addEventListener('mouseup', () => touchState.left = false);
-            rightTouch.addEventListener('mouseup', () => touchState.right = false);
-            shootTouch.addEventListener('mouseup', () => touchState.shoot = false);
+            function clearMovementTouch(e) {
+                e.preventDefault();
+                touchState.left = false;
+                touchState.right = false;
+                leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+            }
 
-            // Prevent context menu on touch controls
-            [leftTouch, rightTouch, shootTouch].forEach(element => {
+            // Mouse events for desktop testing
+            movementArea.addEventListener('mousedown', handleMouseMovement);
+            document.addEventListener('mouseup', clearMouseMovement);
+            
+            shootArea.addEventListener('mousedown', () => {
+                touchState.shoot = true;
+                shootTouch.style.background = 'rgba(255, 0, 0, 0.6)';
+            });
+            
+            shootArea.addEventListener('mouseup', () => {
+                touchState.shoot = false;
+                shootTouch.style.background = 'rgba(255, 0, 0, 0.3)';
+            });
+
+            function handleMouseMovement(e) {
+                const rect = movementArea.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                
+                if (mouseX < rect.width / 2) {
+                    touchState.left = true;
+                    touchState.right = false;
+                    leftTouch.style.background = 'rgba(255, 255, 255, 0.4)';
+                    rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                } else {
+                    touchState.left = false;
+                    touchState.right = true;
+                    leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                    rightTouch.style.background = 'rgba(255, 255, 255, 0.4)';
+                }
+            }
+
+            function clearMouseMovement() {
+                touchState.left = false;
+                touchState.right = false;
+                leftTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+                rightTouch.style.background = 'rgba(255, 255, 255, 0.2)';
+            }
+
+            // Prevent context menu
+            [movementArea, shootArea, leftTouch, rightTouch, shootTouch].forEach(element => {
                 element.addEventListener('contextmenu', (e) => e.preventDefault());
             });
+        }
+
+        // Start game with selected difficulty
+        function startGame(difficulty) {
+            currentDifficulty = difficulty;
+            difficultySettings = DIFFICULTY_SETTINGS[difficulty];
+            document.getElementById('mainMenuScreen').style.display = 'none';
+            initGame();
         }
 
         // Initialize game
@@ -683,17 +987,25 @@
             
             player = new Player();
             bullets = [];
+            enemyBullets = [];
             enemies = [];
             particles = [];
             powerUps = [];
             score = 0;
-            lives = MAX_LIVES;
+            lives = difficultySettings.lives;
             wave = 1;
             gameOver = false;
             gameRunning = true;
             comboCount = 0;
             comboTime = 0;
             upgradePoints = 0;
+            
+            // Reset active power-ups
+            for (let key in activePowerUps) {
+                activePowerUps[key].active = false;
+                activePowerUps[key].timer = 0;
+                document.getElementById(`powerup${key.charAt(0).toUpperCase() + key.slice(1)}`).style.display = 'none';
+            }
             
             playerUpgrades = {
                 bulletPower: 1,
@@ -704,6 +1016,7 @@
             
             initStars();
             setupTouchControls();
+            updateUI();
             gameLoop();
         }
 
@@ -725,36 +1038,50 @@
             
             // Update bullets
             bullets = bullets.filter(bullet => bullet.update());
+            enemyBullets = enemyBullets.filter(bullet => bullet.update());
             
             // Update enemies
             enemies = enemies.filter(enemy => {
-                if (!enemy.update()) {
-                    // Enemy left screen
-                    return false;
-                }
+                if (!enemy.update()) return false;
                 
-                // Check collision with player
                 if (checkCollision(player, enemy)) {
                     player.takeDamage();
                     createExplosion(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2);
                     return false;
                 }
-                
                 return true;
             });
             
-            // Update particles
+            // Update particles and power-ups
             particles = particles.filter(particle => particle.update());
-            
-            // Update power-ups
             powerUps = powerUps.filter(powerUp => {
                 if (!powerUp.update()) return false;
-                
                 if (checkCollision(player, powerUp)) {
                     applyPowerUp(powerUp.type);
                     return false;
                 }
                 return true;
+            });
+            
+            // Update active power-ups
+            updateActivePowerUps();
+            
+            // Check enemy bullet collisions with player
+            enemyBullets.forEach((bullet, index) => {
+                if (checkCollision(player, bullet)) {
+                    player.takeDamage();
+                    enemyBullets.splice(index, 1);
+                    
+                    for (let i = 0; i < 5; i++) {
+                        particles.push(new Particle(
+                            bullet.x, bullet.y,
+                            (Math.random() - 0.5) * 4,
+                            (Math.random() - 0.5) * 4,
+                            '#ff4444',
+                            30
+                        ));
+                    }
+                }
             });
             
             // Spawn enemies
@@ -763,7 +1090,7 @@
                 const enemyType = Math.random() < 0.1 + wave * 0.02 ? 
                                  (Math.random() < 0.3 ? 2 : 1) : 0;
                 enemies.push(new Enemy(enemyType));
-                enemySpawnTimer = Math.max(20, 60 - wave * 5);
+                enemySpawnTimer = Math.max(20, difficultySettings.enemySpawnRate - wave * 5);
             }
             
             // Spawn power-ups
@@ -776,21 +1103,20 @@
                 powerUpTimer = 300;
             }
             
-            // Check bullet collisions
+            // Check bullet collisions with enemies
             bullets.forEach((bullet, bulletIndex) => {
                 enemies.forEach((enemy, enemyIndex) => {
                     if (checkCollision(bullet, enemy)) {
                         if (enemy.takeDamage(bullet.power)) {
-                            // Enemy destroyed
-                            const points = enemy.type === 0 ? 10 : enemy.type === 1 ? 25 : 100;
-                            score += points;
+                            const basePoints = enemy.type === 0 ? 10 : enemy.type === 1 ? 25 : 100;
+                            const multipliedPoints = Math.floor(basePoints * difficultySettings.scoreMultiplier);
+                            score += multipliedPoints;
                             comboCount++;
                             comboTime = 180;
                             
                             createExplosion(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2);
                             enemies.splice(enemyIndex, 1);
                             
-                            // Chance to spawn power-up
                             if (Math.random() < 0.2) {
                                 powerUps.push(new PowerUp(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2));
                             }
@@ -809,7 +1135,7 @@
             }
             
             // Check for level up
-            if (score >= wave * 500) {
+            if (score >= wave * 500 * difficultySettings.scoreMultiplier) {
                 wave++;
                 upgradePoints++;
                 showUpgradeScreen();
@@ -823,15 +1149,29 @@
                     star.x = Math.random() * CANVAS_WIDTH;
                 }
             });
+            
+            // Update UI
+            updateUI();
+        }
+
+        // Update active power-ups
+        function updateActivePowerUps() {
+            for (let key in activePowerUps) {
+                if (activePowerUps[key].active) {
+                    activePowerUps[key].timer--;
+                    if (activePowerUps[key].timer <= 0) {
+                        activePowerUps[key].active = false;
+                        document.getElementById(`powerup${key.charAt(0).toUpperCase() + key.slice(1)}`).style.display = 'none';
+                    }
+                }
+            }
         }
 
         // Render game
         function renderGame() {
-            // Clear canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
-            // Draw stars
             ctx.fillStyle = '#fff';
             stars.forEach(star => {
                 ctx.beginPath();
@@ -839,41 +1179,39 @@
                 ctx.fill();
             });
             
-            // Draw game objects
             powerUps.forEach(powerUp => powerUp.draw());
+            enemyBullets.forEach(bullet => bullet.draw());
             enemies.forEach(enemy => enemy.draw());
             bullets.forEach(bullet => bullet.draw());
             particles.forEach(particle => particle.draw());
             player.draw();
-            
-            // Draw UI
-            drawUI();
         }
 
-        // Draw UI elements
-        function drawUI() {
-            ctx.fillStyle = '#fff';
-            ctx.font = '16px Courier New';
-            ctx.textAlign = 'left';
+        // Update UI elements
+        function updateUI() {
+            document.getElementById('score').textContent = `Score: ${score}`;
+            document.getElementById('lives').textContent = `Lives: ${lives}`;
+            document.getElementById('wave').textContent = `Wave: ${wave}`;
+            document.getElementById('power').textContent = `Power: ${playerUpgrades.bulletPower}`;
+            document.getElementById('difficulty').textContent = `Difficulty: ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}`;
             
-            ctx.fillText(`Score: ${score}`, 10, 25);
-            ctx.fillText(`Lives: ${lives}`, 10, 50);
-            ctx.fillText(`Wave: ${wave}`, 10, 75);
-            ctx.fillText(`Power: ${playerUpgrades.bulletPower}`, 10, 100);
+            // Update power-up indicators
+            for (let key in activePowerUps) {
+                const indicator = document.getElementById(`powerup${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                if (activePowerUps[key].active) {
+                    const secondsLeft = Math.ceil(activePowerUps[key].timer / 60);
+                    indicator.textContent = indicator.textContent.replace(/\d+s/, '') + ` ${secondsLeft}s`;
+                    indicator.style.display = 'block';
+                }
+            }
             
             // Draw combo
             if (comboCount > 1) {
-                ctx.fillStyle = '#ffff00';
-                ctx.font = '20px Courier New';
-                ctx.textAlign = 'center';
-                ctx.fillText(`COMBO x${comboCount}!`, CANVAS_WIDTH / 2, 30);
-                ctx.textAlign = 'left';
-            }
-            
-            // Draw upgrade points
-            if (upgradePoints > 0) {
-                ctx.fillStyle = '#00ff88';
-                ctx.fillText(`Upgrades Available: ${upgradePoints}`, CANVAS_WIDTH - 200, 25);
+                const comboDisplay = document.getElementById('comboDisplay');
+                comboDisplay.textContent = `COMBO x${comboCount}!`;
+                comboDisplay.style.display = 'block';
+            } else {
+                document.getElementById('comboDisplay').style.display = 'none';
             }
         }
 
@@ -901,15 +1239,17 @@
         // Apply power-up effect
         function applyPowerUp(type) {
             switch(type) {
-                case 0: // Speed
-                    playerUpgrades.speed = Math.min(2, playerUpgrades.speed + 0.2);
+                case 0:
+                    activePowerUps.speed.active = true;
+                    activePowerUps.speed.timer = POWERUP_DURATION;
                     break;
-                case 1: // Shield
-                    playerUpgrades.shield++;
-                    lives = Math.min(MAX_LIVES, lives + 1);
+                case 1:
+                    activePowerUps.shield.active = true;
+                    activePowerUps.shield.timer = POWERUP_DURATION;
                     break;
-                case 2: // Power
-                    playerUpgrades.bulletPower = Math.min(3, playerUpgrades.bulletPower + 1);
+                case 2:
+                    activePowerUps.rapid.active = true;
+                    activePowerUps.rapid.timer = POWERUP_DURATION;
                     break;
             }
         }
@@ -948,6 +1288,7 @@
         function showGameOver() {
             gameRunning = false;
             document.getElementById('finalScore').textContent = `Final Score: ${score}`;
+            document.getElementById('finalDifficulty').textContent = `Difficulty: ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}`;
             document.getElementById('gameOverScreen').style.display = 'flex';
         }
 
@@ -957,12 +1298,10 @@
             initGame();
         }
 
-        // Show main menu (placeholder)
+        // Show main menu
         function showMainMenu() {
             document.getElementById('gameOverScreen').style.display = 'none';
-            // Add main menu implementation here
-            alert('Main menu would go here!');
-            initGame();
+            document.getElementById('mainMenuScreen').style.display = 'flex';
         }
 
         // Handle keyboard input
@@ -982,8 +1321,16 @@
             }
         }, false);
 
-        // Start the game
-        window.onload = initGame;
+        // Start with main menu
+        window.onload = function() {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            initStars();
+            setupTouchControls();
+            
+            // Show main menu initially
+            document.getElementById('mainMenuScreen').style.display = 'flex';
+        };
     </script>
 </body>
 </html>
