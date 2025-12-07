@@ -25,6 +25,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
     
@@ -36,12 +39,11 @@
 </head>
 <body>
     <!-- ====== NAVIGATION ====== -->
-    <nav class="pro-nav">
+    <nav class="cyber-nav">
         <div class="nav-container">
             <!-- Logo -->
             <a href="index.html" class="nav-brand">
-                <i class="fas fa-gamepad"></i>
-                <span>SyedAbbas<span style="color: #2575fc;">Games</span></span>
+                <span class="text-gradient">SyedAbbasGames</span>
             </a>
             
             <!-- Mobile Menu Toggle -->
@@ -67,19 +69,19 @@
     </nav>
     
     <!-- ====== HERO SECTION ====== -->
-    <section class="hero" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; padding: 4rem 20px; text-align: center;">
+    <section class="cyber-hero">
         <div class="container" style="max-width: 800px; margin: 0 auto;">
-            <h1 style="font-size: 3rem; margin-bottom: 1rem; color: white;">
+            <h1>
                 <i class="fas fa-gamepad"></i> Play Amazing HTML5 Games
             </h1>
-            <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">
+            <p>
                 Free browser games built with JavaScript. No downloads, no registration - just pure fun!
             </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#featured-games" class="btn" style="background: white; color: #6a11cb; font-weight: bold;">
+                <a href="#featured-games" class="cyber-btn">
                     <i class="fas fa-play"></i> Play Games
                 </a>
-                <a href="blog.html" class="btn btn-outline" style="border-color: white; color: white;">
+                <a href="blog.html" class="cyber-btn cyber-btn-outline">
                     <i class="fas fa-book"></i> Learn Development
                 </a>
             </div>
@@ -88,25 +90,31 @@
     
     <!-- ====== FEATURED GAMES ====== -->
     <section class="container" style="padding: 4rem 20px;" id="featured-games">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">
+        <h2 class="text-center mb-4">
             <i class="fas fa-star"></i> Featured Games
         </h2>
         
-        <div class="game-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        <div class="game-grid">
             <!-- Snake Game -->
             <div class="game-card">
-                <div style="background: linear-gradient(135deg, #00b894, #00a085); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
-                    <i class="fas fa-snake" style="font-size: 4rem;"></i>
+                <div class="game-card-header">
+                    <span class="game-card-category">Classic</span>
+                    <div style="background: linear-gradient(135deg, #00b894, #00a085); height: 100%;"></div>
                 </div>
-                <div class="game-info">
-                    <h3 class="game-title">Snake Game</h3>
-                    <p class="game-description">Classic snake game with modern controls. Eat food, grow longer, avoid walls!</p>
-                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                        <a href="Snake.html" class="play-btn">
+                <div class="game-card-content">
+                    <h3 class="game-card-title">Snake Game</h3>
+                    <p class="game-card-description">Classic snake game with modern controls. Eat food, grow longer, avoid walls!</p>
+                    <div class="game-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Canvas</span>
+                    </div>
+                    <div class="game-card-footer">
+                        <a href="Snake.html" class="cyber-btn">
                             <i class="fas fa-play"></i> Play Now
                         </a>
-                        <a href="blog.html#snake" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
-                            <i class="fas fa-code"></i> How It's Made
+                        <a href="blog.html#snake" class="cyber-btn cyber-btn-outline">
+                            <i class="fas fa-code"></i> Tutorial
                         </a>
                     </div>
                 </div>
@@ -114,18 +122,24 @@
             
             <!-- Space Shooter -->
             <div class="game-card">
-                <div style="background: linear-gradient(135deg, #0984e3, #074a8f); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
-                    <i class="fas fa-rocket" style="font-size: 4rem;"></i>
+                <div class="game-card-header">
+                    <span class="game-card-category">Action</span>
+                    <div style="background: linear-gradient(135deg, #0984e3, #074a8f); height: 100%;"></div>
                 </div>
-                <div class="game-info">
-                    <h3 class="game-title">Space Shooter</h3>
-                    <p class="game-description">Defend Earth from alien invaders in this action-packed space shooter.</p>
-                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                        <a href="Spaceshooter.html" class="play-btn">
+                <div class="game-card-content">
+                    <h3 class="game-card-title">Space Shooter</h3>
+                    <p class="game-card-description">Defend Earth from alien invaders in this action-packed space shooter.</p>
+                    <div class="game-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Physics</span>
+                    </div>
+                    <div class="game-card-footer">
+                        <a href="Spaceshooter.html" class="cyber-btn">
                             <i class="fas fa-play"></i> Play Now
                         </a>
-                        <a href="blog.html#spaceshooter" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
-                            <i class="fas fa-code"></i> How It's Made
+                        <a href="blog.html#spaceshooter" class="cyber-btn cyber-btn-outline">
+                            <i class="fas fa-code"></i> Tutorial
                         </a>
                     </div>
                 </div>
@@ -133,18 +147,24 @@
             
             <!-- Tic Tac Toe -->
             <div class="game-card">
-                <div style="background: linear-gradient(135deg, #fd79a8, #e84393); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
-                    <i class="fas fa-times" style="font-size: 4rem;"></i>
+                <div class="game-card-header">
+                    <span class="game-card-category">Puzzle</span>
+                    <div style="background: linear-gradient(135deg, #fd79a8, #e84393); height: 100%;"></div>
                 </div>
-                <div class="game-info">
-                    <h3 class="game-title">Tic Tac Toe</h3>
-                    <p class="game-description">Classic X and O game with smart AI opponent. Can you beat the computer?</p>
-                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                        <a href="tictactoe.html" class="play-btn">
+                <div class="game-card-content">
+                    <h3 class="game-card-title">Tic Tac Toe</h3>
+                    <p class="game-card-description">Classic X and O game with smart AI opponent. Can you beat the computer?</p>
+                    <div class="game-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AI</span>
+                    </div>
+                    <div class="game-card-footer">
+                        <a href="tictactoe.html" class="cyber-btn">
                             <i class="fas fa-play"></i> Play Now
                         </a>
-                        <a href="blog.html#tictactoe" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
-                            <i class="fas fa-code"></i> How It's Made
+                        <a href="blog.html#tictactoe" class="cyber-btn cyber-btn-outline">
+                            <i class="fas fa-code"></i> Tutorial
                         </a>
                     </div>
                 </div>
@@ -152,29 +172,35 @@
             
             <!-- Car Game -->
             <div class="game-card">
-                <div style="background: linear-gradient(135deg, #fdcb6e, #e17055); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
-                    <i class="fas fa-car" style="font-size: 4rem;"></i>
+                <div class="game-card-header">
+                    <span class="game-card-category">Racing</span>
+                    <div style="background: linear-gradient(135deg, #fdcb6e, #e17055); height: 100%;"></div>
                 </div>
-                <div class="game-info">
-                    <h3 class="game-title">Car Game</h3>
-                    <p class="game-description">Avoid obstacles in this fast-paced driving game. How long can you survive?</p>
-                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                        <a href="car.html" class="play-btn">
+                <div class="game-card-content">
+                    <h3 class="game-card-title">Car Game</h3>
+                    <p class="game-card-description">Avoid obstacles in this fast-paced driving game. How long can you survive?</p>
+                    <div class="game-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Animation</span>
+                    </div>
+                    <div class="game-card-footer">
+                        <a href="car.html" class="cyber-btn">
                             <i class="fas fa-play"></i> Play Now
                         </a>
-                        <a href="blog.html#car" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
-                            <i class="fas fa-code"></i> How It's Made
+                        <a href="blog.html#car" class="cyber-btn cyber-btn-outline">
+                            <i class="fas fa-code"></i> Tutorial
                         </a>
                     </div>
                 </div>
             </div>
             
-            <!-- More Games Button -->
-            <div class="game-card" style="background: #f8f9fa; display: flex; align-items: center; justify-content: center; text-align: center;">
-                <div class="game-info">
-                    <h3 class="game-title">More Games Available!</h3>
-                    <p class="game-description">Check out all my game projects including Happy Game, Reptile Game, and Mining Game</p>
-                    <a href="projects.html" class="play-btn" style="margin-top: 1rem;">
+            <!-- View All Games Card -->
+            <div class="game-card">
+                <div class="game-card-content" style="height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                    <h3 class="game-card-title">More Games Available!</h3>
+                    <p class="game-card-description">Check out all my game projects including Happy Game, Reptile Game, and Mining Game</p>
+                    <a href="projects.html" class="cyber-btn" style="margin-top: 1.5rem;">
                         <i class="fas fa-list"></i> View All Games
                     </a>
                 </div>
@@ -183,40 +209,47 @@
     </section>
     
     <!-- ====== BLOG PREVIEW ====== -->
-    <section style="background: #f8f9fa; padding: 4rem 20px;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">
-                <i class="fas fa-blog"></i> Latest Game Development Articles
-            </h2>
+    <section class="container" style="padding: 4rem 0;">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-blog"></i> Latest Game Development Articles
+        </h2>
+        
+        <div class="blog-preview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+            <article class="blog-card">
+                <h3 class="blog-title"><i class="fas fa-code"></i> Building Games with JavaScript</h3>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> Dec 2023</span>
+                    <span><i class="far fa-clock"></i> 8 min read</span>
+                </div>
+                <p class="blog-excerpt">Learn the basics of game development using vanilla JavaScript and HTML5 Canvas.</p>
+                <a href="blog.html#javascript-games" class="read-more">Read Article →</a>
+            </article>
             
-            <div class="blog-preview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
-                <article class="blog-card">
-                    <h3 class="blog-title"><i class="fas fa-code"></i> Building Games with JavaScript</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> December 2023 | <i class="far fa-clock"></i> 8 min read</p>
-                    <p class="blog-excerpt">Learn the basics of game development using vanilla JavaScript and HTML5 Canvas. No frameworks required!</p>
-                    <a href="blog.html#javascript-games" class="read-more">Read Article →</a>
-                </article>
-                
-                <article class="blog-card">
-                    <h3 class="blog-title"><i class="fas fa-mobile-alt"></i> Mobile Game Optimization</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> November 2023 | <i class="far fa-clock"></i> 12 min read</p>
-                    <p class="blog-excerpt">Tips and tricks to make your HTML5 games run smoothly on mobile devices with touch controls.</p>
-                    <a href="blog.html#mobile-optimization" class="read-more">Read Article →</a>
-                </article>
-                
-                <article class="blog-card">
-                    <h3 class="blog-title"><i class="fas fa-tools"></i> Debugging Game Code</h3>
-                    <p class="blog-meta"><i class="far fa-calendar"></i> October 2023 | <i class="far fa-clock"></i> 10 min read</p>
-                    <p class="blog-excerpt">Common bugs in game development and how to fix them using browser developer tools.</p>
-                    <a href="blog.html#debugging" class="read-more">Read Article →</a>
-                </article>
-            </div>
+            <article class="blog-card">
+                <h3 class="blog-title"><i class="fas fa-mobile-alt"></i> Mobile Game Optimization</h3>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> Nov 2023</span>
+                    <span><i class="far fa-clock"></i> 12 min read</span>
+                </div>
+                <p class="blog-excerpt">Tips and tricks to make your HTML5 games run smoothly on mobile devices.</p>
+                <a href="blog.html#mobile-optimization" class="read-more">Read Article →</a>
+            </article>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="blog.html" class="btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                    <i class="fas fa-book-open"></i> Visit Game Development Blog
-                </a>
-            </div>
+            <article class="blog-card">
+                <h3 class="blog-title"><i class="fas fa-tools"></i> Debugging Game Code</h3>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> Oct 2023</span>
+                    <span><i class="far fa-clock"></i> 10 min read</span>
+                </div>
+                <p class="blog-excerpt">Common bugs in game development and how to fix them with developer tools.</p>
+                <a href="blog.html#debugging" class="read-more">Read Article →</a>
+            </article>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="blog.html" class="cyber-btn">
+                <i class="fas fa-book-open"></i> Visit Development Blog
+            </a>
         </div>
     </section>
     
@@ -231,13 +264,13 @@
                 All my games are built with vanilla JavaScript and are completely free to play.
             </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="about.html" class="btn">
+                <a href="about.html" class="cyber-btn">
                     <i class="fas fa-info-circle"></i> My Story
                 </a>
-                <a href="https://github.com/SyedAbbas786-web" target="_blank" class="btn btn-secondary">
+                <a href="https://github.com/SyedAbbas786-web" target="_blank" class="cyber-btn cyber-btn-outline">
                     <i class="fab fa-github"></i> View Code on GitHub
                 </a>
-                <a href="contact.html" class="btn btn-outline">
+                <a href="contact.html" class="cyber-btn cyber-btn-outline">
                     <i class="fas fa-envelope"></i> Contact Me
                 </a>
             </div>
@@ -245,7 +278,7 @@
     </section>
     
     <!-- ====== FOOTER ====== -->
-    <footer class="pro-footer">
+    <footer class="cyber-footer">
         <div class="footer-content">
             <!-- About Section -->
             <div class="footer-section">
