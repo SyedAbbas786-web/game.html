@@ -1,21 +1,1307 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Projects</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Projects Portfolio - SyedAbbas Games</title>
+    <meta name="description" content="Explore my collection of HTML5 games, C++ projects, and interactive web applications. Play games, view source code, and learn development techniques.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Projects Page Specific CSS -->
+    <style>
+        /* ====== PROJECTS PAGE STYLES ====== */
+        :root {
+            --project-primary: #6a11cb;
+            --project-secondary: #2575fc;
+            --project-accent: #ff416c;
+            --project-success: #00b894;
+            --project-warning: #fdcb6e;
+            --project-dark: #2d3436;
+            --project-light: #f8f9fa;
+        }
+        
+        .projects-page {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Projects Hero */
+        .projects-hero {
+            background: linear-gradient(135deg, var(--project-primary), var(--project-secondary));
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .projects-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .projects-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .projects-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .projects-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .stat-box {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Filter Buttons */
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: #f8f9fa;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            color: var(--project-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--project-primary);
+            color: white;
+            border-color: var(--project-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Projects Grid */
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* Project Card */
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .project-card.featured {
+            border: 3px solid var(--project-accent);
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .project-card-header {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card.featured .project-card-header {
+            height: 100%;
+        }
+        
+        .project-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .project-card:hover .project-card-image {
+            transform: scale(1.05);
+        }
+        
+        .project-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--project-accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .project-card-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.95);
+            color: var(--project-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .project-card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--project-dark);
+            line-height: 1.4;
+        }
+        
+        .project-card-description {
+            color: #636e72;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #f0f2f5;
+            color: var(--project-primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-features {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .project-features li {
+            margin-bottom: 0.5rem;
+            color: #636e72;
+        }
+        
+        .project-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .project-date {
+            color: #636e72;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-play {
+            background: linear-gradient(135deg, var(--project-primary), var(--project-secondary));
+            color: white;
+        }
+        
+        .btn-play:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+            color: white;
+        }
+        
+        .btn-code {
+            background: #f8f9fa;
+            color: var(--project-dark);
+            border: 2px solid #eee;
+        }
+        
+        .btn-code:hover {
+            background: var(--project-dark);
+            color: white;
+            border-color: var(--project-dark);
+        }
+        
+        /* Project Details Modal */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--project-accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.2rem;
+        }
+        
+        /* Game Embed Section */
+        .game-embed-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 20px;
+        }
+        
+        .game-embed-section h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .game-iframe-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Skills Showcase */
+        .skills-showcase {
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-item {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--project-primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .project-card.featured {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .projects-title {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-stats {
+                gap: 1rem;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .project-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .project-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -468px 0 }
+            100% { background-position: 468px 0 }
+        }
+        
+        .loading {
+            background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+            background-size: 800px 104px;
+            animation: shimmer 1.5s infinite linear;
+        }
+    </style>
 </head>
-<body>
-  <h1>My Projects</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="intro.html">Intro</a>
-    <a href="projects.html">Projects</a>
-  </nav>
-  <p>This page tells you about my Projects.</p>
+<body class="projects-page">
+    <!-- Navigation -->
+    <div id="nav-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="projects-hero">
+        <div class="projects-hero-content">
+            <h1 class="projects-title"><i class="fas fa-gamepad"></i> My Game Projects</h1>
+            <p class="projects-subtitle">
+                Explore my collection of interactive games built with HTML5, JavaScript, C++, and various game development technologies. 
+                Each project includes playable demos, source code, and development insights.
+            </p>
+            
+            <div class="project-stats">
+                <div class="stat-box">
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">Games Built</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">15K+</span>
+                    <span class="stat-label">Lines of Code</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Free to Play</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Filter Buttons -->
+    <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-th"></i> All Projects
+        </button>
+        <button class="filter-btn" data-filter="html5">
+            <i class="fab fa-html5"></i> HTML5 Games
+        </button>
+        <button class="filter-btn" data-filter="cpp">
+            <i class="fas fa-cogs"></i> C++ Games
+        </button>
+        <button class="filter-btn" data-filter="featured">
+            <i class="fas fa-star"></i> Featured
+        </button>
+        <button class="filter-btn" data-filter="classic">
+            <i class="fas fa-history"></i> Classic Games
+        </button>
+        <button class="filter-btn" data-filter="action">
+            <i class="fas fa-rocket"></i> Action Games
+        </button>
+    </div>
+    
+    <!-- Projects Grid -->
+    <div class="projects-container">
+        <div class="projects-grid">
+            <!-- Featured: Space Shooter -->
+            <article class="project-card featured animate-card" data-category="html5 action featured">
+                <div class="project-card-header">
+                    <div class="project-card-badge">FEATURED</div>
+                    <div class="project-card-category">HTML5 Canvas</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Space Shooter Game</h2>
+                    <p class="project-card-description">
+                        An action-packed space shooter game built with HTML5 Canvas and vanilla JavaScript. 
+                        Defend Earth from alien invaders with multiple weapon upgrades, enemy AI patterns, 
+                        and progressive difficulty levels.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5 Canvas</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Game Physics</span>
+                        <span class="tech-tag">Collision Detection</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Advanced enemy AI with different behavior patterns</li>
+                        <li>Multiple weapon systems and power-ups</li>
+                        <li>Score tracking with local storage</li>
+                        <li>Smooth 60 FPS animation</li>
+                        <li>Responsive controls for desktop and mobile</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> Updated: December 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="Spaceshooter.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Game
+                            </a>
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                                <i class="fab fa-github"></i> View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Snake Game -->
+            <article class="project-card animate-card" data-category="html5 classic">
+                <div class="project-card-header">
+                    <div class="project-card-category">Classic Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Snake Game</h2>
+                    <p class="project-card-description">
+                        A modern implementation of the classic Snake game with enhanced graphics, 
+                        smooth controls, and progressive difficulty. Built with HTML5 Canvas and JavaScript.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5 Canvas</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Game Logic</span>
+                        <span class="tech-tag">Local Storage</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Smooth snake movement with keyboard controls</li>
+                        <li>Progressive speed increase as score grows</li>
+                        <li>High score tracking in browser storage</li>
+                        <li>Wall collision detection</li>
+                        <li>Clean, modern visual design</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> December 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="Snake.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Now
+                            </a>
+                            <a href="blog.html#snake" class="project-btn btn-code">
+                                <i class="fas fa-book"></i> Tutorial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- 2D Car Racing Game (C++) -->
+            <article class="project-card animate-card" data-category="cpp">
+                <div class="project-card-header">
+                    <div class="project-card-category">C++ Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">2D Car Racing Game</h2>
+                    <p class="project-card-description">
+                        A complete 2D car racing game developed in C++ using graphics.h library. 
+                        Features car control mechanics, obstacle collision detection, and score tracking system.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">graphics.h</span>
+                        <span class="tech-tag">Game Physics</span>
+                        <span class="tech-tag">Collision Detection</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Complete 2D car physics simulation</li>
+                        <li>Dynamic obstacle generation and collision</li>
+                        <li>Score tracking and level progression</li>
+                        <li>Keyboard-controlled car movement</li>
+                        <li>Multiple game states (menu, play, game over)</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> 2023 Project
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#cpp-racing-details" class="project-btn btn-play show-details">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Tic Tac Toe -->
+            <article class="project-card animate-card" data-category="html5 classic">
+                <div class="project-card-header">
+                    <div class="project-card-category">Strategy Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Tic Tac Toe</h2>
+                    <p class="project-card-description">
+                        A smart Tic Tac Toe game with AI opponent. Features multiple difficulty levels, 
+                        score tracking, and a clean user interface built with HTML, CSS, and JavaScript.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Game AI</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Intelligent AI opponent with difficulty levels</li>
+                        <li>Win detection algorithm</li>
+                        <li>Score tracking and game history</li>
+                        <li>Responsive design for all devices</li>
+                        <li>Smooth animations and transitions</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> November 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="tictactoe.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Game
+                            </a>
+                            <a href="blog.html#tictactoe" class="project-btn btn-code">
+                                <i class="fas fa-code"></i> See Logic
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car Game (HTML5) -->
+            <article class="project-card animate-card" data-category="html5 action">
+                <div class="project-card-header">
+                    <div class="project-card-category">Racing Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Car Racing Game</h2>
+                    <p class="project-card-description">
+                        An exciting car racing game where players avoid obstacles while maintaining speed. 
+                        Built with HTML5 Canvas featuring dynamic difficulty and score system.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5 Canvas</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Game Physics</span>
+                        <span class="tech-tag">Animation</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Dynamic obstacle generation</li>
+                        <li>Car physics and collision detection</li>
+                        <li>Progressive difficulty system</li>
+                        <li>High score leaderboard</li>
+                        <li>Smooth scrolling background</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> October 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="car.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Now
+                            </a>
+                            <a href="blog.html#car-game" class="project-btn btn-code">
+                                <i class="fas fa-book"></i> Tutorial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Mining Game -->
+            <article class="project-card animate-card" data-category="html5">
+                <div class="project-card-header">
+                    <div class="project-card-category">Adventure Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Mining Adventure Game</h2>
+                    <p class="project-card-description">
+                        An adventure game where players mine resources, upgrade tools, and explore different levels. 
+                        Features resource management and progression systems.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Game Economy</span>
+                        <span class="tech-tag">Progression System</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Resource collection and management</li>
+                        <li>Tool upgrade system</li>
+                        <li>Multiple mining levels</li>
+                        <li>Inventory management</li>
+                        <li>Progressive difficulty</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> September 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="mine.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Game
+                            </a>
+                            <a href="#" class="project-btn btn-code">
+                                <i class="fas fa-code"></i> View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Happy Game -->
+            <article class="project-card animate-card" data-category="html5">
+                <div class="project-card-header">
+                    <div class="project-card-category">Casual Game</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Happy Game</h2>
+                    <p class="project-card-description">
+                        A fun, casual game designed to be relaxing and enjoyable. Features simple mechanics, 
+                        cheerful graphics, and addictive gameplay perfect for short sessions.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Animation</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Simple and addictive gameplay</li>
+                        <li>Colorful, cheerful graphics</li>
+                        <li>Score tracking</li>
+                        <li>Mobile-friendly design</li>
+                        <li>Relaxing game mechanics</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> August 2023
+                        </div>
+                        <div class="project-buttons">
+                            <a href="happy.html" class="project-btn btn-play">
+                                <i class="fas fa-play"></i> Play Now
+                            </a>
+                            <a href="#" class="project-btn btn-code">
+                                <i class="fas fa-code"></i> See Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car Parking Simulation -->
+            <article class="project-card animate-card" data-category="cpp">
+                <div class="project-card-header">
+                    <div class="project-card-category">Simulation</div>
+                    <!-- Placeholder for game screenshot -->
+                    <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); height: 100%;"></div>
+                </div>
+                <div class="project-card-content">
+                    <h2 class="project-card-title">Car Parking Simulation</h2>
+                    <p class="project-card-description">
+                        A realistic car parking simulation game developed in C++. Features precise controls, 
+                        parking scenarios, and scoring based on parking accuracy and time.
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">graphics.h</span>
+                        <span class="tech-tag">Physics Simulation</span>
+                        <span class="tech-tag">Collision System</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Realistic car physics and controls</li>
+                        <li>Multiple parking scenarios</li>
+                        <li>Scoring based on precision and time</li>
+                        <li>Collision detection system</li>
+                        <li>Progressive difficulty levels</li>
+                    </ul>
+                    
+                    <div class="project-card-footer">
+                        <div class="project-date">
+                            <i class="far fa-calendar"></i> 2023 Project
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#parking-details" class="project-btn btn-play show-details">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                                <i class="fab fa-github"></i> Source
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Skills Showcase -->
+        <section class="skills-showcase">
+            <h2 style="text-align: center; margin-bottom: 1rem;">
+                <i class="fas fa-tools"></i> Game Development Skills
+            </h2>
+            <p style="text-align: center; color: #636e72; max-width: 800px; margin: 0 auto 2rem;">
+                Technologies and skills I've acquired through building these game projects
+            </p>
+            
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML5 Game Development</h3>
+                    <p>Creating interactive games using Canvas API, game loops, and browser APIs</p>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3>JavaScript Programming</h3>
+                    <p>Game logic, physics simulation, AI algorithms, and interactive elements</p>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>C++ Game Development</h3>
+                    <p>Building desktop games with graphics.h library and C++ programming</p>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Game Design</h3>
+                    <p>Game mechanics, level design, user experience, and progression systems</p>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Problem Solving</h3>
+                    <p>Algorithm design, optimization, debugging, and technical challenges</p>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive interfaces, responsive layouts, and engaging visuals</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Game Embed Section -->
+        <section class="game-embed-section">
+            <h2><i class="fas fa-play-circle"></i> Try a Game Directly</h2>
+            <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.9;">
+                Play the Snake game directly on this page! Use arrow keys to control the snake.
+            </p>
+            
+            <div class="game-iframe-container">
+                <iframe src="Snake.html" width="100%" height="500" style="border: none; border-radius: 10px;"></iframe>
+                <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> Use arrow keys to play. If game doesn't load, 
+                    <a href="Snake.html" style="color: #6a11cb;">open it directly</a>.
+                </p>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="projects.html" class="project-btn btn-play" style="background: white; color: #6a11cb;">
+                    <i class="fas fa-gamepad"></i> View All Games
+                </a>
+            </div>
+        </section>
+        
+        <!-- Project Modal (for C++ details) -->
+        <div id="project-modal" class="project-modal">
+            <div class="modal-content">
+                <div class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div id="modal-body">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <script>
+        // Load navigation and footer from main site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navigation
+            fetch('index.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network error');
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Load Navigation
+                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    if (nav) {
+                        document.getElementById('nav-container').innerHTML = nav.outerHTML;
+                        
+                        // Update active link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            if (link.getAttribute('href') === 'projects.html') {
+                                link.classList.add('active');
+                            }
+                        });
+                    } else {
+                        createBasicNav();
+                    }
+                    
+                    // Load Footer
+                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    if (footer) {
+                        document.getElementById('footer-container').innerHTML = footer.outerHTML;
+                        
+                        // Update year in footer
+                        const yearSpan = document.getElementById('currentYear');
+                        if (yearSpan) {
+                            yearSpan.textContent = new Date().getFullYear();
+                        }
+                    } else {
+                        createBasicFooter();
+                    }
+                    
+                    // Initialize project page functionality
+                    initProjectsPage();
+                })
+                .catch(error => {
+                    console.error('Error loading components:', error);
+                    createBasicNav();
+                    createBasicFooter();
+                    initProjectsPage();
+                });
+            
+            function createBasicNav() {
+                document.getElementById('nav-container').innerHTML = `
+                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                            </a>
+                            <div>
+                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
+                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Projects</a>
+                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Blog</a>
+                                <a href="about.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">About</a>
+                            </div>
+                        </div>
+                    </nav>
+                `;
+            }
+            
+            function createBasicFooter() {
+                document.getElementById('footer-container').innerHTML = `
+                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
+                        <div style="max-width: 1400px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Game Projects</h3>
+                                    <p style="color: #b2bec3;">Collection of interactive games built with various technologies.</p>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Access</h3>
+                                    <a href="Snake.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-snake"></i> Snake Game
+                                    </a>
+                                    <a href="Spaceshooter.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-rocket"></i> Space Shooter
+                                    </a>
+                                    <a href="tictactoe.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-times"></i> Tic Tac Toe
+                                    </a>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fab fa-github"></i> View Source Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
+                                <p>&copy; ${new Date().getFullYear()} Syed Abbas. All games are free to play and learn from.</p>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            }
+            
+            function initProjectsPage() {
+                // Filter functionality
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const projectCards = document.querySelectorAll('.project-card');
+                
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        
+                        const filterValue = this.getAttribute('data-filter');
+                        
+                        // Show/hide projects based on filter
+                        projectCards.forEach(card => {
+                            const categories = card.getAttribute('data-category').split(' ');
+                            
+                            if (filterValue === 'all' || categories.includes(filterValue)) {
+                                card.style.display = 'flex';
+                                card.classList.add('animate-card');
+                            } else {
+                                card.style.display = 'none';
+                                card.classList.remove('animate-card');
+                            }
+                        });
+                    });
+                });
+                
+                // Project details modal
+                const modal = document.getElementById('project-modal');
+                const modalClose = document.getElementById('modal-close');
+                const modalBody = document.getElementById('modal-body');
+                const showDetailButtons = document.querySelectorAll('.show-details');
+                
+                // Close modal when X is clicked
+                modalClose.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+                
+                // Close modal when clicking outside
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+                
+                // Show details when buttons are clicked
+                showDetailButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const projectTitle = this.closest('.project-card').querySelector('.project-card-title').textContent;
+                        
+                        // Load appropriate content based on project
+                        let content = '';
+                        
+                        if (projectTitle.includes('Car Racing')) {
+                            content = `
+                                <div style="padding: 3rem;">
+                                    <h2 style="color: #6a11cb; margin-bottom: 1.5rem;">${projectTitle} - C++ Implementation</h2>
+                                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                                        <h3><i class="fas fa-code"></i> Project Overview</h3>
+                                        <p>This 2D Car Racing Game was developed using C++ with the graphics.h library, which provides basic graphics functionality for DOS-based C++ programming.</p>
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                                        <div>
+                                            <h4><i class="fas fa-cogs"></i> Key Features</h4>
+                                            <ul>
+                                                <li>Complete 2D car physics simulation</li>
+                                                <li>Dynamic obstacle generation system</li>
+                                                <li>Real-time collision detection</li>
+                                                <li>Score tracking and level progression</li>
+                                                <li>Multiple game states (Menu, Play, Game Over)</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4><i class="fas fa-tools"></i> Technologies Used</h4>
+                                            <ul>
+                                                <li>C++ Programming Language</li>
+                                                <li>graphics.h library for 2D graphics</li>
+                                                <li>Basic game loop implementation</li>
+                                                <li>Keyboard input handling</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="background: #1e1e1e; color: #f8f8f2; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                                        <h4 style="color: #50fa7b;"><i class="fas fa-code"></i> Code Snippet</h4>
+                                        <pre style="overflow-x: auto; font-family: 'Roboto Mono', monospace;">
+// Basic game structure
+#include &lt;graphics.h&gt;
+#include &lt;conio.h&gt;
+
+class CarGame {
+private:
+    int score;
+    int level;
+    bool gameRunning;
+    
+public:
+    CarGame() {
+        score = 0;
+        level = 1;
+        gameRunning = true;
+    }
+    
+    void update() {
+        // Game update logic
+        moveCar();
+        checkCollisions();
+        updateScore();
+    }
+    
+    void render() {
+        // Drawing game objects
+        cleardevice();
+        drawCar();
+        drawObstacles();
+        drawScore();
+    }
+};</pre>
+                                    </div>
+                                    
+                                    <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 10px;">
+                                        <h4><i class="fas fa-graduation-cap"></i> Learning Outcomes</h4>
+                                        <p>This project helped me understand:</p>
+                                        <ul>
+                                            <li>Game loop implementation in C++</li>
+                                            <li>2D graphics programming basics</li>
+                                            <li>Collision detection algorithms</li>
+                                            <li>Game state management</li>
+                                            <li>Object-oriented game design</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        
+                        modalBody.innerHTML = content;
+                        modal.style.display = 'flex';
+                    });
+                });
+                
+                // Add animation to cards on scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-card');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                document.querySelectorAll('.project-card').forEach(card => {
+                    observer.observe(card);
+                });
+                
+                // Initialize statistics animation
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.textContent.replace('+', '').replace('K+', '000'));
+                    const duration = 2000;
+                    const steps = 60;
+                    const increment = target / steps;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = stat.textContent.includes('+') ? target + '+' : 
+                                             stat.textContent.includes('K+') ? (target/1000) + 'K+' : target;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, duration / steps);
+                });
+            }
+        });
+    </script>
 </body>
-<div class= "line">2D Car Racing Game (C++) graphics.h </div>
-<div class="line">Developed a 2D car racing game using graphics.h and C++.</div>
-<div class="line">The project included features 
-like car control, obstacle collision, and score tracking.Also made many other game like old Snake Xenia, Car Parking Simulation, Tic-tac-toe 
-and with html.</div>
 </html>
