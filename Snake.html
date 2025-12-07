@@ -11,6 +11,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -106,6 +107,10 @@
             box-shadow: var(--shadow);
             background: #000;
             min-height: 600px;
+            width: 100%;
+            aspect-ratio: 1;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         #snake-canvas {
@@ -114,6 +119,7 @@
             height: 100%;
             background: #000;
             border: 2px solid var(--primary-color);
+            touch-action: none; /* Prevent scrolling on canvas only */
         }
 
         /* Game UI Overlay */
@@ -360,6 +366,7 @@
             pointer-events: auto;
             opacity: 0.3;
             transition: opacity var(--transition-speed);
+            touch-action: none; /* Prevent scrolling on touch areas */
         }
 
         .touch-area:active {
@@ -549,7 +556,7 @@
         </header>
         
         <div class="game-area">
-            <canvas id="snake-canvas"></canvas>
+            <canvas id="snake-canvas" width="600" height="600"></canvas>
             
             <div class="game-ui-overlay">
                 <div class="ui-panel">
@@ -718,9 +725,9 @@
             POWERUP_DURATION: 8000,
             COMBO_TIMEOUT: 2000,
             DIFFICULTY: {
-                easy: { speed: 200, powerupChance: 0.3, foodScore: 10 },
-                normal: { speed: 150, powerupChance: 0.25, foodScore: 15 },
-                hard: { speed: 100, powerupChance: 0.2, foodScore: 20 }
+                easy: { speed: 200, powerupChance: 0.3, foodScore: 10, wallCollision: false },
+                normal: { speed: 150, powerupChance: 0.25, foodScore: 15, wallCollision: true },
+                hard: { speed: 100, powerupChance: 0.2, foodScore: 20, wallCollision: true }
             }
         };
 
@@ -794,24 +801,14 @@
             }
 
             setupCanvas() {
-                // Calculate canvas size based on grid
-                const cellSize = GameConfig.CELL_SIZE;
-                const width = this.gridWidth * cellSize;
-                const height = this.gridHeight * cellSize;
+                // Set fixed canvas size
+                this.canvas.width = 600;
+                this.canvas.height = 600;
+                this.canvas.style.width = '100%';
+                this.canvas.style.height = '100%';
                 
-                this.canvas.width = width;
-                this.canvas.height = height;
-                
-                // Apply device pixel ratio for crisp rendering
-                const dpr = window.devicePixelRatio || 1;
-                const rect = this.canvas.getBoundingClientRect();
-                
-                this.canvas.width = rect.width * dpr;
-                this.canvas.height = rect.height * dpr;
-                
-                this.ctx.scale(dpr, dpr);
-                this.canvas.style.width = `${rect.width}px`;
-                this.canvas.style.height = `${rect.height}px`;
+                // Center the snake in the grid
+                this.snake.reset();
             }
 
             startGame() {
@@ -877,6 +874,9 @@
 
                 this.snake.move();
                 
+                // Check wall collision based on difficulty
+                const difficulty = GameConfig.DIFFICULTY[this.difficulty];
+                
                 if (this.checkFoodCollision()) {
                     this.handleFoodCollection();
                 }
@@ -885,14 +885,36 @@
                     this.audioManager.playPowerUpSound();
                 }
                 
-                if ((this.checkWallCollision() || this.checkSelfCollision()) && !this.hasShield) {
-                    this.gameOver();
-                    return;
+                // Check collisions
+                const wallCollision = this.checkWallCollision();
+                const selfCollision = this.checkSelfCollision();
+                
+                if ((difficulty.wallCollision && wallCollision) || selfCollision) {
+                    if (!this.hasShield) {
+                        this.gameOver();
+                        return;
+                    } else if (wallCollision) {
+                        // Handle wall collision with shield - teleport to opposite side
+                        this.handleWallTeleport();
+                    }
+                } else if (wallCollision && !difficulty.wallCollision) {
+                    // Easy mode: teleport through walls
+                    this.handleWallTeleport();
                 }
                 
                 this.powerUps.update(this);
                 this.uiManager.updateStats(this);
                 this.uiManager.updatePowerUps(this.powerUps);
+            }
+
+            handleWallTeleport() {
+                const head = this.snake.segments[0];
+                
+                if (head.x < 0) head.x = this.gridWidth - 1;
+                else if (head.x >= this.gridWidth) head.x = 0;
+                
+                if (head.y < 0) head.y = this.gridHeight - 1;
+                else if (head.y >= this.gridHeight) head.y = 0;
             }
 
             applyMagnetEffect() {
@@ -1140,10 +1162,14 @@
             }
 
             reset() {
+                // Start snake in the middle of the grid
+                const centerX = Math.floor(GameConfig.GRID_WIDTH / 2);
+                const centerY = Math.floor(GameConfig.GRID_HEIGHT / 2);
+                
                 this.segments = [
-                    { x: 5, y: 15 },
-                    { x: 4, y: 15 },
-                    { x: 3, y: 15 }
+                    { x: centerX, y: centerY },
+                    { x: centerX - 1, y: centerY },
+                    { x: centerX - 2, y: centerY }
                 ];
                 this.direction = Direction.RIGHT;
                 this.nextDirection = Direction.RIGHT;
@@ -1257,48 +1283,6 @@
                 ctx.arc(leftEyeX - eyeSize/3, leftEyeY - eyeSize/3, eyeSize/3, 0, Math.PI * 2);
                 ctx.arc(rightEyeX - eyeSize/3, rightEyeY - eyeSize/3, eyeSize/3, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Draw tongue when moving
-                if (Math.random() > 0.7) {
-                    this.drawTongue(ctx, x, y, size);
-                }
-            }
-
-            drawTongue(ctx, x, y, size) {
-                ctx.save();
-                ctx.strokeStyle = '#ff0000';
-                ctx.lineWidth = 1;
-                ctx.lineCap = 'round';
-                
-                let startX, startY, endX, endY;
-                
-                if (this.direction.x === 1) { // Right
-                    startX = x + size;
-                    startY = y + size/2;
-                    endX = startX + size/2;
-                    endY = startY + (Math.random() - 0.5) * size/2;
-                } else if (this.direction.x === -1) { // Left
-                    startX = x;
-                    startY = y + size/2;
-                    endX = startX - size/2;
-                    endY = startY + (Math.random() - 0.5) * size/2;
-                } else if (this.direction.y === 1) { // Down
-                    startX = x + size/2;
-                    startY = y + size;
-                    endX = startX + (Math.random() - 0.5) * size/2;
-                    endY = startY + size/2;
-                } else { // Up
-                    startX = x + size/2;
-                    startY = y;
-                    endX = startX + (Math.random() - 0.5) * size/2;
-                    endY = startY - size/2;
-                }
-                
-                ctx.beginPath();
-                ctx.moveTo(startX, startY);
-                ctx.lineTo(endX, endY);
-                ctx.stroke();
-                ctx.restore();
             }
 
             drawSegment(ctx, x, y, size, index) {
@@ -1832,6 +1816,36 @@
                 this.setupTouchControls();
                 this.setupButtonListeners();
                 this.setupDifficultyButtons();
+                this.preventTouchScroll();
+            }
+
+            preventTouchScroll() {
+                // Only prevent scrolling on canvas and touch controls
+                const canvas = this.game.canvas;
+                const leftTouch = document.getElementById('left-touch');
+                const rightTouch = document.getElementById('right-touch');
+                
+                const preventScroll = (e) => {
+                    if (this.game.state === GameState.PLAYING) {
+                        e.preventDefault();
+                    }
+                };
+                
+                // Add touch event listeners to prevent scrolling only on game elements
+                if (canvas) {
+                    canvas.addEventListener('touchstart', preventScroll, { passive: false });
+                    canvas.addEventListener('touchmove', preventScroll, { passive: false });
+                }
+                
+                if (leftTouch) {
+                    leftTouch.addEventListener('touchstart', preventScroll, { passive: false });
+                    leftTouch.addEventListener('touchmove', preventScroll, { passive: false });
+                }
+                
+                if (rightTouch) {
+                    rightTouch.addEventListener('touchstart', preventScroll, { passive: false });
+                    rightTouch.addEventListener('touchmove', preventScroll, { passive: false });
+                }
             }
 
             setupKeyboardControls() {
@@ -1898,16 +1912,20 @@
                         this.handleSwipe('right');
                     });
                     
-                    // Swipe detection
+                    // Swipe detection for all directions
                     let touchStartX = 0;
                     let touchStartY = 0;
                     
                     document.addEventListener('touchstart', (e) => {
+                        if (this.game.state !== GameState.PLAYING) return;
+                        
                         touchStartX = e.touches[0].clientX;
                         touchStartY = e.touches[0].clientY;
                     });
                     
                     document.addEventListener('touchend', (e) => {
+                        if (this.game.state !== GameState.PLAYING) return;
+                        
                         const touchEndX = e.changedTouches[0].clientX;
                         const touchEndY = e.changedTouches[0].clientY;
                         
@@ -1915,11 +1933,11 @@
                         const diffY = touchEndY - touchStartY;
                         
                         if (Math.abs(diffX) > Math.abs(diffY)) {
-                            if (diffX > 50) this.handleSwipe('right');
-                            else if (diffX < -50) this.handleSwipe('left');
+                            if (diffX > 30) this.handleSwipe('right');
+                            else if (diffX < -30) this.handleSwipe('left');
                         } else {
-                            if (diffY > 50) this.handleSwipe('down');
-                            else if (diffY < -50) this.handleSwipe('up');
+                            if (diffY > 30) this.handleSwipe('down');
+                            else if (diffY < -30) this.handleSwipe('up');
                         }
                     });
                 }
@@ -2090,7 +2108,6 @@ Power-ups last for 8 seconds each.`);
                 
                 // Handle window resize
                 window.addEventListener('resize', () => {
-                    game.setupCanvas();
                     game.render();
                 });
             }, 100);
