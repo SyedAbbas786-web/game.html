@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBER TAC TOE - Neon Edition</title>
+    <title>CYBER TAC TOE - Full Screen Scrollable</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* RESET AND BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         :root {
@@ -18,24 +27,18 @@
             --neon-green: #00ff00;
             --neon-purple: #9d00ff;
             --dark-bg: #0a0a1a;
-            --darker-bg: #050510;
-            --grid-bg: rgba(15, 15, 35, 0.8);
             --text-glow: 0 0 10px, 0 0 20px, 0 0 30px;
         }
 
         body {
-            font-family: 'Orbitron', 'Arial', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             background-color: var(--dark-bg);
             color: var(--neon-blue);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            overflow-y: auto;
         }
 
-        /* Animated background */
+        /* ANIMATED BACKGROUND */
         body::before {
             content: '';
             position: fixed;
@@ -44,48 +47,35 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(9, 0, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 20% 30%, rgba(9, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a1a, #050510);
             z-index: -2;
         }
 
-        /* Grid lines effect */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
+        /* MAIN CONTAINER - Allows scrolling */
         .container {
             width: 100%;
-            max-width: 900px;
+            min-height: 100vh;
             padding: 20px;
             position: relative;
             z-index: 1;
+            overflow: visible;
         }
 
-        /* Header with glowing text */
+        /* HEADER */
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            position: relative;
+            padding: 30px 20px;
+            margin-bottom: 30px;
         }
 
         .main-title {
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-green));
             -webkit-background-clip: text;
@@ -95,58 +85,79 @@
             animation: pulse 3s infinite alternate;
         }
 
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--neon-green);
             text-shadow: 0 0 10px var(--neon-green);
             letter-spacing: 2px;
             font-weight: 300;
         }
 
-        /* Cyber grid for content */
-        .cyber-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+        /* MAIN CONTENT - Scrollable area */
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 600px;
+            padding: 20px 0;
+            margin-bottom: 50px;
         }
 
-        @media (max-width: 768px) {
+        /* CYBER GRID LAYOUT */
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        @media (max-width: 1100px) {
             .cyber-grid {
                 grid-template-columns: 1fr;
+                max-width: 700px;
             }
         }
 
-        /* Menu Section */
+        /* MENU AND GAME SECTIONS */
         .menu-section, .game-section {
-            background: rgba(10, 10, 30, 0.85);
-            border: 2px solid var(--neon-blue);
-            border-radius: 15px;
-            padding: 30px;
+            background: rgba(10, 10, 30, 0.9);
+            border: 3px solid var(--neon-blue);
+            border-radius: 20px;
+            padding: 35px 30px;
             box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.3),
-                inset 0 0 30px rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+                0 0 50px rgba(0, 255, 255, 0.4),
+                inset 0 0 50px rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
         }
 
         .menu-section::before, .game-section::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
             background: linear-gradient(45deg, 
                 var(--neon-blue), 
                 var(--neon-pink), 
                 var(--neon-green), 
                 var(--neon-purple));
-            border-radius: 17px;
+            border-radius: 23px;
             z-index: -1;
             opacity: 0.3;
-            animation: borderRotate 8s linear infinite;
+            animation: borderRotate 10s linear infinite;
         }
 
         @keyframes borderRotate {
@@ -154,15 +165,15 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Menu buttons */
+        /* SECTION TITLES */
         .menu-title, .game-title {
-            font-size: 2rem;
-            margin-bottom: 25px;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
             text-align: center;
             color: var(--neon-pink);
-            text-shadow: 0 0 15px var(--neon-pink);
+            text-shadow: 0 0 20px var(--neon-pink);
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .menu-title::after, .game-title::after {
@@ -171,127 +182,115 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
+            width: 150px;
+            height: 4px;
             background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
         }
 
+        /* MODE BUTTONS */
         .mode-buttons {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
+            flex: 1;
+            justify-content: center;
+            padding: 20px 0;
         }
 
+        /* CYBER BUTTONS */
         .cyber-btn {
-            padding: 20px 30px;
-            font-size: 1.3rem;
+            padding: 25px 35px;
+            font-size: 1.4rem;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             background: rgba(20, 20, 50, 0.8);
             color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
         }
 
         .cyber-btn:hover {
             transform: translateY(-5px);
             box-shadow: 
-                0 0 25px var(--neon-blue),
-                0 5px 15px rgba(0, 0, 0, 0.5);
+                0 0 40px var(--neon-blue),
+                0 10px 25px rgba(0, 0, 0, 0.5);
             background: rgba(30, 30, 70, 0.9);
             color: white;
-        }
-
-        .cyber-btn:active {
-            transform: translateY(0);
-        }
-
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s;
-        }
-
-        .cyber-btn:hover::before {
-            left: 100%;
         }
 
         .cyber-btn.pvp {
             border-color: var(--neon-green);
             color: var(--neon-green);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
         }
 
         .cyber-btn.pvp:hover {
-            box-shadow: 0 0 25px var(--neon-green);
+            box-shadow: 0 0 40px var(--neon-green);
         }
 
         .cyber-btn.pvc {
             border-color: var(--neon-pink);
             color: var(--neon-pink);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
         }
 
         .cyber-btn.pvc:hover {
-            box-shadow: 0 0 25px var(--neon-pink);
+            box-shadow: 0 0 40px var(--neon-pink);
         }
 
-        /* Game Board */
+        /* GAME INFO */
         .game-info {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 25px;
-            padding: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
             background: rgba(15, 15, 40, 0.7);
-            border-radius: 10px;
-            border: 1px solid var(--neon-purple);
+            border-radius: 15px;
+            border: 2px solid var(--neon-purple);
         }
 
         .score-item {
             text-align: center;
-            padding: 10px 20px;
+            padding: 15px 25px;
+            flex: 1;
         }
 
         .score-label {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--neon-green);
-            margin-bottom: 5px;
-            text-shadow: 0 0 8px var(--neon-green);
+            margin-bottom: 10px;
+            text-shadow: 0 0 12px var(--neon-green);
         }
 
         .score-value {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 900;
             color: white;
-            text-shadow: 0 0 10px white;
+            text-shadow: 0 0 15px white;
         }
 
+        /* TURN INDICATOR */
         .turn-indicator {
             text-align: center;
-            margin-bottom: 25px;
-            padding: 15px;
+            margin: 25px 0;
+            padding: 20px;
             background: rgba(15, 15, 40, 0.7);
-            border-radius: 10px;
-            border: 1px solid var(--neon-blue);
-            font-size: 1.5rem;
-            font-weight: 700;
+            border-radius: 15px;
+            border: 2px solid var(--neon-blue);
+            font-size: 1.8rem;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
             animation: pulse 2s infinite;
         }
 
@@ -300,175 +299,179 @@
             50% { opacity: 0.8; }
         }
 
-        /* Game Grid */
+        /* GAME GRID */
         .game-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 30px;
-            background: var(--grid-bg);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid var(--neon-blue);
+            gap: 15px;
+            margin: 30px 0;
+            background: rgba(15, 15, 35, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px solid var(--neon-blue);
             box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.2),
-                inset 0 0 30px rgba(0, 255, 255, 0.05);
+                0 0 40px rgba(0, 255, 255, 0.3),
+                inset 0 0 40px rgba(0, 255, 255, 0.05);
+            min-height: 400px;
         }
 
         .cell {
-            aspect-ratio: 1;
             background: rgba(20, 20, 50, 0.7);
-            border: 2px solid var(--neon-blue);
-            border-radius: 10px;
+            border: 3px solid var(--neon-blue);
+            border-radius: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 900;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             user-select: none;
+            aspect-ratio: 1;
         }
 
         .cell:hover {
             background: rgba(30, 30, 70, 0.9);
             transform: scale(1.05);
-            box-shadow: 0 0 20px var(--neon-blue);
+            box-shadow: 0 0 25px var(--neon-blue);
         }
 
         .cell.x {
             color: var(--neon-green);
-            text-shadow: 0 0 20px var(--neon-green);
+            text-shadow: 0 0 25px var(--neon-green);
         }
 
         .cell.o {
             color: var(--neon-pink);
-            text-shadow: 0 0 20px var(--neon-pink);
+            text-shadow: 0 0 25px var(--neon-pink);
         }
 
         .cell.win {
             animation: winPulse 1.5s infinite;
-            background: rgba(0, 255, 0, 0.1);
+            background: rgba(0, 255, 0, 0.15);
         }
 
         @keyframes winPulse {
             0%, 100% { 
-                box-shadow: 0 0 20px var(--neon-green);
+                box-shadow: 0 0 25px var(--neon-green);
                 transform: scale(1);
             }
             50% { 
-                box-shadow: 0 0 40px var(--neon-green);
-                transform: scale(1.05);
+                box-shadow: 0 0 50px var(--neon-green);
+                transform: scale(1.08);
             }
         }
 
-        /* Game Controls */
+        /* GAME CONTROLS */
         .game-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
+            margin-top: 30px;
         }
 
         .control-btn {
-            padding: 15px 25px;
-            font-size: 1.1rem;
+            padding: 18px 35px;
+            font-size: 1.3rem;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             background: rgba(20, 20, 50, 0.8);
             color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px var(--neon-blue);
         }
 
         .control-btn.reset {
             border-color: var(--neon-pink);
             color: var(--neon-pink);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
         }
 
         .control-btn.reset:hover {
-            box-shadow: 0 0 20px var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
         }
 
         .control-btn.menu {
             border-color: var(--neon-green);
             color: var(--neon-green);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .control-btn.menu:hover {
-            box-shadow: 0 0 20px var(--neon-green);
+            box-shadow: 0 0 30px var(--neon-green);
         }
 
-        /* Difficulty selector */
+        /* DIFFICULTY SELECTOR */
         .difficulty-selector {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
         }
 
         .difficulty-label {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: var(--neon-blue);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: block;
-            text-shadow: 0 0 10px var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
         }
 
         .difficulty-slider {
             width: 100%;
-            height: 10px;
+            height: 15px;
             -webkit-appearance: none;
             appearance: none;
             background: rgba(20, 20, 50, 0.8);
-            border-radius: 5px;
+            border-radius: 10px;
             outline: none;
-            border: 1px solid var(--neon-blue);
+            border: 2px solid var(--neon-blue);
         }
 
         .difficulty-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: var(--neon-pink);
             cursor: pointer;
-            box-shadow: 0 0 15px var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+            border: 2px solid white;
         }
 
         .difficulty-slider::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: var(--neon-pink);
             cursor: pointer;
-            border: none;
-            box-shadow: 0 0 15px var(--neon-pink);
+            border: 2px solid white;
+            box-shadow: 0 0 20px var(--neon-pink);
         }
 
         .difficulty-value {
-            margin-top: 10px;
-            font-size: 1.2rem;
+            margin-top: 15px;
+            font-size: 1.5rem;
             color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green);
+            font-weight: 700;
         }
 
-        /* Floating particles */
+        /* FLOATING PARTICLES */
         .particles {
             position: fixed;
             top: 0;
@@ -481,11 +484,11 @@
 
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
             background: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
             animation: floatParticle linear infinite;
         }
 
@@ -506,69 +509,30 @@
             }
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 3rem;
-            }
-            
-            .cell {
-                font-size: 3.5rem;
-            }
-            
-            .score-value {
-                font-size: 2rem;
-            }
-            
-            .cyber-btn, .control-btn {
-                padding: 15px 20px;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .cell {
-                font-size: 2.8rem;
-            }
-            
-            .game-grid {
-                gap: 5px;
-                padding: 10px;
-            }
-            
-            .cyber-grid {
-                padding: 15px;
-            }
-        }
-
-        /* Game over overlay */
+        /* GAME OVER OVERLAY */
         .game-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 5, 15, 0.9);
+            background: rgba(5, 5, 15, 0.95);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(5px);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .overlay-content {
-            background: rgba(10, 10, 30, 0.95);
-            border: 3px solid var(--neon-blue);
-            border-radius: 20px;
-            padding: 40px;
+            background: rgba(10, 10, 30, 0.98);
+            border: 4px solid var(--neon-blue);
+            border-radius: 25px;
+            padding: 60px 50px;
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            box-shadow: 0 0 50px var(--neon-blue);
+            box-shadow: 0 0 80px var(--neon-blue);
             animation: overlayAppear 0.5s ease-out;
         }
 
@@ -578,37 +542,142 @@
         }
 
         .overlay-title {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             color: var(--neon-green);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px var(--neon-green);
+            margin-bottom: 30px;
+            text-shadow: 0 0 25px var(--neon-green);
+            font-weight: 900;
         }
 
         .overlay-message {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--neon-blue);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .overlay-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .overlay-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background: rgba(20, 20, 50, 0.8);
+            padding: 20px 40px;
+            font-size: 1.4rem;
+            background: rgba(20, 20, 50, 0.9);
             color: var(--neon-pink);
-            border: 2px solid var(--neon-pink);
-            border-radius: 10px;
+            border: 3px solid var(--neon-pink);
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 10px;
+            letter-spacing: 2px;
         }
 
         .overlay-btn:hover {
             background: var(--neon-pink);
             color: var(--dark-bg);
-            box-shadow: 0 0 25px var(--neon-pink);
+            box-shadow: 0 0 40px var(--neon-pink);
+            transform: translateY(-5px);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--neon-purple);
+            font-size: 1rem;
+            text-shadow: 0 0 10px var(--neon-purple);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        /* RESPONSIVE ADJUSTMENTS */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .cyber-grid {
+                gap: 25px;
+            }
+            
+            .menu-section, .game-section {
+                padding: 25px 20px;
+                min-height: 550px;
+            }
+            
+            .cyber-btn, .control-btn {
+                padding: 20px 25px;
+                font-size: 1.2rem;
+            }
+            
+            .game-grid {
+                min-height: 350px;
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .cell {
+                font-size: 3.5rem;
+            }
+            
+            .score-value {
+                font-size: 2.2rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .game-title, .menu-title {
+                font-size: 1.8rem;
+            }
+            
+            .cyber-btn {
+                padding: 18px 20px;
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+            
+            .control-btn {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            
+            .cell {
+                font-size: 2.8rem;
+            }
+            
+            .overlay-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .overlay-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        /* FORCE SCROLLABLE PAGE */
+        .force-scroll {
+            min-height: 1200px; /* Ensures there's enough content to scroll */
         }
     </style>
 </head>
@@ -621,74 +690,81 @@
         <div class="overlay-content">
             <h2 class="overlay-title" id="overlayTitle">VICTORY ACHIEVED</h2>
             <p class="overlay-message" id="overlayMessage">Player X wins the match!</p>
-            <div>
+            <div class="overlay-buttons">
                 <button class="overlay-btn" id="overlayRestart">PLAY AGAIN</button>
                 <button class="overlay-btn" id="overlayMenu">MAIN MENU</button>
             </div>
         </div>
     </div>
     
-    <div class="container">
+    <div class="container force-scroll">
         <header class="header">
             <h1 class="main-title">CYBER TAC TOE</h1>
-            <p class="subtitle">NEURAL NETWORK EDITION</p>
+            <p class="subtitle">NEURAL NETWORK EDITION - FULL SCREEN MODE</p>
         </header>
         
-        <div class="cyber-grid">
-            <!-- Menu Section -->
-            <section class="menu-section" id="menuSection">
-                <h2 class="menu-title">SELECT MODE</h2>
-                <div class="mode-buttons">
-                    <button class="cyber-btn pvp" id="pvpBtn">
-                        <i class="fas fa-user-friends"></i> PLAYER VS PLAYER
-                    </button>
-                    <button class="cyber-btn pvc" id="pvcBtn">
-                        <i class="fas fa-robot"></i> PLAYER VS AI
-                    </button>
-                </div>
-                
-                <div class="difficulty-selector" id="difficultySection">
-                    <label class="difficulty-label">AI DIFFICULTY</label>
-                    <input type="range" min="1" max="3" value="2" class="difficulty-slider" id="difficultySlider">
-                    <div class="difficulty-value" id="difficultyValue">ADAPTIVE AI</div>
-                </div>
-            </section>
-            
-            <!-- Game Section -->
-            <section class="game-section" id="gameSection" style="display: none;">
-                <h2 class="game-title">NEURAL GRID</h2>
-                
-                <div class="game-info">
-                    <div class="score-item">
-                        <div class="score-label">PLAYER X</div>
-                        <div class="score-value" id="playerXWins">0</div>
+        <div class="content-wrapper">
+            <div class="cyber-grid">
+                <!-- Menu Section -->
+                <section class="menu-section" id="menuSection">
+                    <h2 class="menu-title">SELECT MODE</h2>
+                    <div class="mode-buttons">
+                        <button class="cyber-btn pvp" id="pvpBtn">
+                            <i class="fas fa-user-friends"></i> PLAYER VS PLAYER
+                        </button>
+                        <button class="cyber-btn pvc" id="pvcBtn">
+                            <i class="fas fa-robot"></i> PLAYER VS AI
+                        </button>
                     </div>
-                    <div class="score-item">
-                        <div class="score-label">VS</div>
-                        <div class="score-value">-</div>
+                    
+                    <div class="difficulty-selector" id="difficultySection">
+                        <label class="difficulty-label">AI DIFFICULTY</label>
+                        <input type="range" min="1" max="3" value="2" class="difficulty-slider" id="difficultySlider">
+                        <div class="difficulty-value" id="difficultyValue">ADAPTIVE AI</div>
                     </div>
-                    <div class="score-item">
-                        <div class="score-label">PLAYER O</div>
-                        <div class="score-value" id="playerOWins">0</div>
+                </section>
+                
+                <!-- Game Section -->
+                <section class="game-section" id="gameSection" style="display: none;">
+                    <h2 class="game-title">NEURAL GRID</h2>
+                    
+                    <div class="game-info">
+                        <div class="score-item">
+                            <div class="score-label">PLAYER X</div>
+                            <div class="score-value" id="playerXWins">0</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">VS</div>
+                            <div class="score-value">-</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">PLAYER O</div>
+                            <div class="score-value" id="playerOWins">0</div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="turn-indicator" id="turnIndicator">PLAYER X TURN</div>
-                
-                <div class="game-grid" id="gameGrid">
-                    <!-- Cells will be generated by JavaScript -->
-                </div>
-                
-                <div class="game-controls">
-                    <button class="control-btn reset" id="resetBtn">
-                        <i class="fas fa-redo"></i> RESET GRID
-                    </button>
-                    <button class="control-btn menu" id="menuBtn">
-                        <i class="fas fa-home"></i> MAIN MENU
-                    </button>
-                </div>
-            </section>
+                    
+                    <div class="turn-indicator" id="turnIndicator">PLAYER X TURN</div>
+                    
+                    <div class="game-grid" id="gameGrid">
+                        <!-- Cells will be generated by JavaScript -->
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="control-btn reset" id="resetBtn">
+                            <i class="fas fa-redo"></i> RESET GRID
+                        </button>
+                        <button class="control-btn menu" id="menuBtn">
+                            <i class="fas fa-home"></i> MAIN MENU
+                        </button>
+                    </div>
+                </section>
+            </div>
         </div>
+        
+        <footer class="footer">
+            <p>CYBER TAC TOE © 2024 | NEURAL NETWORK EDITION</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">Use arrow keys or mouse to play | ESC to return to menu</p>
+        </footer>
     </div>
 
     <script>
@@ -726,29 +802,43 @@
             setupEventListeners();
             generateGameGrid();
             updateDifficultyText();
+            ensureScrollable();
+        }
+
+        // Force scrollable page
+        function ensureScrollable() {
+            // Force the body to be scrollable
+            document.body.style.overflowY = 'auto';
+            document.body.style.minHeight = '1200px';
+            
+            // Ensure container is visible
+            const container = document.querySelector('.container');
+            container.style.minHeight = '1200px';
+            container.style.paddingBottom = '100px';
         }
 
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
+            const particleCount = 60;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                const size = Math.random() * 4 + 1;
+                const size = Math.random() * 5 + 2;
                 const left = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 20;
-                const color = i % 3 === 0 ? '#ff00ff' : (i % 3 === 1 ? '#00ff00' : '#0ff0fc');
+                const duration = Math.random() * 25 + 15;
+                const delay = Math.random() * 25;
+                const colors = ['#ff00ff', '#00ff00', '#0ff0fc', '#9d00ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 Object.assign(particle.style, {
                     width: `${size}px`,
                     height: `${size}px`,
                     left: `${left}%`,
                     background: color,
-                    boxShadow: `0 0 10px ${color}`,
+                    boxShadow: `0 0 15px ${color}`,
                     animationDuration: `${duration}s`,
                     animationDelay: `${delay}s`
                 });
@@ -766,6 +856,13 @@
             difficultySlider.addEventListener('input', updateDifficulty);
             overlayRestart.addEventListener('click', restartGame);
             overlayMenu.addEventListener('click', showMenu);
+            
+            // Handle escape key for menu
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && gameSection.style.display === 'block') {
+                    showMenu();
+                }
+            });
         }
 
         // Generate game grid cells
@@ -1085,9 +1182,11 @@
             if (result === 'X' || result === 'O') {
                 overlayTitle.textContent = 'VICTORY ACHIEVED';
                 overlayMessage.textContent = `PLAYER ${result} WINS THE MATCH!`;
+                document.querySelector('.overlay-content').style.borderColor = result === 'X' ? 'var(--neon-green)' : 'var(--neon-pink)';
             } else {
                 overlayTitle.textContent = 'NEURAL DEADLOCK';
                 overlayMessage.textContent = 'SYSTEM STALEMATE - NO WINNER';
+                document.querySelector('.overlay-content').style.borderColor = 'var(--neon-blue)';
             }
             
             gameOverlay.style.display = 'flex';
@@ -1141,6 +1240,15 @@
 
         // Initialize game when page loads
         window.addEventListener('DOMContentLoaded', init);
+        
+        // Ensure scrolling works
+        window.addEventListener('load', () => {
+            // Force scroll to top
+            window.scrollTo(0, 0);
+            
+            // Ensure body is scrollable
+            document.body.style.overflowY = 'scroll';
+        });
     </script>
 </body>
 </html>
