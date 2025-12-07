@@ -3,44 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Projects Portfolio - SyedAbbas Games</title>
-    <meta name="description" content="Explore my collection of HTML5 games, C++ projects, and interactive web applications. Play games, view source code, and learn development techniques.">
+    <title>Cyber Game Projects - SyedAbbas Games</title>
+    <meta name="description" content="Explore my collection of cyber HTML5 games, C++ projects, and interactive web applications. Play games, view source code, and learn development techniques.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
     
     <!-- Projects Page Specific CSS -->
     <style>
-        /* ====== PROJECTS PAGE STYLES ====== */
+        /* ====== CYBER PROJECTS PAGE STYLES ====== */
         :root {
-            --project-primary: #6a11cb;
-            --project-secondary: #2575fc;
-            --project-accent: #ff416c;
-            --project-success: #00b894;
-            --project-warning: #fdcb6e;
-            --project-dark: #2d3436;
-            --project-light: #f8f9fa;
+            --cyber-blue: #00d4ff;
+            --neon-purple: #9d4edd;
+            --matrix-green: #00ff9d;
+            --blood-red: #ff0055;
+            --dark-1: #0a0a0f;
+            --dark-2: #121218;
+            --dark-3: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --text-muted: #8a8aa3;
         }
         
         .projects-page {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--dark-1);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Cyber Grid Background */
+        .projects-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.3;
         }
         
         /* Projects Hero */
         .projects-hero {
-            background: linear-gradient(135deg, var(--project-primary), var(--project-secondary));
-            color: white;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
+            color: var(--text-primary);
             padding: 5rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .projects-hero::before {
@@ -50,8 +75,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .projects-hero-content {
@@ -65,12 +91,19 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--cyber-blue);
         }
         
         .projects-subtitle {
             font-size: 1.4rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .project-stats {
@@ -83,57 +116,92 @@
         
         .stat-box {
             text-align: center;
-            background: rgba(255,255,255,0.1);
+            background: rgba(26, 26, 36, 0.8);
             padding: 1.5rem;
-            border-radius: 15px;
+            border-radius: 10px;
             backdrop-filter: blur(10px);
             min-width: 150px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-box:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: white;
+            color: var(--cyber-blue);
             display: block;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--cyber-blue);
         }
         
         .stat-label {
             font-size: 0.9rem;
-            opacity: 0.8;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
+            margin-top: 0.5rem;
         }
         
-        /* Filter Buttons */
+        /* Filter Buttons - Cyber Style */
         .projects-filter {
             display: flex;
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
             padding: 2rem;
-            background: white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            background: rgba(26, 26, 36, 0.8);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .filter-btn {
             padding: 10px 25px;
-            background: #f8f9fa;
-            border: 2px solid #eee;
-            border-radius: 25px;
-            color: var(--project-dark);
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-secondary);
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .filter-btn:hover::before {
+            left: 100%;
         }
         
         .filter-btn:hover, .filter-btn.active {
-            background: var(--project-primary);
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
             color: white;
-            border-color: var(--project-primary);
+            border-color: transparent;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
         
         /* Projects Grid */
@@ -150,30 +218,55 @@
             margin-bottom: 4rem;
         }
         
-        /* Project Card */
+        /* Project Card - Cyber Style */
         .project-card {
-            background: white;
-            border-radius: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             height: 100%;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(0, 212, 255, 0.1) 50%, 
+                transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .project-card:hover::before {
+            transform: translateX(100%);
         }
         
         .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 212, 255, 0.3);
+            border-color: var(--cyber-blue);
         }
         
         .project-card.featured {
-            border: 3px solid var(--project-accent);
+            border: 2px solid var(--cyber-blue);
             grid-column: 1 / -1;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
         }
         
         .project-card-header {
@@ -186,42 +279,48 @@
             height: 100%;
         }
         
-        .project-card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        
-        .project-card:hover .project-card-image {
-            transform: scale(1.05);
+        .project-card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--dark-3), transparent);
         }
         
         .project-card-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: var(--project-accent);
+            background: var(--blood-red);
             color: white;
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             z-index: 2;
+            border: 1px solid var(--blood-red);
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .project-card-category {
             position: absolute;
             top: 15px;
             left: 15px;
-            background: rgba(255,255,255,0.95);
-            color: var(--project-primary);
-            padding: 5px 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--cyber-blue);
+            padding: 8px 20px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid var(--cyber-blue);
+            z-index: 2;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .project-card-content {
@@ -234,31 +333,43 @@
         .project-card-title {
             font-size: 1.6rem;
             margin-bottom: 1rem;
-            color: var(--project-dark);
+            color: var(--text-primary);
             line-height: 1.4;
+            font-family: 'Orbitron', sans-serif;
+            border-left: 4px solid var(--cyber-blue);
+            padding-left: 1rem;
         }
         
         .project-card-description {
-            color: #636e72;
+            color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .project-tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.8rem;
             margin: 1rem 0;
         }
         
         .tech-tag {
-            background: #f0f2f5;
-            color: var(--project-primary);
-            padding: 5px 12px;
-            border-radius: 15px;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--cyber-blue);
+            padding: 6px 15px;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .tech-tag:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
         }
         
         .project-features {
@@ -268,7 +379,14 @@
         
         .project-features li {
             margin-bottom: 0.5rem;
-            color: #636e72;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .project-features li:before {
+            content: '▸';
+            color: var(--matrix-green);
+            margin-right: 10px;
         }
         
         .project-card-footer {
@@ -277,15 +395,20 @@
             align-items: center;
             margin-top: auto;
             padding-top: 1.5rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .project-date {
-            color: #636e72;
+            color: var(--text-muted);
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 5px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .project-date i {
+            color: var(--matrix-green);
         }
         
         .project-buttons {
@@ -293,113 +416,30 @@
             gap: 1rem;
         }
         
-        .project-btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-play {
-            background: linear-gradient(135deg, var(--project-primary), var(--project-secondary));
-            color: white;
-        }
-        
-        .btn-play:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
-            color: white;
-        }
-        
-        .btn-code {
-            background: #f8f9fa;
-            color: var(--project-dark);
-            border: 2px solid #eee;
-        }
-        
-        .btn-code:hover {
-            background: var(--project-dark);
-            color: white;
-            border-color: var(--project-dark);
-        }
-        
-        /* Project Details Modal */
-        .project-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--project-accent);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1001;
-            font-size: 1.2rem;
-        }
-        
-        /* Game Embed Section */
-        .game-embed-section {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            margin: 3rem 0;
-            border-radius: 20px;
-        }
-        
-        .game-embed-section h2 {
-            color: white;
-            margin-bottom: 2rem;
-        }
-        
-        .game-iframe-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        /* Skills Showcase */
+        /* Skills Showcase - Cyber Style */
         .skills-showcase {
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 20px;
+            padding: 3rem;
+            background: rgba(26, 26, 36, 0.8);
+            border-radius: 15px;
             margin: 3rem 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .skills-showcase h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .skills-showcase > p {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .skills-grid {
@@ -412,19 +452,159 @@
         .skill-item {
             text-align: center;
             padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
             transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .skill-item:hover {
             transform: translateY(-10px);
+            border-color: var(--cyber-blue);
+            background: rgba(0, 212, 255, 0.1);
         }
         
         .skill-icon {
             font-size: 3rem;
-            color: var(--project-primary);
+            color: var(--cyber-blue);
             margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--cyber-blue);
+        }
+        
+        .skill-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .skill-item p {
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        /* Game Embed Section - Cyber Style */
+        .game-embed-section {
+            padding: 3rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
+            color: white;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-embed-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
+        }
+        
+        .game-embed-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .game-embed-section p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .game-iframe-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26, 26, 36, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        
+        .game-iframe-container p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .game-iframe-container a {
+            color: var(--cyber-blue);
+            text-decoration: none;
+        }
+        
+        .game-iframe-container a:hover {
+            text-shadow: 0 0 10px var(--cyber-blue);
+        }
+        
+        /* Project Modal - Cyber Style */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: rgba(26, 26, 36, 0.95);
+            border-radius: 15px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--blood-red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.2rem;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #ff3366;
+            transform: rotate(90deg);
         }
         
         /* Responsive Design */
@@ -461,9 +641,13 @@
                 width: 100%;
             }
             
-            .project-btn {
-                width: 100%;
-                justify-content: center;
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .game-embed-section {
+                padding: 2rem 1rem;
             }
         }
         
@@ -483,48 +667,71 @@
             animation: fadeInUp 0.6s ease forwards;
         }
         
-        /* Loading Animation */
-        @keyframes shimmer {
-            0% { background-position: -468px 0 }
-            100% { background-position: 468px 0 }
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
         
-        .loading {
-            background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
-            background-size: 800px 104px;
-            animation: shimmer 1.5s infinite linear;
+        .glitch:hover {
+            animation: glitch 0.3s;
+        }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 212, 255, 0.05) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
         }
     </style>
 </head>
 <body class="projects-page">
+    <!-- Cyber Scan Line -->
+    <div class="scan-line"></div>
+    
     <!-- Navigation -->
     <div id="nav-container"></div>
     
     <!-- Hero Section -->
     <section class="projects-hero">
         <div class="projects-hero-content">
-            <h1 class="projects-title"><i class="fas fa-gamepad"></i> My Game Projects</h1>
+            <h1 class="projects-title"><i class="fas fa-gamepad"></i> CYBER GAME PROJECTS</h1>
             <p class="projects-subtitle">
-                Explore my collection of interactive games built with HTML5, JavaScript, C++, and various game development technologies. 
-                Each project includes playable demos, source code, and development insights.
+                Explore my collection of cyber-themed games built with HTML5, JavaScript, C++, 
+                and various game development technologies. Each project includes playable demos, 
+                source code, and development insights.
             </p>
             
             <div class="project-stats">
-                <div class="stat-box">
+                <div class="stat-box glitch">
                     <span class="stat-number">8+</span>
-                    <span class="stat-label">Games Built</span>
+                    <span class="stat-label">GAMES BUILT</span>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box glitch">
                     <span class="stat-number">4</span>
-                    <span class="stat-label">Technologies</span>
+                    <span class="stat-label">TECHNOLOGIES</span>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box glitch">
                     <span class="stat-number">15K+</span>
-                    <span class="stat-label">Lines of Code</span>
+                    <span class="stat-label">LINES OF CODE</span>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box glitch">
                     <span class="stat-number">100%</span>
-                    <span class="stat-label">Free to Play</span>
+                    <span class="stat-label">FREE TO PLAY</span>
                 </div>
             </div>
         </div>
@@ -533,22 +740,22 @@
     <!-- Filter Buttons -->
     <div class="projects-filter">
         <button class="filter-btn active" data-filter="all">
-            <i class="fas fa-th"></i> All Projects
+            <i class="fas fa-th"></i> ALL PROJECTS
         </button>
         <button class="filter-btn" data-filter="html5">
-            <i class="fab fa-html5"></i> HTML5 Games
+            <i class="fab fa-html5"></i> HTML5 GAMES
         </button>
         <button class="filter-btn" data-filter="cpp">
-            <i class="fas fa-cogs"></i> C++ Games
+            <i class="fas fa-cogs"></i> C++ GAMES
         </button>
         <button class="filter-btn" data-filter="featured">
-            <i class="fas fa-star"></i> Featured
+            <i class="fas fa-star"></i> FEATURED
         </button>
         <button class="filter-btn" data-filter="classic">
-            <i class="fas fa-history"></i> Classic Games
+            <i class="fas fa-history"></i> CLASSIC GAMES
         </button>
         <button class="filter-btn" data-filter="action">
-            <i class="fas fa-rocket"></i> Action Games
+            <i class="fas fa-rocket"></i> ACTION GAMES
         </button>
     </div>
     
@@ -558,13 +765,12 @@
             <!-- Featured: Space Shooter -->
             <article class="project-card featured animate-card" data-category="html5 action featured">
                 <div class="project-card-header">
-                    <div class="project-card-badge">FEATURED</div>
-                    <div class="project-card-category">HTML5 Canvas</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%;"></div>
+                    <div class="project-card-badge">CYBER FEATURED</div>
+                    <div class="project-card-category">HTML5 CANVAS</div>
+                    <div style="background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Space Shooter Game</h2>
+                    <h2 class="project-card-title">SPACE SHOOTER GAME</h2>
                     <p class="project-card-description">
                         An action-packed space shooter game built with HTML5 Canvas and vanilla JavaScript. 
                         Defend Earth from alien invaders with multiple weapon upgrades, enemy AI patterns, 
@@ -591,10 +797,10 @@
                             <i class="far fa-calendar"></i> Updated: December 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="Spaceshooter.html" class="project-btn btn-play">
+                            <a href="Spaceshooter.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Game
                             </a>
-                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="cyber-btn cyber-btn-outline">
                                 <i class="fab fa-github"></i> View Code
                             </a>
                         </div>
@@ -605,14 +811,13 @@
             <!-- Snake Game -->
             <article class="project-card animate-card" data-category="html5 classic">
                 <div class="project-card-header">
-                    <div class="project-card-category">Classic Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); height: 100%;"></div>
+                    <div class="project-card-category">CLASSIC GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--matrix-green), var(--cyber-blue)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Snake Game</h2>
+                    <h2 class="project-card-title">SNAKE GAME</h2>
                     <p class="project-card-description">
-                        A modern implementation of the classic Snake game with enhanced graphics, 
+                        A cyber implementation of the classic Snake game with enhanced graphics, 
                         smooth controls, and progressive difficulty. Built with HTML5 Canvas and JavaScript.
                     </p>
                     
@@ -628,7 +833,7 @@
                         <li>Progressive speed increase as score grows</li>
                         <li>High score tracking in browser storage</li>
                         <li>Wall collision detection</li>
-                        <li>Clean, modern visual design</li>
+                        <li>Cyber visual design</li>
                     </ul>
                     
                     <div class="project-card-footer">
@@ -636,10 +841,10 @@
                             <i class="far fa-calendar"></i> December 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="Snake.html" class="project-btn btn-play">
+                            <a href="Snake.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Now
                             </a>
-                            <a href="blog.html#snake" class="project-btn btn-code">
+                            <a href="blog.html#snake" class="cyber-btn cyber-btn-outline">
                                 <i class="fas fa-book"></i> Tutorial
                             </a>
                         </div>
@@ -650,12 +855,11 @@
             <!-- 2D Car Racing Game (C++) -->
             <article class="project-card animate-card" data-category="cpp">
                 <div class="project-card-header">
-                    <div class="project-card-category">C++ Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%); height: 100%;"></div>
+                    <div class="project-card-category">C++ GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--blood-red), var(--neon-purple)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">2D Car Racing Game</h2>
+                    <h2 class="project-card-title">2D CAR RACING GAME</h2>
                     <p class="project-card-description">
                         A complete 2D car racing game developed in C++ using graphics.h library. 
                         Features car control mechanics, obstacle collision detection, and score tracking system.
@@ -681,10 +885,10 @@
                             <i class="far fa-calendar"></i> 2023 Project
                         </div>
                         <div class="project-buttons">
-                            <a href="#cpp-racing-details" class="project-btn btn-play show-details">
+                            <a href="#cpp-racing-details" class="cyber-btn show-details">
                                 <i class="fas fa-info-circle"></i> Details
                             </a>
-                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="cyber-btn cyber-btn-outline">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -695,15 +899,14 @@
             <!-- Tic Tac Toe -->
             <article class="project-card animate-card" data-category="html5 classic">
                 <div class="project-card-header">
-                    <div class="project-card-category">Strategy Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); height: 100%;"></div>
+                    <div class="project-card-category">STRATEGY GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Tic Tac Toe</h2>
+                    <h2 class="project-card-title">TIC TAC TOE</h2>
                     <p class="project-card-description">
                         A smart Tic Tac Toe game with AI opponent. Features multiple difficulty levels, 
-                        score tracking, and a clean user interface built with HTML, CSS, and JavaScript.
+                        score tracking, and a cyber user interface built with HTML, CSS, and JavaScript.
                     </p>
                     
                     <div class="project-tech-stack">
@@ -726,10 +929,10 @@
                             <i class="far fa-calendar"></i> November 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="tictactoe.html" class="project-btn btn-play">
+                            <a href="tictactoe.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Game
                             </a>
-                            <a href="blog.html#tictactoe" class="project-btn btn-code">
+                            <a href="blog.html#tictactoe" class="cyber-btn cyber-btn-outline">
                                 <i class="fas fa-code"></i> See Logic
                             </a>
                         </div>
@@ -740,12 +943,11 @@
             <!-- Car Game (HTML5) -->
             <article class="project-card animate-card" data-category="html5 action">
                 <div class="project-card-header">
-                    <div class="project-card-category">Racing Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%); height: 100%;"></div>
+                    <div class="project-card-category">RACING GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--matrix-green), var(--cyber-blue)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Car Racing Game</h2>
+                    <h2 class="project-card-title">CAR RACING GAME</h2>
                     <p class="project-card-description">
                         An exciting car racing game where players avoid obstacles while maintaining speed. 
                         Built with HTML5 Canvas featuring dynamic difficulty and score system.
@@ -771,10 +973,10 @@
                             <i class="far fa-calendar"></i> October 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="car.html" class="project-btn btn-play">
+                            <a href="car.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Now
                             </a>
-                            <a href="blog.html#car-game" class="project-btn btn-code">
+                            <a href="blog.html#car-game" class="cyber-btn cyber-btn-outline">
                                 <i class="fas fa-book"></i> Tutorial
                             </a>
                         </div>
@@ -785,12 +987,11 @@
             <!-- Mining Game -->
             <article class="project-card animate-card" data-category="html5">
                 <div class="project-card-header">
-                    <div class="project-card-category">Adventure Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); height: 100%;"></div>
+                    <div class="project-card-category">ADVENTURE GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--neon-purple), var(--cyber-blue)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Mining Adventure Game</h2>
+                    <h2 class="project-card-title">MINING ADVENTURE GAME</h2>
                     <p class="project-card-description">
                         An adventure game where players mine resources, upgrade tools, and explore different levels. 
                         Features resource management and progression systems.
@@ -816,10 +1017,10 @@
                             <i class="far fa-calendar"></i> September 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="mine.html" class="project-btn btn-play">
+                            <a href="mine.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Game
                             </a>
-                            <a href="#" class="project-btn btn-code">
+                            <a href="#" class="cyber-btn cyber-btn-outline">
                                 <i class="fas fa-code"></i> View Code
                             </a>
                         </div>
@@ -830,12 +1031,11 @@
             <!-- Happy Game -->
             <article class="project-card animate-card" data-category="html5">
                 <div class="project-card-header">
-                    <div class="project-card-category">Casual Game</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%); height: 100%;"></div>
+                    <div class="project-card-category">CASUAL GAME</div>
+                    <div style="background: linear-gradient(45deg, var(--matrix-green), var(--blood-red)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Happy Game</h2>
+                    <h2 class="project-card-title">HAPPY GAME</h2>
                     <p class="project-card-description">
                         A fun, casual game designed to be relaxing and enjoyable. Features simple mechanics, 
                         cheerful graphics, and addictive gameplay perfect for short sessions.
@@ -861,10 +1061,10 @@
                             <i class="far fa-calendar"></i> August 2023
                         </div>
                         <div class="project-buttons">
-                            <a href="happy.html" class="project-btn btn-play">
+                            <a href="happy.html" class="cyber-btn">
                                 <i class="fas fa-play"></i> Play Now
                             </a>
-                            <a href="#" class="project-btn btn-code">
+                            <a href="#" class="cyber-btn cyber-btn-outline">
                                 <i class="fas fa-code"></i> See Code
                             </a>
                         </div>
@@ -875,12 +1075,11 @@
             <!-- Car Parking Simulation -->
             <article class="project-card animate-card" data-category="cpp">
                 <div class="project-card-header">
-                    <div class="project-card-category">Simulation</div>
-                    <!-- Placeholder for game screenshot -->
-                    <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); height: 100%;"></div>
+                    <div class="project-card-category">SIMULATION</div>
+                    <div style="background: linear-gradient(45deg, var(--blood-red), var(--matrix-green)); height: 100%;"></div>
                 </div>
                 <div class="project-card-content">
-                    <h2 class="project-card-title">Car Parking Simulation</h2>
+                    <h2 class="project-card-title">CAR PARKING SIMULATION</h2>
                     <p class="project-card-description">
                         A realistic car parking simulation game developed in C++. Features precise controls, 
                         parking scenarios, and scoring based on parking accuracy and time.
@@ -906,10 +1105,10 @@
                             <i class="far fa-calendar"></i> 2023 Project
                         </div>
                         <div class="project-buttons">
-                            <a href="#parking-details" class="project-btn btn-play show-details">
+                            <a href="#parking-details" class="cyber-btn show-details">
                                 <i class="fas fa-info-circle"></i> Details
                             </a>
-                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="project-btn btn-code">
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="cyber-btn cyber-btn-outline">
                                 <i class="fab fa-github"></i> Source
                             </a>
                         </div>
@@ -920,12 +1119,8 @@
         
         <!-- Skills Showcase -->
         <section class="skills-showcase">
-            <h2 style="text-align: center; margin-bottom: 1rem;">
-                <i class="fas fa-tools"></i> Game Development Skills
-            </h2>
-            <p style="text-align: center; color: #636e72; max-width: 800px; margin: 0 auto 2rem;">
-                Technologies and skills I've acquired through building these game projects
-            </p>
+            <h2><i class="fas fa-tools"></i> GAME DEVELOPMENT SKILLS</h2>
+            <p>Technologies and skills I've acquired through building these cyber game projects</p>
             
             <div class="skills-grid">
                 <div class="skill-item">
@@ -980,21 +1175,21 @@
         
         <!-- Game Embed Section -->
         <section class="game-embed-section">
-            <h2><i class="fas fa-play-circle"></i> Try a Game Directly</h2>
-            <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.9;">
+            <h2><i class="fas fa-play-circle"></i> TRY A GAME DIRECTLY</h2>
+            <p>
                 Play the Snake game directly on this page! Use arrow keys to control the snake.
             </p>
             
             <div class="game-iframe-container">
                 <iframe src="Snake.html" width="100%" height="500" style="border: none; border-radius: 10px;"></iframe>
-                <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">
+                <p>
                     <i class="fas fa-info-circle"></i> Use arrow keys to play. If game doesn't load, 
-                    <a href="Snake.html" style="color: #6a11cb;">open it directly</a>.
+                    <a href="Snake.html">open it directly</a>.
                 </p>
             </div>
             
-            <div style="margin-top: 2rem;">
-                <a href="projects.html" class="project-btn btn-play" style="background: white; color: #6a11cb;">
+            <div style="margin-top: 2rem; position: relative; z-index: 1;">
+                <a href="projects.html" class="cyber-btn">
                     <i class="fas fa-gamepad"></i> View All Games
                 </a>
             </div>
@@ -1030,7 +1225,7 @@
                     const doc = parser.parseFromString(html, 'text/html');
                     
                     // Load Navigation
-                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    const nav = doc.querySelector('nav') || doc.querySelector('.cyber-nav');
                     if (nav) {
                         document.getElementById('nav-container').innerHTML = nav.outerHTML;
                         
@@ -1038,14 +1233,16 @@
                         document.querySelectorAll('.nav-link').forEach(link => {
                             if (link.getAttribute('href') === 'projects.html') {
                                 link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
                             }
                         });
                     } else {
-                        createBasicNav();
+                        createCyberNav();
                     }
                     
                     // Load Footer
-                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    const footer = doc.querySelector('footer') || doc.querySelector('.cyber-footer');
                     if (footer) {
                         document.getElementById('footer-container').innerHTML = footer.outerHTML;
                         
@@ -1055,7 +1252,7 @@
                             yearSpan.textContent = new Date().getFullYear();
                         }
                     } else {
-                        createBasicFooter();
+                        createCyberFooter();
                     }
                     
                     // Initialize project page functionality
@@ -1063,59 +1260,49 @@
                 })
                 .catch(error => {
                     console.error('Error loading components:', error);
-                    createBasicNav();
-                    createBasicFooter();
+                    createCyberNav();
+                    createCyberFooter();
                     initProjectsPage();
                 });
             
-            function createBasicNav() {
+            function createCyberNav() {
                 document.getElementById('nav-container').innerHTML = `
-                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                    <nav class="cyber-nav">
+                        <div class="nav-container">
+                            <a href="index.html" class="nav-brand">
+                                <span class="text-gradient">SyedAbbasGames</span>
                             </a>
-                            <div>
-                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
-                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Projects</a>
-                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Blog</a>
-                                <a href="about.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">About</a>
-                            </div>
+                            <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav-menu">
+                                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="projects.html" class="nav-link active"><i class="fas fa-gamepad"></i> Projects</a></li>
+                                <li><a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+                                <li><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                            </ul>
                         </div>
                     </nav>
                 `;
             }
             
-            function createBasicFooter() {
+            function createCyberFooter() {
                 document.getElementById('footer-container').innerHTML = `
-                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
-                        <div style="max-width: 1400px; margin: 0 auto;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Game Projects</h3>
-                                    <p style="color: #b2bec3;">Collection of interactive games built with various technologies.</p>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Access</h3>
-                                    <a href="Snake.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fas fa-snake"></i> Snake Game
-                                    </a>
-                                    <a href="Spaceshooter.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fas fa-rocket"></i> Space Shooter
-                                    </a>
-                                    <a href="tictactoe.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fas fa-times"></i> Tic Tac Toe
-                                    </a>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
-                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fab fa-github"></i> View Source Code
+                    <footer class="cyber-footer">
+                        <div class="footer-content">
+                            <div class="footer-section">
+                                <h3>SyedAbbas Games</h3>
+                                <p class="footer-about">Creating cyber games with HTML5, CSS3, and JavaScript.</p>
+                                <div class="social-links">
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                                        <i class="fab fa-github"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
-                                <p>&copy; ${new Date().getFullYear()} Syed Abbas. All games are free to play and learn from.</p>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="copyright">
+                                &copy; ${new Date().getFullYear()} Syed Abbas. Cyber Game Developer.
                             </div>
                         </div>
                     </footer>
@@ -1179,19 +1366,19 @@
                         // Load appropriate content based on project
                         let content = '';
                         
-                        if (projectTitle.includes('Car Racing')) {
+                        if (projectTitle.includes('CAR RACING')) {
                             content = `
-                                <div style="padding: 3rem;">
-                                    <h2 style="color: #6a11cb; margin-bottom: 1.5rem;">${projectTitle} - C++ Implementation</h2>
-                                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
-                                        <h3><i class="fas fa-code"></i> Project Overview</h3>
-                                        <p>This 2D Car Racing Game was developed using C++ with the graphics.h library, which provides basic graphics functionality for DOS-based C++ programming.</p>
+                                <div style="padding: 3rem; color: var(--text-primary);">
+                                    <h2 style="color: var(--cyber-blue); margin-bottom: 1.5rem; font-family: 'Orbitron', sans-serif;">${projectTitle} - C++ IMPLEMENTATION</h2>
+                                    <div style="background: rgba(0, 212, 255, 0.1); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid rgba(0, 212, 255, 0.3);">
+                                        <h3 style="color: var(--text-primary); font-family: 'Orbitron', sans-serif;"><i class="fas fa-code"></i> PROJECT OVERVIEW</h3>
+                                        <p style="color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">This 2D Car Racing Game was developed using C++ with the graphics.h library, which provides basic graphics functionality for DOS-based C++ programming.</p>
                                     </div>
                                     
                                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                                        <div>
-                                            <h4><i class="fas fa-cogs"></i> Key Features</h4>
-                                            <ul>
+                                        <div style="background: rgba(0, 212, 255, 0.05); padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                                            <h4 style="color: var(--text-primary); font-family: 'Orbitron', sans-serif;"><i class="fas fa-cogs"></i> KEY FEATURES</h4>
+                                            <ul style="color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">
                                                 <li>Complete 2D car physics simulation</li>
                                                 <li>Dynamic obstacle generation system</li>
                                                 <li>Real-time collision detection</li>
@@ -1199,9 +1386,9 @@
                                                 <li>Multiple game states (Menu, Play, Game Over)</li>
                                             </ul>
                                         </div>
-                                        <div>
-                                            <h4><i class="fas fa-tools"></i> Technologies Used</h4>
-                                            <ul>
+                                        <div style="background: rgba(157, 78, 221, 0.05); padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(157, 78, 221, 0.2);">
+                                            <h4 style="color: var(--text-primary); font-family: 'Orbitron', sans-serif;"><i class="fas fa-tools"></i> TECHNOLOGIES USED</h4>
+                                            <ul style="color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">
                                                 <li>C++ Programming Language</li>
                                                 <li>graphics.h library for 2D graphics</li>
                                                 <li>Basic game loop implementation</li>
@@ -1210,8 +1397,8 @@
                                         </div>
                                     </div>
                                     
-                                    <div style="background: #1e1e1e; color: #f8f8f2; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
-                                        <h4 style="color: #50fa7b;"><i class="fas fa-code"></i> Code Snippet</h4>
+                                    <div style="background: #0a0a14; color: #f8f8f2; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid rgba(0, 212, 255, 0.2);">
+                                        <h4 style="color: #50fa7b; font-family: 'Orbitron', sans-serif;"><i class="fas fa-code"></i> CODE SNIPPET</h4>
                                         <pre style="overflow-x: auto; font-family: 'Roboto Mono', monospace;">
 // Basic game structure
 #include &lt;graphics.h&gt;
@@ -1247,10 +1434,10 @@ public:
 };</pre>
                                     </div>
                                     
-                                    <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 10px;">
-                                        <h4><i class="fas fa-graduation-cap"></i> Learning Outcomes</h4>
-                                        <p>This project helped me understand:</p>
-                                        <ul>
+                                    <div style="background: rgba(0, 255, 157, 0.1); padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(0, 255, 157, 0.3);">
+                                        <h4 style="color: var(--text-primary); font-family: 'Orbitron', sans-serif;"><i class="fas fa-graduation-cap"></i> LEARNING OUTCOMES</h4>
+                                        <p style="color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">This project helped me understand:</p>
+                                        <ul style="color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">
                                             <li>Game loop implementation in C++</li>
                                             <li>2D graphics programming basics</li>
                                             <li>Collision detection algorithms</li>
@@ -1280,7 +1467,18 @@ public:
                     observer.observe(card);
                 });
                 
-                // Initialize statistics animation
+                // Add glitch effect to stat boxes
+                const statBoxes = document.querySelectorAll('.stat-box');
+                statBoxes.forEach(box => {
+                    setInterval(() => {
+                        box.classList.remove('glitch');
+                        setTimeout(() => {
+                            box.classList.add('glitch');
+                        }, 10);
+                    }, 8000);
+                });
+                
+                // Statistics animation
                 const statNumbers = document.querySelectorAll('.stat-number');
                 statNumbers.forEach(stat => {
                     const target = parseInt(stat.textContent.replace('+', '').replace('K+', '000'));
