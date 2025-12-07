@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SyedAbbas Game Dev Blog - Tutorials, Tips & Code Examples</title>
-    <meta name="description" content="Comprehensive game development tutorials, JavaScript tips, HTML5 Canvas guides, and behind-the-scenes looks at building browser games. Learn from real projects and code examples.">
-    <meta name="keywords" content="game development, JavaScript tutorials, HTML5 Canvas, game programming, browser games, web development, coding tutorials, game design">
+    <title>SyedAbbas Game Dev Blog - Cyber Game Development Tutorials</title>
+    <meta name="description" content="Cyberpunk game development tutorials, JavaScript tips, HTML5 Canvas guides, and behind-the-scenes looks at building browser games. Learn from real projects and code examples.">
+    <meta name="keywords" content="cyberpunk game development, JavaScript tutorials, HTML5 Canvas, game programming, browser games, web development, coding tutorials, game design">
     <meta name="author" content="Syed Abbas">
     
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="SyedAbbas Game Development Blog">
-    <meta property="og:description" content="Learn game development with detailed tutorials and code examples">
+    <meta property="og:title" content="SyedAbbas Cyber Game Development Blog">
+    <meta property="og:description" content="Learn cyber game development with detailed tutorials and code examples">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://syedabbas786-web.github.io/blog.html">
     <meta property="og:image" content="images/blog-og-image.jpg">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Game Dev Blog by SyedAbbas">
+    <meta name="twitter:title" content="Cyber Game Dev Blog by SyedAbbas">
     <meta name="twitter:description" content="HTML5 Game Development Tutorials & JavaScript Tips">
     
     <!-- Favicon -->
@@ -26,35 +26,53 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
     
     <!-- Blog Specific CSS -->
     <style>
-        /* ====== BLOG PAGE STYLES ====== */
+        /* ====== CYBER BLOG PAGE STYLES ====== */
         :root {
-            --blog-primary: #6a11cb;
-            --blog-secondary: #2575fc;
-            --blog-accent: #ff416c;
-            --blog-dark: #2d3436;
-            --blog-light: #f8f9fa;
-            --blog-gray: #636e72;
-            --blog-code-bg: #1e1e1e;
-            --blog-success: #00b894;
-            --blog-warning: #fdcb6e;
-            --blog-danger: #d63031;
-            --blog-info: #0984e3;
+            --cyber-blue: #00d4ff;
+            --neon-purple: #9d4edd;
+            --matrix-green: #00ff9d;
+            --blood-red: #ff0055;
+            --dark-1: #0a0a0f;
+            --dark-2: #121218;
+            --dark-3: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --text-muted: #8a8aa3;
+        }
+        
+        body.blog-page {
+            background: var(--dark-1);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Cyber Grid Background */
+        body.blog-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.3;
         }
         
         /* Blog Layout */
-        .blog-page {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        
         .blog-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -70,16 +88,20 @@
             }
         }
         
-        /* Blog Hero Section */
+        /* Blog Hero Section - Cyber Style */
         .blog-hero {
-            background: linear-gradient(135deg, var(--blog-primary), var(--blog-secondary));
-            color: white;
-            padding: 4rem 3rem;
-            border-radius: 20px;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
+            color: var(--text-primary);
+            padding: 5rem 3rem;
+            border-radius: 15px;
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
             text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .blog-hero::before {
@@ -89,8 +111,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .blog-hero-content {
@@ -102,15 +125,22 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--cyber-blue);
         }
         
         .blog-hero-subtitle {
             font-size: 1.4rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .hero-stats {
@@ -123,19 +153,37 @@
         
         .stat-item {
             text-align: center;
+            position: relative;
+            padding: 1rem;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 212, 255, 0.05);
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: white;
+            color: var(--cyber-blue);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--cyber-blue);
         }
         
         .stat-label {
             font-size: 0.9rem;
-            opacity: 0.8;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
+            margin-top: 0.5rem;
         }
         
         /* Blog Grid */
@@ -146,22 +194,46 @@
             margin-bottom: 4rem;
         }
         
-        /* Blog Card Enhanced */
+        /* Blog Card - Cyber Style */
         .blog-card {
-            background: white;
+            background: rgba(26, 26, 36, 0.8);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             height: 100%;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(0, 212, 255, 0.1) 50%, 
+                transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .blog-card:hover::before {
+            transform: translateX(100%);
         }
         
         .blog-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 212, 255, 0.3);
+            border-color: var(--cyber-blue);
         }
         
         .blog-card-header {
@@ -170,29 +242,31 @@
             overflow: hidden;
         }
         
-        .blog-card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .blog-card:hover .blog-card-image {
-            transform: scale(1.05);
+        .blog-card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--dark-3), transparent);
         }
         
         .blog-card-category {
             position: absolute;
             top: 15px;
             left: 15px;
-            background: rgba(255,255,255,0.95);
-            color: var(--blog-primary);
-            padding: 5px 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--cyber-blue);
+            padding: 8px 20px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid var(--cyber-blue);
+            z-index: 2;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .blog-card-content {
@@ -205,8 +279,11 @@
         .blog-card-title {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--blog-dark);
+            color: var(--text-primary);
             line-height: 1.4;
+            font-family: 'Orbitron', sans-serif;
+            border-left: 4px solid var(--cyber-blue);
+            padding-left: 1rem;
         }
         
         .blog-card-meta {
@@ -214,19 +291,22 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
-            color: var(--blog-gray);
+            color: var(--text-muted);
             font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .blog-card-meta i {
             margin-right: 5px;
+            color: var(--matrix-green);
         }
         
         .blog-card-excerpt {
-            color: var(--blog-gray);
+            color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .blog-card-footer {
@@ -234,31 +314,59 @@
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .read-time {
-            color: var(--blog-gray);
+            color: var(--text-muted);
             font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .read-time i {
+            color: var(--matrix-green);
         }
         
         .read-more-btn {
-            background: linear-gradient(135deg, var(--blog-primary), var(--blog-secondary));
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
             color: white;
             padding: 8px 20px;
-            border-radius: 25px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .read-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .read-more-btn:hover::before {
+            left: 100%;
         }
         
         .read-more-btn:hover {
             transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
             color: white;
         }
         
@@ -268,33 +376,40 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 2px solid var(--cyber-blue);
         }
         
         .featured-post-image {
             height: 100%;
             min-height: 350px;
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
         }
         
         .featured-post-content {
             padding: 3rem;
-            background: white;
+            background: rgba(26, 26, 36, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border-left: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .featured-badge {
-            background: var(--blog-accent);
+            background: var(--blood-red);
             color: white;
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 1rem;
+            border: 1px solid var(--blood-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         @media (max-width: 768px) {
@@ -307,15 +422,17 @@
             }
         }
         
-        /* Sidebar */
+        /* Sidebar - Cyber Style */
         .blog-sidebar {
-            background: white;
+            background: rgba(26, 26, 36, 0.8);
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             height: fit-content;
             position: sticky;
             top: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .sidebar-widget {
@@ -328,13 +445,36 @@
         
         .widget-title {
             font-size: 1.3rem;
-            color: var(--blog-dark);
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--blog-primary);
+            border-bottom: 3px solid var(--cyber-blue);
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .widget-title i {
+            color: var(--matrix-green);
+        }
+        
+        /* Search Box */
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--dark-3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
         
         /* Categories */
@@ -351,24 +491,28 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 15px;
-            background: #f8f9fa;
+            background: rgba(0, 212, 255, 0.05);
             border-radius: 8px;
-            color: var(--blog-dark);
+            color: var(--text-secondary);
             text-decoration: none;
             transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .category-list a:hover {
-            background: var(--blog-primary);
-            color: white;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--cyber-blue);
             transform: translateX(5px);
+            border-color: rgba(0, 212, 255, 0.3);
         }
         
         .category-count {
-            background: rgba(255,255,255,0.2);
-            padding: 2px 8px;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.8rem;
+            color: var(--cyber-blue);
         }
         
         /* Popular Posts */
@@ -377,7 +521,7 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
         }
         
         .popular-post:last-child {
@@ -391,62 +535,98 @@
             height: 80px;
             border-radius: 10px;
             object-fit: cover;
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
         
         .popular-post-content h4 {
             font-size: 1rem;
             margin-bottom: 0.5rem;
             line-height: 1.4;
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .popular-post-meta {
             font-size: 0.8rem;
-            color: var(--blog-gray);
+            color: var(--text-muted);
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* Newsletter */
+        /* Newsletter - Cyber Style */
         .newsletter-form {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
             padding: 2rem;
             border-radius: 15px;
             color: white;
             text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
         
         .newsletter-form h3 {
-            color: white;
+            color: var(--text-primary);
             margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
         }
         
         .newsletter-form p {
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .newsletter-input {
             width: 100%;
             padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
+            background: var(--dark-3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--text-primary);
+            border-radius: 5px;
             margin-bottom: 1rem;
-            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
         
         .newsletter-btn {
             width: 100%;
-            background: white;
-            color: var(--blog-primary);
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
+            color: white;
             border: none;
             padding: 12px;
-            border-radius: 25px;
+            border-radius: 5px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .newsletter-btn:hover::before {
+            left: 100%;
         }
         
         .newsletter-btn:hover {
-            background: #f8f9fa;
-            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
         }
         
         /* Pagination */
@@ -459,37 +639,58 @@
         
         .pagination-btn {
             padding: 10px 20px;
-            background: white;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            color: var(--blog-dark);
+            background: rgba(26, 26, 36, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .pagination-btn:hover {
-            background: var(--blog-primary);
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
             color: white;
-            border-color: var(--blog-primary);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
         
         .pagination-btn.active {
-            background: var(--blog-primary);
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
             color: white;
-            border-color: var(--blog-primary);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
         
-        /* Code Blocks in Cards */
+        /* Code Blocks - Cyber Style */
         .code-preview {
-            background: var(--blog-code-bg);
+            background: #0a0a14;
             color: #f8f8f2;
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 8px;
             margin: 1rem 0;
             font-family: 'Roboto Mono', monospace;
             font-size: 0.9rem;
             overflow-x: auto;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+        }
+        
+        .code-preview::before {
+            content: 'CODE';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--dark-3);
+            color: var(--cyber-blue);
+            padding: 2px 10px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .code-keyword { color: #ff79c6; }
@@ -498,7 +699,7 @@
         .code-comment { color: #6272a4; }
         .code-number { color: #bd93f9; }
         
-        /* Tags */
+        /* Tags - Cyber Style */
         .blog-tags {
             display: flex;
             flex-wrap: wrap;
@@ -507,29 +708,22 @@
         }
         
         .tag {
-            background: #f0f2f5;
-            color: var(--blog-gray);
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--text-secondary);
             padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.8rem;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .tag:hover {
-            background: var(--blog-primary);
-            color: white;
-        }
-        
-        /* Loading Animation */
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-        
-        .loading {
-            animation: pulse 1.5s infinite;
+            background: var(--cyber-blue);
+            color: var(--dark-1);
+            border-color: var(--cyber-blue);
+            transform: translateY(-2px);
         }
         
         /* Responsive Design */
@@ -557,35 +751,59 @@
             .stat-number {
                 font-size: 2rem;
             }
+            
+            .stat-item {
+                padding: 0.5rem;
+            }
         }
         
-        /* Dark Mode Support */
-        @media (prefers-color-scheme: dark) {
-            .blog-page {
-                background: #1a1a1a;
-            }
-            
-            .blog-card, .blog-sidebar, .featured-post-content {
-                background: #2d2d2d;
-                color: #e0e0e0;
-            }
-            
-            .blog-card-title, .widget-title {
-                color: #e0e0e0;
-            }
-            
-            .blog-card-excerpt, .blog-card-meta {
-                color: #b0b0b0;
-            }
-            
-            .category-list a {
-                background: #3d3d3d;
-                color: #e0e0e0;
-            }
+        /* Glitch Animation */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .glitch:hover {
+            animation: glitch 0.3s;
+        }
+        
+        /* Loading Animation */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 212, 255, 0.05) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
         }
     </style>
 </head>
 <body class="blog-page">
+    <!-- Cyber Scan Line -->
+    <div class="scan-line"></div>
+    
     <!-- Navigation will be loaded via JavaScript -->
     <div id="nav-container"></div>
     
@@ -595,28 +813,28 @@
             <!-- Hero Section -->
             <section class="blog-hero">
                 <div class="blog-hero-content">
-                    <h1><i class="fas fa-code-branch"></i> Game Development Blog</h1>
+                    <h1><i class="fas fa-code-branch"></i> CYBER GAME DEVELOPMENT BLOG</h1>
                     <p class="blog-hero-subtitle">
-                        Dive deep into HTML5 game programming with detailed tutorials, 
+                        Dive deep into HTML5 game programming with detailed cyber-themed tutorials, 
                         real project examples, and practical JavaScript tips from building 
                         actual browser games.
                     </p>
                     <div class="hero-stats">
-                        <div class="stat-item">
+                        <div class="stat-item glitch">
                             <div class="stat-number">15+</div>
-                            <div class="stat-label">Tutorials</div>
+                            <div class="stat-label">CYBER TUTORIALS</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item glitch">
                             <div class="stat-number">8</div>
-                            <div class="stat-label">Game Projects</div>
+                            <div class="stat-label">GAME PROJECTS</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item glitch">
                             <div class="stat-number">25K+</div>
-                            <div class="stat-label">Lines of Code</div>
+                            <div class="stat-label">LINES OF CODE</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item glitch">
                             <div class="stat-number">100%</div>
-                            <div class="stat-label">Free Content</div>
+                            <div class="stat-label">FREE CONTENT</div>
                         </div>
                     </div>
                 </div>
@@ -624,11 +842,13 @@
             
             <!-- Featured Post -->
             <article class="blog-card featured-post">
-                <div class="featured-post-image" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
-                    <!-- Image would go here -->
+                <div class="featured-post-image">
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        <i class="fas fa-snake"></i>
+                    </div>
                 </div>
                 <div class="featured-post-content">
-                    <span class="featured-badge">FEATURED TUTORIAL</span>
+                    <span class="featured-badge">CYBER TUTORIAL</span>
                     <h2 class="blog-card-title">Building a Complete Snake Game: From Zero to Hero</h2>
                     <div class="blog-card-meta">
                         <span><i class="far fa-calendar"></i> December 15, 2023</span>
@@ -666,8 +886,8 @@
             <div class="blog-grid">
                 <!-- Post 1 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                        <span class="blog-card-category">Tutorial</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(157, 78, 221, 0.3));">
+                        <span class="blog-card-category">TUTORIAL</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Mastering HTML5 Canvas for Game Development</h3>
@@ -699,8 +919,8 @@
                 
                 <!-- Post 2 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
-                        <span class="blog-card-category">Physics</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(0, 255, 157, 0.3), rgba(157, 78, 221, 0.3));">
+                        <span class="blog-card-category">PHYSICS</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Game Physics Made Simple: Implementing Collision Detection</h3>
@@ -733,7 +953,7 @@
                 
                 <!-- Post 3 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #c2e9fb 0%, #a1c4fd 100%);">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(255, 0, 85, 0.3), rgba(157, 78, 221, 0.3));">
                         <span class="blog-card-category">AI</span>
                     </div>
                     <div class="blog-card-content">
@@ -766,8 +986,8 @@
                 
                 <!-- Post 4 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);">
-                        <span class="blog-card-category">Performance</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(0, 255, 157, 0.3));">
+                        <span class="blog-card-category">PERFORMANCE</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Optimizing JavaScript Games for 60 FPS</h3>
@@ -803,8 +1023,8 @@
                 
                 <!-- Post 5 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
-                        <span class="blog-card-category">Mobile</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(255, 0, 85, 0.3));">
+                        <span class="blog-card-category">MOBILE</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Touch Controls for Mobile HTML5 Games</h3>
@@ -836,8 +1056,8 @@
                 
                 <!-- Post 6 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
-                        <span class="blog-card-category">Audio</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(157, 78, 221, 0.3));">
+                        <span class="blog-card-category">AUDIO</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Adding Sound Effects and Music to Games</h3>
@@ -867,8 +1087,8 @@
                 
                 <!-- Post 7 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
-                        <span class="blog-card-category">Networking</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(255, 0, 85, 0.3), rgba(0, 212, 255, 0.3));">
+                        <span class="blog-card-category">NETWORKING</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Multiplayer Browser Games with WebSockets</h3>
@@ -898,8 +1118,8 @@
                 
                 <!-- Post 8 -->
                 <article class="blog-card">
-                    <div class="blog-card-header" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
-                        <span class="blog-card-category">Tools</span>
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, rgba(0, 255, 157, 0.3), rgba(157, 78, 221, 0.3));">
+                        <span class="blog-card-category">TOOLS</span>
                     </div>
                     <div class="blog-card-content">
                         <h3 class="blog-card-title">Essential Tools for HTML5 Game Developers</h3>
@@ -947,8 +1167,8 @@
             <div class="sidebar-widget">
                 <h3 class="widget-title"><i class="fas fa-search"></i> Search Blog</h3>
                 <div class="search-box">
-                    <input type="text" placeholder="Search tutorials..." class="newsletter-input" style="background: white;">
-                    <button class="newsletter-btn" style="margin-top: 0.5rem;">
+                    <input type="text" placeholder="Search tutorials..." class="newsletter-input">
+                    <button class="cyber-btn" style="width: 100%; margin-top: 0.5rem;">
                         <i class="fas fa-search"></i> Search
                     </button>
                 </div>
@@ -1013,21 +1233,27 @@
             <div class="sidebar-widget">
                 <h3 class="widget-title"><i class="fas fa-fire"></i> Popular Posts</h3>
                 <div class="popular-post">
-                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div style="width: 80px; height: 80px; border-radius: 10px; background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                        <i class="fas fa-snake"></i>
+                    </div>
                     <div class="popular-post-content">
                         <h4>Building Snake Game with JavaScript</h4>
                         <div class="popular-post-meta">Dec 15, 2023</div>
                     </div>
                 </div>
                 <div class="popular-post">
-                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div style="width: 80px; height: 80px; border-radius: 10px; background: linear-gradient(45deg, var(--matrix-green), var(--cyber-blue)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                        <i class="fas fa-atom"></i>
+                    </div>
                     <div class="popular-post-content">
                         <h4>Game Physics: Collision Detection</h4>
                         <div class="popular-post-meta">Nov 15, 2023</div>
                     </div>
                 </div>
                 <div class="popular-post">
-                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div style="width: 80px; height: 80px; border-radius: 10px; background: linear-gradient(45deg, var(--blood-red), var(--neon-purple)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
                     <div class="popular-post-content">
                         <h4>Optimizing for 60 FPS</h4>
                         <div class="popular-post-meta">Oct 18, 2023</div>
@@ -1083,7 +1309,7 @@
                     const doc = parser.parseFromString(html, 'text/html');
                     
                     // Load Navigation
-                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    const nav = doc.querySelector('nav') || doc.querySelector('.cyber-nav');
                     if (nav) {
                         document.getElementById('nav-container').innerHTML = nav.outerHTML;
                         
@@ -1091,14 +1317,16 @@
                         document.querySelectorAll('.nav-link').forEach(link => {
                             if (link.getAttribute('href') === 'blog.html') {
                                 link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
                             }
                         });
                     } else {
-                        createBasicNav();
+                        createCyberNav();
                     }
                     
                     // Load Footer
-                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    const footer = doc.querySelector('footer') || doc.querySelector('.cyber-footer');
                     if (footer) {
                         document.getElementById('footer-container').innerHTML = footer.outerHTML;
                         
@@ -1108,7 +1336,7 @@
                             yearSpan.textContent = new Date().getFullYear();
                         }
                     } else {
-                        createBasicFooter();
+                        createCyberFooter();
                     }
                     
                     // Initialize blog interactions
@@ -1116,53 +1344,49 @@
                 })
                 .catch(error => {
                     console.error('Error loading components:', error);
-                    createBasicNav();
-                    createBasicFooter();
+                    createCyberNav();
+                    createCyberFooter();
                     initBlogInteractions();
                 });
             
-            function createBasicNav() {
+            function createCyberNav() {
                 document.getElementById('nav-container').innerHTML = `
-                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                    <nav class="cyber-nav">
+                        <div class="nav-container">
+                            <a href="index.html" class="nav-brand">
+                                <span class="text-gradient">SyedAbbasGames</span>
                             </a>
-                            <div>
-                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
-                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Games</a>
-                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Blog</a>
-                                <a href="about.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">About</a>
-                            </div>
+                            <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav-menu">
+                                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="projects.html" class="nav-link"><i class="fas fa-gamepad"></i> Games</a></li>
+                                <li><a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a></li>
+                                <li><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                            </ul>
                         </div>
                     </nav>
                 `;
             }
             
-            function createBasicFooter() {
+            function createCyberFooter() {
                 document.getElementById('footer-container').innerHTML = `
-                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
-                        <div style="max-width: 1400px; margin: 0 auto;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">SyedAbbas Games</h3>
-                                    <p style="color: #b2bec3;">Creating interactive HTML5 games and sharing game development knowledge.</p>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
-                                    <a href="index.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Home</a>
-                                    <a href="projects.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">All Games</a>
-                                    <a href="blog.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Development Blog</a>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
-                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fab fa-github"></i> GitHub
+                    <footer class="cyber-footer">
+                        <div class="footer-content">
+                            <div class="footer-section">
+                                <h3>SyedAbbas Games</h3>
+                                <p class="footer-about">Creating cyber games with HTML5, CSS3, and JavaScript.</p>
+                                <div class="social-links">
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                                        <i class="fab fa-github"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
-                                <p>&copy; ${new Date().getFullYear()} SyedAbbas Games. All content is free to use and learn from.</p>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="copyright">
+                                &copy; ${new Date().getFullYear()} Syed Abbas. Cyber Game Developer.
                             </div>
                         </div>
                     </footer>
@@ -1171,7 +1395,7 @@
             
             function initBlogInteractions() {
                 // Search functionality
-                const searchBtn = document.querySelector('.newsletter-btn');
+                const searchBtn = document.querySelector('.search-box button');
                 const searchInput = document.querySelector('.search-box input');
                 
                 if (searchBtn && searchInput) {
@@ -1218,16 +1442,15 @@
                     });
                 });
                 
-                // Smooth scroll for pagination
-                document.querySelectorAll('.pagination-btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const pageNum = this.textContent.trim();
-                        if (!isNaN(pageNum) || pageNum === 'Next') {
-                            // In production, this would load new page content
-                            alert(`Loading page ${pageNum}...\n\nIn a real blog, this would fetch more articles.`);
-                        }
-                    });
+                // Add glitch effect to stat items
+                const statItems = document.querySelectorAll('.stat-item');
+                statItems.forEach(item => {
+                    setInterval(() => {
+                        item.classList.remove('glitch');
+                        setTimeout(() => {
+                            item.classList.add('glitch');
+                        }, 10);
+                    }, 8000);
                 });
                 
                 // Helper function for email validation
@@ -1235,16 +1458,6 @@
                     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     return re.test(email);
                 }
-                
-                // Add loading animation to images (simulated)
-                const images = document.querySelectorAll('.blog-card-image, .popular-post-image');
-                images.forEach(img => {
-                    img.classList.add('loading');
-                    // Simulate image load
-                    setTimeout(() => {
-                        img.classList.remove('loading');
-                    }, 1000);
-                });
             }
         });
     </script>
