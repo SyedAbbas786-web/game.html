@@ -3,334 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syed's Awesome Games | Play Now!</title>
-    <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0c0c2e, #1a1a3e, #2a2a5e);
-            color: white;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        header {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(20, 20, 60, 0.7);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(100, 100, 255, 0.3);
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00ffcc;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #ccc;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .game-card {
-            display: block;
-            background: rgba(20, 20, 60, 0.7);
-            border-radius: 15px;
-            padding: 2rem;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(100, 100, 255, 0.2);
-            text-align: center;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border-color: rgba(100, 100, 255, 0.6);
-        }
-
-        .game-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #00ccff;
-        }
-
-        .game-card p {
-            color: #aaa;
-            margin-bottom: 1.5rem;
-        }
-
-        .play-btn {
-            display: inline-block;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .game-card:hover .play-btn {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .contact-form {
-            background: rgba(20, 20, 60, 0.7);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(100, 100, 255, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .contact-form h2 {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #00ffcc;
-        }
-
-        .contact-form p {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #ccc;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(100, 100, 255, 0.3);
-            background: rgba(10, 10, 30, 0.7);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #00ccff;
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
-        }
-
-        button.play-btn {
-            width: 100%;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 1rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            margin-top: 2rem;
-            color: #aaa;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>SyedAbbas Games - Play Free HTML5 Browser Games</title>
+    <meta name="description" content="Play amazing free HTML5 games built with JavaScript. Snake, Space Shooter, Tic Tac Toe, Car Racing and more. Learn game development with our tutorials.">
+    <meta name="keywords" content="HTML5 games, JavaScript games, free browser games, game development, web games, play online games">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="SyedAbbas Games - Free HTML5 Browser Games">
+    <meta property="og:description" content="Play amazing free HTML5 games. Snake, Space Shooter, Tic Tac Toe and more!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://syedabbas786-web.github.io">
+    <meta property="og:image" content="images/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SyedAbbas Games">
+    <meta name="twitter:description" content="Free HTML5 games to play in your browser">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics (Optional - Add later) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+    
+    <!-- AdSense (Add after approval) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
 </head>
 <body>
-    <header>
-        <h1>🎮 Syed's Game Zone 🎯</h1>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h2>Welcome to My Gaming World! 🚀</h2>
-            <p>Discover amazing games built with passion and creativity. Choose your adventure and have fun!</p>
-        </section>
-
-        <section class="games-grid">
-            <a href="tictactoe.html" class="game-card">
-                <h3>⭕ Tic Tac Toe ❌</h3>
-                <p>Classic 3x3 strategy game. Challenge your friends!</p>
-                <span class="play-btn">Play Now</span>
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="pro-nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-gamepad"></i>
+                <span>SyedAbbas<span style="color: #2575fc;">Games</span></span>
             </a>
-
-            <a href="car.html" class="game-card">
-                <h3>🏎️ Car Racing Game</h3>
-                <p>Exciting racing adventure with fast cars!</p>
-                <span class="play-btn">Start Racing</span>
-            </a>
-
-            <a href="reptile.html" class="game-card">
-                <h3>🦎 Reptile Adventure</h3>
-                <p>Explore the amazing world of reptiles!</p>
-                <span class="play-btn">Explore</span>
-            </a>
-
-            <a href="happy.html" class="game-card">
-                <h3>😊 Happy Game</h3>
-                <p>Fun and cheerful gaming experience!</p>
-                <span class="play-btn">Be Happy</span>
-            </a>
-
-            <!-- UPDATED SPACESHIP GAME - Play Online -->
-            <a href="Spaceshooter.html" class="game-card">
-                <h3>🚀 Spaceship Adventure</h3>
-                <p>Epic space battle game! Play directly in your browser!</p>
-                <span class="play-btn">Play</span>
-            </a>
-
-            <!-- NEW SNAKE & PONG GAME -->
-            <a href="Snake.html" class="game-card">
-                <h3>🐍 Snake Xenia 🎮</h3>
-                <p>Two classic games in one! Play Snake or challenge the AI in Pong!</p>
-                <span class="play-btn">Play</span>
-            </a>
-
-            <a href="projects.html" class="game-card">
-                <h3>💼 My Projects</h3>
-                <p>Check out all my creative work!</p>
-                <span class="play-btn">View Projects</span>
-            </a>
-
-            <a href="about.html" class="game-card">
-                <h3>👨‍💻 About Me</h3>
-                <p>Get to know the developer behind these games!</p>
-                <span class="play-btn">Learn More</span>
-            </a>
-        </section>
-
-        <!-- CONTACT FORM SECTION -->
-        <section class="contact-form">
-            <h2>📧 Join My Gaming Community!</h2>
-            <p>Leave your details and I'll add you to my gaming updates list!</p>
             
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <select id="favorite_game" name="favorite_game">
-                        <option value="">Select your favorite game</option>
-                        <option value="tic_tac_toe">Tic Tac Toe</option>
-                        <option value="car_racing">Car Racing</option>
-                        <option value="reptile_adventure">Reptile Adventure</option>
-                        <option value="happy_game">Happy Game</option>
-                        <option value="spaceship">Spaceship Adventure</option>
-                        <option value="snake_pong">Snake Xenia & Pong</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Your message or suggestions..." rows="4"></textarea>
-                </div>
-                <button type="submit" class="play-btn">Join Community</button>
-            </form>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
             
-            <div id="formMessage"></div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Made with ❤️ by Syed Abbas | Share with your friends! 🎉</p>
+            <!-- Main Menu -->
+            <ul class="nav-menu" id="mainMenu">
+                <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="projects.html" class="nav-link"><i class="fas fa-gamepad"></i> All Games</a></li>
+                <li><a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Dev Blog</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            
+            <!-- Search Box (Optional) -->
+            <div class="search-box" style="display: none;">
+                <input type="text" placeholder="Search games..." id="searchInput">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; padding: 4rem 20px; text-align: center;">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <h1 style="font-size: 3rem; margin-bottom: 1rem; color: white;">
+                <i class="fas fa-gamepad"></i> Play Amazing HTML5 Games
+            </h1>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">
+                Free browser games built with JavaScript. No downloads, no registration - just pure fun!
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#featured-games" class="btn" style="background: white; color: #6a11cb; font-weight: bold;">
+                    <i class="fas fa-play"></i> Play Games
+                </a>
+                <a href="blog.html" class="btn btn-outline" style="border-color: white; color: white;">
+                    <i class="fas fa-book"></i> Learn Development
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== FEATURED GAMES ====== -->
+    <section class="container" style="padding: 4rem 20px;" id="featured-games">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">
+            <i class="fas fa-star"></i> Featured Games
+        </h2>
+        
+        <div class="game-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+            <!-- Snake Game -->
+            <div class="game-card">
+                <div style="background: linear-gradient(135deg, #00b894, #00a085); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-snake" style="font-size: 4rem;"></i>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Snake Game</h3>
+                    <p class="game-description">Classic snake game with modern controls. Eat food, grow longer, avoid walls!</p>
+                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                        <a href="Snake.html" class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </a>
+                        <a href="blog.html#snake" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
+                            <i class="fas fa-code"></i> How It's Made
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Space Shooter -->
+            <div class="game-card">
+                <div style="background: linear-gradient(135deg, #0984e3, #074a8f); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-rocket" style="font-size: 4rem;"></i>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Space Shooter</h3>
+                    <p class="game-description">Defend Earth from alien invaders in this action-packed space shooter.</p>
+                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                        <a href="Spaceshooter.html" class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </a>
+                        <a href="blog.html#spaceshooter" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
+                            <i class="fas fa-code"></i> How It's Made
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tic Tac Toe -->
+            <div class="game-card">
+                <div style="background: linear-gradient(135deg, #fd79a8, #e84393); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-times" style="font-size: 4rem;"></i>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Tic Tac Toe</h3>
+                    <p class="game-description">Classic X and O game with smart AI opponent. Can you beat the computer?</p>
+                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                        <a href="tictactoe.html" class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </a>
+                        <a href="blog.html#tictactoe" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
+                            <i class="fas fa-code"></i> How It's Made
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Car Game -->
+            <div class="game-card">
+                <div style="background: linear-gradient(135deg, #fdcb6e, #e17055); height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-car" style="font-size: 4rem;"></i>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Car Game</h3>
+                    <p class="game-description">Avoid obstacles in this fast-paced driving game. How long can you survive?</p>
+                    <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                        <a href="car.html" class="play-btn">
+                            <i class="fas fa-play"></i> Play Now
+                        </a>
+                        <a href="blog.html#car" class="btn-small" style="background: #f8f9fa; color: #333; border: 1px solid #ddd;">
+                            <i class="fas fa-code"></i> How It's Made
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More Games Button -->
+            <div class="game-card" style="background: #f8f9fa; display: flex; align-items: center; justify-content: center; text-align: center;">
+                <div class="game-info">
+                    <h3 class="game-title">More Games Available!</h3>
+                    <p class="game-description">Check out all my game projects including Happy Game, Reptile Game, and Mining Game</p>
+                    <a href="projects.html" class="play-btn" style="margin-top: 1rem;">
+                        <i class="fas fa-list"></i> View All Games
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== BLOG PREVIEW ====== -->
+    <section style="background: #f8f9fa; padding: 4rem 20px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">
+                <i class="fas fa-blog"></i> Latest Game Development Articles
+            </h2>
+            
+            <div class="blog-preview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+                <article class="blog-card">
+                    <h3 class="blog-title"><i class="fas fa-code"></i> Building Games with JavaScript</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> December 2023 | <i class="far fa-clock"></i> 8 min read</p>
+                    <p class="blog-excerpt">Learn the basics of game development using vanilla JavaScript and HTML5 Canvas. No frameworks required!</p>
+                    <a href="blog.html#javascript-games" class="read-more">Read Article →</a>
+                </article>
+                
+                <article class="blog-card">
+                    <h3 class="blog-title"><i class="fas fa-mobile-alt"></i> Mobile Game Optimization</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> November 2023 | <i class="far fa-clock"></i> 12 min read</p>
+                    <p class="blog-excerpt">Tips and tricks to make your HTML5 games run smoothly on mobile devices with touch controls.</p>
+                    <a href="blog.html#mobile-optimization" class="read-more">Read Article →</a>
+                </article>
+                
+                <article class="blog-card">
+                    <h3 class="blog-title"><i class="fas fa-tools"></i> Debugging Game Code</h3>
+                    <p class="blog-meta"><i class="far fa-calendar"></i> October 2023 | <i class="far fa-clock"></i> 10 min read</p>
+                    <p class="blog-excerpt">Common bugs in game development and how to fix them using browser developer tools.</p>
+                    <a href="blog.html#debugging" class="read-more">Read Article →</a>
+                </article>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="blog.html" class="btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                    <i class="fas fa-book-open"></i> Visit Game Development Blog
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== ABOUT PREVIEW ====== -->
+    <section class="container" style="padding: 4rem 20px; text-align: center;">
+        <h2 class="section-title">
+            <i class="fas fa-user"></i> About the Developer
+        </h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Hi, I'm Syed Abbas! I create free HTML5 games to help people learn programming and have fun. 
+                All my games are built with vanilla JavaScript and are completely free to play.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="about.html" class="btn">
+                    <i class="fas fa-info-circle"></i> My Story
+                </a>
+                <a href="https://github.com/SyedAbbas786-web" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> View Code on GitHub
+                </a>
+                <a href="contact.html" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Contact Me
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== FOOTER ====== -->
+    <footer class="pro-footer">
+        <div class="footer-content">
+            <!-- About Section -->
+            <div class="footer-section">
+                <h3 class="footer-title">
+                    <i class="fas fa-gamepad"></i> SyedAbbas Games
+                </h3>
+                <p class="footer-about">
+                    Creating fun, interactive browser games with HTML5, CSS3, and JavaScript. 
+                    All games are free to play and open source.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/SyedAbbas786-web" target="_blank" aria-label="GitHub" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="projects.html"><i class="fas fa-gamepad"></i> All Games</a></li>
+                    <li><a href="blog.html"><i class="fas fa-blog"></i> Dev Blog</a></li>
+                    <li><a href="about.html"><i class="fas fa-user"></i> About Me</a></li>
+                </ul>
+            </div>
+            
+            <!-- Game Categories -->
+            <div class="footer-section">
+                <h3 class="footer-title">Game Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="Snake.html"><i class="fas fa-snake"></i> Classic Games</a></li>
+                    <li><a href="Spaceshooter.html"><i class="fas fa-rocket"></i> Action Games</a></li>
+                    <li><a href="tictactoe.html"><i class="fas fa-times"></i> Puzzle Games</a></li>
+                    <li><a href="car.html"><i class="fas fa-car"></i> Racing Games</a></li>
+                    <li><a href="mine.html"><i class="fas fa-gem"></i> Adventure Games</a></li>
+                </ul>
+            </div>
+            
+            <!-- Legal -->
+            <div class="footer-section">
+                <h3 class="footer-title">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                    <li><a href="cookie-policy.html"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> SyedAbbas Games. All games are free to play.
+                <br>
+                Source code available on <a href="https://github.com/SyedAbbas786-web" target="_blank">GitHub</a>.
+            </div>
+            
+            <div class="visitor-counter" style="color: #b2bec3; font-size: 0.9rem;">
+                <i class="fas fa-users"></i> Games played: <span id="visitorCount">1,000+</span>
+            </div>
+        </div>
     </footer>
-
+    
+    <!-- ====== JAVASCRIPT ====== -->
     <script>
-        // Simple form handling with local storage
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        if (mobileToggle && mainMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mainMenu.classList.toggle('active');
+                mobileToggle.innerHTML = mainMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
             
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                favorite_game: document.getElementById('favorite_game').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toLocaleString()
-            };
-            
-            // Save to localStorage
-            let submissions = JSON.parse(localStorage.getItem('gameSubmissions')) || [];
-            submissions.push(formData);
-            localStorage.setItem('gameSubmissions', JSON.stringify(submissions));
-            
-            // Show success message
-            const messageDiv = document.getElementById('formMessage');
-            messageDiv.innerHTML = `
-                <div style="background: rgba(46, 204, 113, 0.2); color: #2ecc71; padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-                    ✅ Thanks ${formData.name}! Your response has been recorded. I'll contact you at ${formData.email}!
-                </div>
-            `;
-            
-            // Reset form
-            document.getElementById('contactForm').reset();
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                messageDiv.innerHTML = '';
-            }, 5000);
+            // Close menu when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!mobileToggle.contains(event.target) && !mainMenu.contains(event.target)) {
+                    mainMenu.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        }
+        
+        // Simple visitor counter (stored in localStorage)
+        const visitorCount = document.getElementById('visitorCount');
+        if (visitorCount) {
+            let count = localStorage.getItem('visitorCount') || 1000;
+            count = parseInt(count) + Math.floor(Math.random() * 5) + 1;
+            localStorage.setItem('visitorCount', count);
+            visitorCount.textContent = count.toLocaleString() + '+';
+        }
+        
+        // Mark active navigation link
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const linkPage = link.getAttribute('href');
+            if ((currentPage === linkPage) || 
+                (currentPage === '' && linkPage === 'index.html') ||
+                (linkPage === 'index.html' && currentPage.includes('index'))) {
+                link.classList.add('active');
+            }
         });
     </script>
 </body>
 </html>
-
