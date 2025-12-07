@@ -3,215 +3,1250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Development Blog - SyedAbbas Games</title>
-    <meta name="description" content="Learn game development with tutorials, tips, and behind-the-scenes looks at how I build my HTML5 games.">
-    <link rel="stylesheet" href="style.css">
+    <title>SyedAbbas Game Dev Blog - Tutorials, Tips & Code Examples</title>
+    <meta name="description" content="Comprehensive game development tutorials, JavaScript tips, HTML5 Canvas guides, and behind-the-scenes looks at building browser games. Learn from real projects and code examples.">
+    <meta name="keywords" content="game development, JavaScript tutorials, HTML5 Canvas, game programming, browser games, web development, coding tutorials, game design">
+    <meta name="author" content="Syed Abbas">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="SyedAbbas Game Development Blog">
+    <meta property="og:description" content="Learn game development with detailed tutorials and code examples">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://syedabbas786-web.github.io/blog.html">
+    <meta property="og:image" content="images/blog-og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Game Dev Blog by SyedAbbas">
+    <meta name="twitter:description" content="HTML5 Game Development Tutorials & JavaScript Tips">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Blog Specific CSS -->
+    <style>
+        /* ====== BLOG PAGE STYLES ====== */
+        :root {
+            --blog-primary: #6a11cb;
+            --blog-secondary: #2575fc;
+            --blog-accent: #ff416c;
+            --blog-dark: #2d3436;
+            --blog-light: #f8f9fa;
+            --blog-gray: #636e72;
+            --blog-code-bg: #1e1e1e;
+            --blog-success: #00b894;
+            --blog-warning: #fdcb6e;
+            --blog-danger: #d63031;
+            --blog-info: #0984e3;
+        }
+        
+        /* Blog Layout */
+        .blog-page {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .blog-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Blog Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--blog-primary), var(--blog-secondary));
+            color: white;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .blog-hero-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* Blog Card Enhanced */
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .blog-card-header {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-card-image {
+            transform: scale(1.05);
+        }
+        
+        .blog-card-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.95);
+            color: var(--blog-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .blog-card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--blog-dark);
+            line-height: 1.4;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--blog-gray);
+            font-size: 0.9rem;
+        }
+        
+        .blog-card-meta i {
+            margin-right: 5px;
+        }
+        
+        .blog-card-excerpt {
+            color: var(--blog-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .read-time {
+            color: var(--blog-gray);
+            font-size: 0.9rem;
+        }
+        
+        .read-more-btn {
+            background: linear-gradient(135deg, var(--blog-primary), var(--blog-secondary));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .read-more-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+            color: white;
+        }
+        
+        /* Featured Post */
+        .featured-post {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .featured-post-image {
+            height: 100%;
+            min-height: 350px;
+        }
+        
+        .featured-post-content {
+            padding: 3rem;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-badge {
+            background: var(--blog-accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-post-image {
+                min-height: 250px;
+            }
+        }
+        
+        /* Sidebar */
+        .blog-sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .sidebar-widget {
+            margin-bottom: 2.5rem;
+        }
+        
+        .sidebar-widget:last-child {
+            margin-bottom: 0;
+        }
+        
+        .widget-title {
+            font-size: 1.3rem;
+            color: var(--blog-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blog-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Categories */
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: var(--blog-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .category-list a:hover {
+            background: var(--blog-primary);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .category-count {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        /* Popular Posts */
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popular-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-post-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .popular-post-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        
+        .popular-post-meta {
+            font-size: 0.8rem;
+            color: var(--blog-gray);
+        }
+        
+        /* Newsletter */
+        .newsletter-form {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter-form h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .newsletter-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            width: 100%;
+            background: white;
+            color: var(--blog-primary);
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        /* Pagination */
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .pagination-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            color: var(--blog-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn:hover {
+            background: var(--blog-primary);
+            color: white;
+            border-color: var(--blog-primary);
+        }
+        
+        .pagination-btn.active {
+            background: var(--blog-primary);
+            color: white;
+            border-color: var(--blog-primary);
+        }
+        
+        /* Code Blocks in Cards */
+        .code-preview {
+            background: var(--blog-code-bg);
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .code-keyword { color: #ff79c6; }
+        .code-function { color: #50fa7b; }
+        .code-string { color: #f1fa8c; }
+        .code-comment { color: #6272a4; }
+        .code-number { color: #bd93f9; }
+        
+        /* Tags */
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background: #f0f2f5;
+            color: var(--blog-gray);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: var(--blog-primary);
+            color: white;
+        }
+        
+        /* Loading Animation */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 1rem;
+            }
+            
+            .blog-hero {
+                padding: 3rem 1.5rem;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .blog-page {
+                background: #1a1a1a;
+            }
+            
+            .blog-card, .blog-sidebar, .featured-post-content {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+            
+            .blog-card-title, .widget-title {
+                color: #e0e0e0;
+            }
+            
+            .blog-card-excerpt, .blog-card-meta {
+                color: #b0b0b0;
+            }
+            
+            .category-list a {
+                background: #3d3d3d;
+                color: #e0e0e0;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="blog-page">
     <!-- Navigation will be loaded via JavaScript -->
     <div id="nav-container"></div>
     
-    <main class="container" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-        <div class="hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem; border-radius: 15px; margin-bottom: 3rem;">
-            <h1 style="color: white; font-size: 2.5rem;"><i class="fas fa-blog"></i> Game Development Blog</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9;">Tutorials, tips, and behind-the-scenes looks at how I build HTML5 games with JavaScript</p>
-        </div>
+    <div class="blog-container">
+        <!-- Main Content -->
+        <main class="blog-main">
+            <!-- Hero Section -->
+            <section class="blog-hero">
+                <div class="blog-hero-content">
+                    <h1><i class="fas fa-code-branch"></i> Game Development Blog</h1>
+                    <p class="blog-hero-subtitle">
+                        Dive deep into HTML5 game programming with detailed tutorials, 
+                        real project examples, and practical JavaScript tips from building 
+                        actual browser games.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Tutorials</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Game Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">25K+</div>
+                            <div class="stat-label">Lines of Code</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Free Content</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Featured Post -->
+            <article class="blog-card featured-post">
+                <div class="featured-post-image" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                    <!-- Image would go here -->
+                </div>
+                <div class="featured-post-content">
+                    <span class="featured-badge">FEATURED TUTORIAL</span>
+                    <h2 class="blog-card-title">Building a Complete Snake Game: From Zero to Hero</h2>
+                    <div class="blog-card-meta">
+                        <span><i class="far fa-calendar"></i> December 15, 2023</span>
+                        <span><i class="far fa-clock"></i> 25 min read</span>
+                        <span><i class="fas fa-code"></i> JavaScript</span>
+                    </div>
+                    <p class="blog-card-excerpt">
+                        A comprehensive guide to building the classic Snake game from scratch. 
+                        Learn game loops, collision detection, score tracking, and responsive 
+                        controls with detailed code examples and explanations.
+                    </p>
+                    <div class="code-preview">
+                        <span class="code-keyword">class</span> <span class="code-function">Game</span> {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">constructor</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.canvas = document.getElementById(<span class="code-string">'gameCanvas'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.ctx = <span class="code-keyword">this</span>.canvas.getContext(<span class="code-string">'2d'</span>);<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                    <div class="blog-card-footer">
+                        <div class="blog-tags">
+                            <a href="#" class="tag">HTML5 Canvas</a>
+                            <a href="#" class="tag">Game Loop</a>
+                            <a href="#" class="tag">Collision Detection</a>
+                            <a href="#" class="tag">JavaScript</a>
+                        </div>
+                        <a href="blog/snake-tutorial.html" class="read-more-btn">
+                            Read Full Guide <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Post 1 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <span class="blog-card-category">Tutorial</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Mastering HTML5 Canvas for Game Development</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Nov 28, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Everything you need to know about HTML5 Canvas API for creating 
+                            smooth, performant games. Learn rendering techniques, animation 
+                            optimization, and best practices.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Double buffering for smooth animations</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">drawGame</span>() {<br>
+                            &nbsp;&nbsp;ctx.clearRect(<span class="code-number">0</span>, <span class="code-number">0</span>, width, height);<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Game rendering logic here</span><br>
+                            &nbsp;&nbsp;requestAnimationFrame(drawGame);<br>
+                            }
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 18 min</span>
+                            <a href="blog/canvas-mastery.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 2 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        <span class="blog-card-category">Physics</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Game Physics Made Simple: Implementing Collision Detection</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Nov 15, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Learn different collision detection algorithms from basic 
+                            rectangle collision to advanced pixel-perfect detection. 
+                            Practical examples with performance comparisons.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Simple rectangle collision</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">checkCollision</span>(rect1, rect2) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> rect1.x &lt; rect2.x + rect2.width &amp;&amp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect1.x + rect1.width &gt; rect2.x &amp;&amp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect1.y &lt; rect2.y + rect2.height &amp;&amp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect1.y + rect1.height &gt; rect2.y;<br>
+                            }
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 22 min</span>
+                            <a href="blog/collision-detection.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 3 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #c2e9fb 0%, #a1c4fd 100%);">
+                        <span class="blog-card-category">AI</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Creating Smart Enemy AI for Browser Games</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Oct 30, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Implement intelligent enemy behavior using state machines, 
+                            pathfinding algorithms, and decision trees. Make your games 
+                            more challenging and engaging.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-keyword">const</span> enemyStates = {<br>
+                            &nbsp;&nbsp;IDLE: <span class="code-string">'idle'</span>,<br>
+                            &nbsp;&nbsp;CHASE: <span class="code-string">'chase'</span>,<br>
+                            &nbsp;&nbsp;ATTACK: <span class="code-string">'attack'</span>,<br>
+                            &nbsp;&nbsp;FLEE: <span class="code-string">'flee'</span><br>
+                            };
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 25 min</span>
+                            <a href="blog/enemy-ai.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 4 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);">
+                        <span class="blog-card-category">Performance</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Optimizing JavaScript Games for 60 FPS</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Oct 18, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Performance optimization techniques for achieving smooth 
+                            60 FPS gameplay. Learn about memory management, rendering 
+                            optimizations, and efficient game loops.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Efficient game loop with delta time</span><br>
+                            <span class="code-keyword">let</span> lastTime = <span class="code-number">0</span>;<br>
+                            <span class="code-keyword">function</span> <span class="code-function">gameLoop</span>(timestamp) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> deltaTime = timestamp - lastTime;<br>
+                            &nbsp;&nbsp;lastTime = timestamp;<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Update game state</span><br>
+                            &nbsp;&nbsp;update(deltaTime);<br>
+                            &nbsp;&nbsp;render();<br>
+                            &nbsp;&nbsp;requestAnimationFrame(gameLoop);<br>
+                            }
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 20 min</span>
+                            <a href="blog/performance-optimization.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 5 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
+                        <span class="blog-card-category">Mobile</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Touch Controls for Mobile HTML5 Games</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Oct 5, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Complete guide to implementing intuitive touch controls for 
+                            mobile games. Handle gestures, virtual joysticks, and touch 
+                            events for the best mobile gaming experience.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Touch event handling</span><br>
+                            canvas.addEventListener(<span class="code-string">'touchstart'</span>, (e) => {<br>
+                            &nbsp;&nbsp;e.preventDefault();<br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> touch = e.touches[<span class="code-number">0</span>];<br>
+                            &nbsp;&nbsp;handleInput(touch.clientX, touch.clientY);<br>
+                            });
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 16 min</span>
+                            <a href="blog/touch-controls.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 6 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                        <span class="blog-card-category">Audio</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Adding Sound Effects and Music to Games</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Sep 22, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Comprehensive audio implementation guide. Learn to add sound 
+                            effects, background music, audio spatialization, and volume 
+                            controls to enhance player immersion.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Audio context setup</span><br>
+                            <span class="code-keyword">const</span> audioContext = <span class="code-keyword">new</span> (<br>
+                            &nbsp;&nbsp;window.AudioContext || window.webkitAudioContext<br>
+                            )();
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 19 min</span>
+                            <a href="blog/game-audio.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 7 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                        <span class="blog-card-category">Networking</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Multiplayer Browser Games with WebSockets</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Sep 10, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Introduction to real-time multiplayer games using WebSockets. 
+                            Learn about client-server architecture, synchronization, and 
+                            handling latency in online games.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// WebSocket connection</span><br>
+                            <span class="code-keyword">const</span> socket = <span class="code-keyword">new</span> WebSocket(<br>
+                            &nbsp;&nbsp;<span class="code-string">'wss://gameserver.example.com'</span><br>
+                            );
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 28 min</span>
+                            <a href="blog/multiplayer-websockets.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Post 8 -->
+                <article class="blog-card">
+                    <div class="blog-card-header" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+                        <span class="blog-card-category">Tools</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Essential Tools for HTML5 Game Developers</h3>
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user"></i> Syed Abbas</span>
+                            <span><i class="far fa-calendar"></i> Aug 28, 2023</span>
+                        </div>
+                        <p class="blog-card-excerpt">
+                            Curated list of tools, libraries, and resources for game 
+                            development. From code editors to debugging tools and asset 
+                            creation software.
+                        </p>
+                        <div class="code-preview">
+                            <span class="code-comment">// Recommended development setup</span><br>
+                            <span class="code-keyword">const</span> devTools = {<br>
+                            &nbsp;&nbsp;editor: <span class="code-string">'VS Code'</span>,<br>
+                            &nbsp;&nbsp;debugger: <span class="code-string">'Chrome DevTools'</span>,<br>
+                            &nbsp;&nbsp;versionControl: <span class="code-string">'Git'</span><br>
+                            };
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="read-time"><i class="far fa-clock"></i> 14 min</span>
+                            <a href="blog/dev-tools.html" class="read-more-btn">
+                                Read <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="blog-pagination">
+                <a href="#" class="pagination-btn active">1</a>
+                <a href="#" class="pagination-btn">2</a>
+                <a href="#" class="pagination-btn">3</a>
+                <a href="#" class="pagination-btn">
+                    Next <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </main>
         
-        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Blog Post 1 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #6a11cb, #2575fc); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-code"></i> Building Snake Game with JavaScript</h3>
+        <!-- Sidebar -->
+        <aside class="blog-sidebar">
+            <!-- Search Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-search"></i> Search Blog</h3>
+                <div class="search-box">
+                    <input type="text" placeholder="Search tutorials..." class="newsletter-input" style="background: white;">
+                    <button class="newsletter-btn" style="margin-top: 0.5rem;">
+                        <i class="fas fa-search"></i> Search
+                    </button>
                 </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> December 2023 | <i class="far fa-clock"></i> 10 min read</p>
-                    <p class="blog-excerpt">Learn how I built the classic Snake game using HTML5 Canvas and vanilla JavaScript. This tutorial covers game loops, collision detection, and keyboard controls.</p>
-                    <a href="blog/snake-tutorial.html" class="read-more">Read Full Tutorial →</a>
-                </div>
-            </article>
+            </div>
             
-            <!-- Blog Post 2 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-rocket"></i> Creating Space Shooter Game Physics</h3>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> November 2023 | <i class="far fa-clock"></i> 15 min read</p>
-                    <p class="blog-excerpt">Discover the physics and math behind my Space Shooter game. Learn about projectile motion, enemy AI patterns, and collision detection algorithms.</p>
-                    <a href="blog/spaceshooter-physics.html" class="read-more">Read About Physics →</a>
-                </div>
-            </article>
+            <!-- Categories Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-folder"></i> Categories</h3>
+                <ul class="category-list">
+                    <li>
+                        <a href="#">
+                            <span>HTML5 Canvas</span>
+                            <span class="category-count">6</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>JavaScript</span>
+                            <span class="category-count">12</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Game Physics</span>
+                            <span class="category-count">4</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>AI & Algorithms</span>
+                            <span class="category-count">5</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Performance</span>
+                            <span class="category-count">3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Mobile Development</span>
+                            <span class="category-count">3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Audio & Visuals</span>
+                            <span class="category-count">2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Tools & Resources</span>
+                            <span class="category-count">4</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             
-            <!-- Blog Post 3 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-gamepad"></i> HTML5 vs Flash: Why HTML5 Wins for Games</h3>
+            <!-- Popular Posts -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-fire"></i> Popular Posts</h3>
+                <div class="popular-post">
+                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div class="popular-post-content">
+                        <h4>Building Snake Game with JavaScript</h4>
+                        <div class="popular-post-meta">Dec 15, 2023</div>
+                    </div>
                 </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> October 2023 | <i class="far fa-clock"></i> 8 min read</p>
-                    <p class="blog-excerpt">Comparing HTML5 Canvas with old Flash technology. Learn why HTML5 is better for modern web games and how to transition your skills.</p>
-                    <a href="blog/html5-vs-flash.html" class="read-more">Read Comparison →</a>
+                <div class="popular-post">
+                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div class="popular-post-content">
+                        <h4>Game Physics: Collision Detection</h4>
+                        <div class="popular-post-meta">Nov 15, 2023</div>
+                    </div>
                 </div>
-            </article>
+                <div class="popular-post">
+                    <img src="https://via.placeholder.com/80" alt="Popular Post" class="popular-post-image">
+                    <div class="popular-post-content">
+                        <h4>Optimizing for 60 FPS</h4>
+                        <div class="popular-post-meta">Oct 18, 2023</div>
+                    </div>
+                </div>
+            </div>
             
-            <!-- Blog Post 4 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-mobile-alt"></i> Optimizing Games for Mobile Devices</h3>
+            <!-- Newsletter -->
+            <div class="sidebar-widget">
+                <div class="newsletter-form">
+                    <h3><i class="fas fa-paper-plane"></i> Game Dev Newsletter</h3>
+                    <p>Get weekly tutorials, tips, and game development insights directly in your inbox.</p>
+                    <input type="email" placeholder="Your email address" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe Now</button>
                 </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> September 2023 | <i class="far fa-clock"></i> 12 min read</p>
-                    <p class="blog-excerpt">Tips and techniques for making HTML5 games work smoothly on phones and tablets. Covers touch controls, responsive design, and performance optimization.</p>
-                    <a href="blog/mobile-optimization.html" class="read-more">Read Optimization Guide →</a>
-                </div>
-            </article>
+            </div>
             
-            <!-- Blog Post 5 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #fa709a, #fee140); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-brain"></i> AI in Browser Games: Simple Enemy Intelligence</h3>
+            <!-- Tags Cloud -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-tags"></i> Popular Tags</h3>
+                <div class="blog-tags">
+                    <a href="#" class="tag">JavaScript</a>
+                    <a href="#" class="tag">HTML5</a>
+                    <a href="#" class="tag">Canvas</a>
+                    <a href="#" class="tag">GameDev</a>
+                    <a href="#" class="tag">Tutorial</a>
+                    <a href="#" class="tag">Code</a>
+                    <a href="#" class="tag">Physics</a>
+                    <a href="#" class="tag">AI</a>
+                    <a href="#" class="tag">Performance</a>
+                    <a href="#" class="tag">Mobile</a>
+                    <a href="#" class="tag">WebGL</a>
+                    <a href="#" class="tag">Animation</a>
                 </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> August 2023 | <i class="far fa-clock"></i> 18 min read</p>
-                    <p class="blog-excerpt">Learn how to implement basic AI for game enemies. This tutorial covers pathfinding, decision trees, and state machines for NPC behavior.</p>
-                    <a href="blog/game-ai.html" class="read-more">Read About Game AI →</a>
-                </div>
-            </article>
-            
-            <!-- Blog Post 6 -->
-            <article class="blog-card">
-                <div style="background: linear-gradient(135deg, #30cfd0, #330867); color: white; padding: 15px; border-radius: 10px 10px 0 0;">
-                    <h3 class="blog-title" style="color: white; margin: 0;"><i class="fas fa-tools"></i> Debugging JavaScript Games: Common Issues Fixed</h3>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <p class="blog-meta"><i class="far fa-calendar"></i> July 2023 | <i class="far fa-clock"></i> 14 min read</p>
-                    <p class="blog-excerpt">A practical guide to debugging common issues in JavaScript games. Learn about browser developer tools, console logging, and performance profiling.</p>
-                    <a href="blog/debugging-games.html" class="read-more">Read Debugging Guide →</a>
-                </div>
-            </article>
-        </div>
-        
-        <!-- Blog Post Creation Form (For You to Add More) -->
-        <div class="blog-card" style="margin-top: 3rem; background: #f8f9fa;">
-            <h3><i class="fas fa-plus-circle"></i> Create New Blog Post</h3>
-            <p>To add more blog content (required for AdSense), create HTML files in a <code>/blog/</code> folder with this structure:</p>
-            <pre style="background: white; padding: 1rem; border-radius: 5px; overflow-x: auto;">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Your Blog Title&lt;/title&gt;
-    &lt;link rel="stylesheet" href="../style.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div id="nav-container"&gt;&lt;/div&gt;
-    &lt;article style="max-width: 800px; margin: 2rem auto; padding: 20px;"&gt;
-        &lt;h1&gt;Your Blog Title&lt;/h1&gt;
-        &lt;p class="blog-meta"&gt;Published: [Date] | Read time: [X] min&lt;/p&gt;
-        &lt;!-- Your content here --&gt;
-        &lt;p&gt;Write at least 800-1000 words of detailed, original content.&lt;/p&gt;
-        &lt;p&gt;Add images, code examples, and practical advice.&lt;/p&gt;
-    &lt;/article&gt;
-    &lt;div id="footer-container"&gt;&lt;/div&gt;
-    &lt;script&gt;
-        // Load navigation and footer (same as other pages)
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-            <p><strong>Goal for AdSense:</strong> Create at least 10-15 detailed blog posts (800+ words each) about game development.</p>
-        </div>
-    </main>
+            </div>
+        </aside>
+    </div>
     
     <!-- Footer will be loaded via JavaScript -->
     <div id="footer-container"></div>
     
     <script>
-        // Load navigation from index.html
-        fetch('index.html')
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                // Find and insert navigation
-                const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
-                if (nav) {
-                    document.getElementById('nav-container').innerHTML = nav.outerHTML;
-                } else {
-                    // Create basic nav if none exists
-                    document.getElementById('nav-container').innerHTML = `
-                        <nav class="pro-nav">
-                            <div class="nav-container">
-                                <a href="index.html" class="nav-brand">
-                                    <i class="fas fa-gamepad"></i> SyedAbbas Games
-                                </a>
-                                <ul class="nav-menu">
-                                    <li><a href="index.html" class="nav-link">Home</a></li>
-                                    <li><a href="projects.html" class="nav-link">Games</a></li>
-                                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                                    <li><a href="about.html" class="nav-link">About</a></li>
-                                    <li><a href="privacy-policy.html" class="nav-link">Privacy</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    `;
-                }
-                
-                // Find and insert footer
-                const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
-                if (footer) {
-                    document.getElementById('footer-container').innerHTML = footer.outerHTML;
-                } else {
-                    // Create basic footer if none exists
-                    document.getElementById('footer-container').innerHTML = `
-                        <footer class="pro-footer">
-                            <div class="footer-content">
-                                <div class="footer-section">
-                                    <h3>SyedAbbas Games</h3>
-                                    <p>Creating fun HTML5 games since 2023</p>
-                                </div>
-                                <div class="footer-section">
-                                    <h3>Quick Links</h3>
-                                    <ul class="footer-links">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="projects.html">All Games</a></li>
-                                        <li><a href="blog.html">Dev Blog</a></li>
-                                    </ul>
-                                </div>
-                                <div class="footer-section">
-                                    <h3>Legal</h3>
-                                    <ul class="footer-links">
-                                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                        <li><a href="terms.html">Terms of Use</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="footer-bottom">
-                                <p>&copy; ${new Date().getFullYear()} SyedAbbas Games. All games free to play.</p>
-                            </div>
-                        </footer>
-                    `;
-                }
-                
-                // Add current year to footer
-                const yearSpans = document.querySelectorAll('#currentYear, .current-year');
-                yearSpans.forEach(span => {
-                    span.textContent = new Date().getFullYear();
+        // Load navigation and footer from main site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to load from index.html first
+            fetch('index.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network error');
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Load Navigation
+                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    if (nav) {
+                        document.getElementById('nav-container').innerHTML = nav.outerHTML;
+                        
+                        // Update active link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            if (link.getAttribute('href') === 'blog.html') {
+                                link.classList.add('active');
+                            }
+                        });
+                    } else {
+                        createBasicNav();
+                    }
+                    
+                    // Load Footer
+                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    if (footer) {
+                        document.getElementById('footer-container').innerHTML = footer.outerHTML;
+                        
+                        // Update year in footer
+                        const yearSpan = document.getElementById('currentYear');
+                        if (yearSpan) {
+                            yearSpan.textContent = new Date().getFullYear();
+                        }
+                    } else {
+                        createBasicFooter();
+                    }
+                    
+                    // Initialize blog interactions
+                    initBlogInteractions();
+                })
+                .catch(error => {
+                    console.error('Error loading components:', error);
+                    createBasicNav();
+                    createBasicFooter();
+                    initBlogInteractions();
                 });
-            })
-            .catch(error => {
-                console.error('Error loading components:', error);
-                // Create basic navigation on error
+            
+            function createBasicNav() {
                 document.getElementById('nav-container').innerHTML = `
-                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                        <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none;">
-                            SyedAbbas Games
-                        </a>
-                        <a href="blog.html" style="float: right; margin-left: 1rem;">Blog</a>
-                        <a href="projects.html" style="float: right; margin-left: 1rem;">Games</a>
+                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                            </a>
+                            <div>
+                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
+                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Games</a>
+                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Blog</a>
+                                <a href="about.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">About</a>
+                            </div>
+                        </div>
                     </nav>
                 `;
-            });
+            }
+            
+            function createBasicFooter() {
+                document.getElementById('footer-container').innerHTML = `
+                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
+                        <div style="max-width: 1400px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">SyedAbbas Games</h3>
+                                    <p style="color: #b2bec3;">Creating interactive HTML5 games and sharing game development knowledge.</p>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                                    <a href="index.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Home</a>
+                                    <a href="projects.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">All Games</a>
+                                    <a href="blog.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Development Blog</a>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fab fa-github"></i> GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
+                                <p>&copy; ${new Date().getFullYear()} SyedAbbas Games. All content is free to use and learn from.</p>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            }
+            
+            function initBlogInteractions() {
+                // Search functionality
+                const searchBtn = document.querySelector('.newsletter-btn');
+                const searchInput = document.querySelector('.search-box input');
+                
+                if (searchBtn && searchInput) {
+                    searchBtn.addEventListener('click', function() {
+                        const query = searchInput.value.trim();
+                        if (query) {
+                            alert(`Searching for: ${query}\n\nIn a real implementation, this would filter the blog posts.`);
+                            // In production, you would filter posts here
+                        }
+                    });
+                    
+                    searchInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            searchBtn.click();
+                        }
+                    });
+                }
+                
+                // Newsletter subscription
+                const subscribeBtn = document.querySelector('.newsletter-form .newsletter-btn');
+                const emailInput = document.querySelector('.newsletter-form input[type="email"]');
+                
+                if (subscribeBtn && emailInput) {
+                    subscribeBtn.addEventListener('click', function() {
+                        const email = emailInput.value.trim();
+                        if (email && validateEmail(email)) {
+                            alert(`Thank you for subscribing with: ${email}\n\nYou'll receive game development tips weekly!`);
+                            emailInput.value = '';
+                        } else {
+                            alert('Please enter a valid email address.');
+                        }
+                    });
+                }
+                
+                // Card click effects
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (!e.target.closest('.read-more-btn') && !e.target.closest('.tag')) {
+                            const link = this.querySelector('.read-more-btn');
+                            if (link) {
+                                window.location.href = link.getAttribute('href');
+                            }
+                        }
+                    });
+                });
+                
+                // Smooth scroll for pagination
+                document.querySelectorAll('.pagination-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const pageNum = this.textContent.trim();
+                        if (!isNaN(pageNum) || pageNum === 'Next') {
+                            // In production, this would load new page content
+                            alert(`Loading page ${pageNum}...\n\nIn a real blog, this would fetch more articles.`);
+                        }
+                    });
+                });
+                
+                // Helper function for email validation
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+                
+                // Add loading animation to images (simulated)
+                const images = document.querySelectorAll('.blog-card-image, .popular-post-image');
+                images.forEach(img => {
+                    img.classList.add('loading');
+                    // Simulate image load
+                    setTimeout(() => {
+                        img.classList.remove('loading');
+                    }, 1000);
+                });
+            }
+        });
     </script>
 </body>
 </html>
