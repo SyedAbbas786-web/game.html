@@ -3,28 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Syed Abbas - Game Developer & IT Student</title>
+    <title>Syed Abbas - Cyber Game Developer & IT Student</title>
     <meta name="description" content="Syed Abbas - Passionate Game Developer, IT Student, and Programmer creating interactive web games with HTML5, CSS3, and JavaScript.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Link to your existing style.css -->
     <link rel="stylesheet" href="style.css">
     
     <!-- About page specific styles -->
     <style>
-        /* About Page Specific Styles */
+        /* Cyberpunk About Page Styles */
+        :root {
+            --cyber-blue: #00d4ff;
+            --neon-purple: #9d4edd;
+            --matrix-green: #00ff9d;
+            --dark-1: #0a0a0f;
+            --dark-2: #121218;
+            --dark-3: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+        }
+        
         .about-hero {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 5rem 2rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
+            color: var(--text-primary);
+            padding: 8rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .about-hero::before {
@@ -34,8 +48,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .profile-container {
@@ -47,34 +62,49 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            border: 5px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid var(--cyber-blue);
             margin: 0 auto 2rem;
             overflow: hidden;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 5rem;
             color: white;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
         }
         
         .profile-title {
             font-size: 3rem;
             margin-bottom: 1rem;
-            font-weight: 700;
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--cyber-blue);
         }
         
         .profile-subtitle {
             font-size: 1.5rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
         }
         
         .tagline {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
-            font-weight: 300;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
         }
         
         /* About Content Sections */
@@ -82,41 +112,47 @@
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            background: var(--dark-1);
         }
         
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .section-title::after {
             content: '';
             display: block;
             width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            height: 3px;
+            background: linear-gradient(to right, var(--cyber-blue), var(--neon-purple));
             margin: 0.5rem auto;
             border-radius: 2px;
         }
         
-        /* Mission Statement */
+        /* Mission Statement - Cyber Style */
         .mission-statement {
-            background: #f8f9fa;
+            background: rgba(26, 26, 36, 0.8);
             border-radius: 15px;
             padding: 3rem;
             margin-bottom: 3rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid #6a11cb;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--cyber-blue);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .mission-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.8;
-            color: #333;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* Skills Grid */
+        /* Skills Grid - Cyber Style */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -125,28 +161,35 @@
         }
         
         .skill-card {
-            background: white;
+            background: rgba(26, 26, 36, 0.8);
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(0, 212, 255, 0.3);
+            border-color: var(--cyber-blue);
         }
         
         .skill-icon {
             font-size: 2.5rem;
-            color: #6a11cb;
+            color: var(--cyber-blue);
             margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--cyber-blue);
         }
         
         .skill-title {
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: #333;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .skill-list {
@@ -156,10 +199,12 @@
         
         .skill-list li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .skill-list li:last-child {
@@ -167,14 +212,16 @@
         }
         
         .skill-list i {
-            color: #2575fc;
+            color: var(--matrix-green);
+            font-size: 0.8rem;
         }
         
-        /* Timeline */
+        /* Timeline - Cyber Style */
         .timeline {
             position: relative;
             max-width: 800px;
             margin: 3rem auto;
+            padding: 2rem 0;
         }
         
         .timeline::before {
@@ -184,8 +231,9 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            background: linear-gradient(to bottom, var(--cyber-blue), var(--neon-purple));
             transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--cyber-blue);
         }
         
         .timeline-item {
@@ -208,10 +256,26 @@
             top: 0;
             width: 20px;
             height: 20px;
-            background: #6a11cb;
+            background: var(--cyber-blue);
             border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px #6a11cb;
+            border: 3px solid var(--dark-1);
+            box-shadow: 
+                0 0 0 3px var(--cyber-blue),
+                0 0 20px var(--cyber-blue);
+            animation: dot-pulse 2s infinite;
+        }
+        
+        @keyframes dot-pulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 0 3px var(--cyber-blue),
+                    0 0 20px var(--cyber-blue);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 0 3px var(--cyber-blue),
+                    0 0 40px var(--cyber-blue);
+            }
         }
         
         .timeline-item:nth-child(odd) .timeline-dot {
@@ -223,29 +287,81 @@
         }
         
         .timeline-content {
-            background: white;
+            background: rgba(26, 26, 36, 0.8);
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
         
         .timeline-date {
-            color: #6a11cb;
+            color: var(--cyber-blue);
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* Call to Action */
+        .timeline-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        /* Call to Action - Cyber Style */
         .cta-section {
             text-align: center;
             padding: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
             color: white;
             border-radius: 15px;
             margin-top: 3rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
+        }
+        
+        .cta-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         .cta-buttons {
@@ -254,6 +370,8 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         /* Responsive Design */
@@ -294,6 +412,10 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            .about-hero {
+                padding: 4rem 1rem;
+            }
         }
         
         /* Animation */
@@ -311,6 +433,20 @@
         .animate {
             animation: fadeInUp 0.6s ease forwards;
         }
+        
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .glitch:hover {
+            animation: glitch 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -320,12 +456,12 @@
     <!-- Hero Section -->
     <section class="about-hero">
         <div class="profile-container">
-            <div class="profile-image">
+            <div class="profile-image glitch">
                 <i class="fas fa-code"></i>
             </div>
-            <h1 class="profile-title">Syed Abbas</h1>
-            <h2 class="profile-subtitle">Game Developer & IT Student</h2>
-            <p class="tagline">Creating interactive experiences through code and design</p>
+            <h1 class="profile-title">SYED ABBAS</h1>
+            <h2 class="profile-subtitle">CYBER GAME DEVELOPER & IT STUDENT</h2>
+            <p class="tagline">Creating interactive cyber experiences through code and design</p>
         </div>
     </section>
     
@@ -333,7 +469,7 @@
     <main class="about-content">
         <!-- Mission Statement -->
         <section class="mission-statement animate">
-            <h2 class="section-title">My Mission</h2>
+            <h2 class="section-title">MY MISSION</h2>
             <div class="mission-text">
                 <p>I'm a motivated and detail-oriented IT student with a strong passion for technology, problem-solving, and continuous learning. I believe in creating technology that not only functions efficiently but also brings joy and engagement to users.</p>
                 <p>Through my game development projects, I aim to blend technical expertise with creative design, making programming accessible and enjoyable for everyone.</p>
@@ -342,23 +478,23 @@
         
         <!-- Career Objective -->
         <section class="mission-statement animate" style="animation-delay: 0.2s;">
-            <h2 class="section-title">Career Objective</h2>
+            <h2 class="section-title">CAREER OBJECTIVE</h2>
             <div class="mission-text">
-                <p>Seeking an entry-level role or internship in <strong>software development</strong>, <strong>game development</strong>, or <strong>IT support</strong> within a dynamic and innovative environment where I can contribute my skills in programming, problem-solving, and creative thinking.</p>
+                <p>Seeking an entry-level role or internship in <strong style="color: var(--cyber-blue);">SOFTWARE DEVELOPMENT</strong>, <strong style="color: var(--matrix-green);">GAME DEVELOPMENT</strong>, or <strong style="color: var(--neon-purple);">IT SUPPORT</strong> within a dynamic and innovative environment where I can contribute my skills in programming, problem-solving, and creative thinking.</p>
                 <p>I'm particularly interested in opportunities that allow me to work on interactive applications, educational technology, or gaming platforms.</p>
             </div>
         </section>
         
         <!-- Skills Section -->
         <section style="margin: 4rem 0;">
-            <h2 class="section-title animate">Technical Skills</h2>
+            <h2 class="section-title animate">TECHNICAL SKILLS</h2>
             <div class="skills-grid">
                 <!-- Game Development Skills -->
                 <div class="skill-card animate" style="animation-delay: 0.1s;">
                     <div class="skill-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
-                    <h3 class="skill-title">Game Development</h3>
+                    <h3 class="skill-title">GAME DEVELOPMENT</h3>
                     <ul class="skill-list">
                         <li><i class="fas fa-check"></i> HTML5 Canvas Games</li>
                         <li><i class="fas fa-check"></i> JavaScript Game Logic</li>
@@ -373,7 +509,7 @@
                     <div class="skill-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
-                    <h3 class="skill-title">Web Development</h3>
+                    <h3 class="skill-title">WEB DEVELOPMENT</h3>
                     <ul class="skill-list">
                         <li><i class="fas fa-check"></i> HTML5 & CSS3</li>
                         <li><i class="fas fa-check"></i> JavaScript (ES6+)</li>
@@ -388,7 +524,7 @@
                     <div class="skill-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3 class="skill-title">IT & Problem Solving</h3>
+                    <h3 class="skill-title">IT & PROBLEM SOLVING</h3>
                     <ul class="skill-list">
                         <li><i class="fas fa-check"></i> Technical Troubleshooting</li>
                         <li><i class="fas fa-check"></i> Debugging & Optimization</li>
@@ -402,14 +538,14 @@
         
         <!-- Experience Timeline -->
         <section style="margin: 4rem 0;">
-            <h2 class="section-title animate">My Journey</h2>
+            <h2 class="section-title animate">MY JOURNEY</h2>
             <div class="timeline">
                 <!-- Timeline Item 1 -->
                 <div class="timeline-item animate" style="animation-delay: 0.1s;">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">
-                            <i class="far fa-calendar"></i> Present
+                            <i class="far fa-calendar"></i> PRESENT
                         </div>
                         <h3>Game Development Portfolio</h3>
                         <p>Building a collection of interactive HTML5 games including Snake, Space Shooter, Tic Tac Toe, and Car Racing games. Focus on clean code, user experience, and educational content.</p>
@@ -445,7 +581,7 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">
-                            <i class="far fa-calendar"></i> Future Goals
+                            <i class="far fa-calendar"></i> FUTURE GOALS
                         </div>
                         <h3>Professional Development</h3>
                         <p>Aspiring to work in software/game development, contribute to open-source projects, and create educational technology that makes learning programming fun and accessible.</p>
@@ -456,15 +592,15 @@
         
         <!-- Projects Showcase -->
         <section class="mission-statement animate" style="animation-delay: 0.5s;">
-            <h2 class="section-title">My Game Projects</h2>
+            <h2 class="section-title">MY GAME PROJECTS</h2>
             <div class="mission-text">
                 <p>I've developed several interactive games that showcase my programming skills and creativity:</p>
-                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                    <li><strong>Snake Game:</strong> Classic arcade game with modern controls and smooth gameplay</li>
-                    <li><strong>Space Shooter:</strong> Action-packed space adventure with enemy AI and scoring system</li>
-                    <li><strong>Tic Tac Toe:</strong> Strategic game with intelligent computer opponent</li>
-                    <li><strong>Car Racing Game:</strong> Dynamic obstacle avoidance game</li>
-                    <li><strong>Various Interactive Experiments:</strong> Exploring different game mechanics and concepts</li>
+                <ul style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                    <li><strong style="color: var(--matrix-green);">Snake Game:</strong> Classic arcade game with modern controls and smooth gameplay</li>
+                    <li><strong style="color: var(--cyber-blue);">Space Shooter:</strong> Action-packed space adventure with enemy AI and scoring system</li>
+                    <li><strong style="color: var(--neon-purple);">Tic Tac Toe:</strong> Strategic game with intelligent computer opponent</li>
+                    <li><strong style="color: var(--matrix-green);">Car Racing Game:</strong> Dynamic obstacle avoidance game</li>
+                    <li><strong style="color: var(--cyber-blue);">Various Interactive Experiments:</strong> Exploring different game mechanics and concepts</li>
                 </ul>
                 <p>All games are built with vanilla JavaScript and are completely free to play.</p>
             </div>
@@ -472,18 +608,18 @@
         
         <!-- Call to Action -->
         <section class="cta-section animate" style="animation-delay: 0.6s;">
-            <h2 style="color: white; margin-bottom: 1rem;">Let's Connect!</h2>
-            <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 2rem;">
+            <h2>LET'S CONNECT!</h2>
+            <p>
                 I'm always interested in new opportunities, collaborations, or just chatting about game development and technology.
             </p>
             <div class="cta-buttons">
-                <a href="projects.html" class="btn" style="background: white; color: #6a11cb;">
+                <a href="projects.html" class="cyber-btn">
                     <i class="fas fa-gamepad"></i> Play My Games
                 </a>
-                <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">
+                <a href="contact.html" class="cyber-btn cyber-btn-outline">
                     <i class="fas fa-envelope"></i> Contact Me
                 </a>
-                <a href="https://github.com/SyedAbbas786-web" target="_blank" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+                <a href="https://github.com/SyedAbbas786-web" target="_blank" class="cyber-btn cyber-btn-outline">
                     <i class="fab fa-github"></i> View GitHub
                 </a>
             </div>
@@ -507,7 +643,7 @@
                     const doc = parser.parseFromString(html, 'text/html');
                     
                     // Try to find navigation
-                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    const nav = doc.querySelector('nav') || doc.querySelector('.cyber-nav') || doc.querySelector('.navbar');
                     if (nav) {
                         document.getElementById('nav-container').innerHTML = nav.outerHTML;
                         
@@ -516,6 +652,8 @@
                         links.forEach(link => {
                             if (link.getAttribute('href') === 'about.html') {
                                 link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
                             }
                         });
                     } else {
@@ -524,7 +662,7 @@
                     }
                     
                     // Try to find footer
-                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    const footer = doc.querySelector('footer') || doc.querySelector('.cyber-footer');
                     if (footer) {
                         document.getElementById('footer-container').innerHTML = footer.outerHTML;
                         
@@ -550,17 +688,20 @@
             
             function createBasicNav() {
                 document.getElementById('nav-container').innerHTML = `
-                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none;">
-                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                    <nav class="cyber-nav">
+                        <div class="nav-container">
+                            <a href="index.html" class="nav-brand">
+                                <span class="text-gradient">SyedAbbasGames</span>
                             </a>
-                            <div>
-                                <a href="index.html" style="margin-left: 1rem; text-decoration: none; color: #333;">Home</a>
-                                <a href="projects.html" style="margin-left: 1rem; text-decoration: none; color: #333;">Games</a>
-                                <a href="about.html" style="margin-left: 1rem; text-decoration: none; color: #6a11cb; font-weight: bold;">About</a>
-                                <a href="contact.html" style="margin-left: 1rem; text-decoration: none; color: #333;">Contact</a>
-                            </div>
+                            <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav-menu">
+                                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="projects.html" class="nav-link"><i class="fas fa-gamepad"></i> All Games</a></li>
+                                <li><a href="about.html" class="nav-link active"><i class="fas fa-user"></i> About</a></li>
+                                <li><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+                            </ul>
                         </div>
                     </nav>
                 `;
@@ -568,14 +709,23 @@
             
             function createBasicFooter() {
                 document.getElementById('footer-container').innerHTML = `
-                    <footer style="background: #2d3436; color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
-                        <p>&copy; ${new Date().getFullYear()} Syed Abbas. Game Developer & IT Student.</p>
-                        <p style="margin-top: 1rem;">
-                            <a href="index.html" style="color: #b2bec3; margin: 0 0.5rem;">Home</a> |
-                            <a href="projects.html" style="color: #b2bec3; margin: 0 0.5rem;">Games</a> |
-                            <a href="about.html" style="color: #b2bec3; margin: 0 0.5rem;">About</a> |
-                            <a href="privacy-policy.html" style="color: #b2bec3; margin: 0 0.5rem;">Privacy</a>
-                        </p>
+                    <footer class="cyber-footer">
+                        <div class="footer-content">
+                            <div class="footer-section">
+                                <h3>SyedAbbas Games</h3>
+                                <p class="footer-about">Creating cyber games with HTML5, CSS3, and JavaScript.</p>
+                                <div class="social-links">
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="copyright">
+                                &copy; ${new Date().getFullYear()} Syed Abbas. Cyber Game Developer.
+                            </div>
+                        </div>
                     </footer>
                 `;
             }
@@ -594,6 +744,17 @@
                 document.querySelectorAll('.animate').forEach(el => {
                     observer.observe(el);
                 });
+                
+                // Add glitch effect to profile image
+                const profileImage = document.querySelector('.profile-image');
+                if (profileImage) {
+                    setInterval(() => {
+                        profileImage.classList.remove('glitch');
+                        setTimeout(() => {
+                            profileImage.classList.add('glitch');
+                        }, 10);
+                    }, 10000);
+                }
             }
         });
     </script>
