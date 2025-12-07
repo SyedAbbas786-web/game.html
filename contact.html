@@ -3,44 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Syed Abbas - Game Developer & IT Student</title>
-    <meta name="description" content="Get in touch with Syed Abbas for game development projects, collaborations, or discussions about web development and programming.">
+    <title>Contact Syed Abbas - Cyber Game Developer</title>
+    <meta name="description" content="Get in touch with Syed Abbas for cyber game development projects, collaborations, or discussions about web development and programming.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
     
     <!-- Contact Page Specific Styles -->
     <style>
-        /* ====== CONTACT PAGE STYLES ====== */
+        /* ====== CYBER CONTACT PAGE STYLES ====== */
         :root {
-            --contact-primary: #6a11cb;
-            --contact-secondary: #2575fc;
-            --contact-accent: #ff416c;
-            --contact-success: #00b894;
-            --contact-dark: #2d3436;
-            --contact-light: #f8f9fa;
-            --contact-gray: #636e72;
+            --cyber-blue: #00d4ff;
+            --neon-purple: #9d4edd;
+            --matrix-green: #00ff9d;
+            --blood-red: #ff0055;
+            --dark-1: #0a0a0f;
+            --dark-2: #121218;
+            --dark-3: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --text-muted: #8a8aa3;
         }
         
         .contact-page {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--dark-1);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Cyber Grid Background */
+        .contact-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.3;
         }
         
         /* Contact Hero */
         .contact-hero {
-            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
-            color: white;
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
+            color: var(--text-primary);
+            padding: 5rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .contact-hero::before {
@@ -50,8 +75,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .contact-hero-content {
@@ -64,16 +90,23 @@
         .contact-title {
             font-size: 3rem;
             margin-bottom: 1rem;
-            font-weight: 700;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(45deg, var(--cyber-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--cyber-blue);
         }
         
         .contact-subtitle {
             font-size: 1.3rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         /* Contact Container */
@@ -87,10 +120,12 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            background: white;
-            border-radius: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         @media (max-width: 900px) {
@@ -99,13 +134,16 @@
             }
         }
         
-        /* Contact Info Sidebar */
+        /* Contact Info Sidebar - Cyber Style */
         .contact-info {
-            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
             color: white;
             padding: 3rem;
             position: relative;
             overflow: hidden;
+            border-right: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .contact-info::before {
@@ -115,8 +153,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .info-content {
@@ -130,7 +169,10 @@
         .info-title {
             font-size: 2rem;
             margin-bottom: 2rem;
-            color: white;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
+            border-left: 4px solid var(--cyber-blue);
+            padding-left: 1rem;
         }
         
         .info-item {
@@ -139,65 +181,74 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
         }
         
         .info-item:hover {
             transform: translateX(10px);
-            background: rgba(255,255,255,0.15);
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--cyber-blue);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
         }
         
         .info-icon {
             font-size: 1.8rem;
             min-width: 50px;
             height: 50px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(0, 212, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--cyber-blue);
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
         
         .info-details h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
-            color: white;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .info-details p {
-            opacity: 0.9;
+            color: var(--text-secondary);
             line-height: 1.6;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .info-details a {
-            color: white;
+            color: var(--cyber-blue);
             text-decoration: none;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
         }
         
         .info-details a:hover {
-            opacity: 0.8;
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
         }
         
-        /* Social Links */
+        /* Social Links - Cyber Style */
         .social-links-container {
             margin-top: auto;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .social-title {
-            color: white;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
         }
         
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
         
@@ -206,42 +257,51 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: white;
+            color: var(--text-primary);
             padding: 1rem;
-            background: rgba(255,255,255,0.1);
+            background: rgba(0, 212, 255, 0.05);
             border-radius: 10px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .social-link:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(0, 212, 255, 0.1);
             transform: translateY(-5px);
+            border-color: var(--cyber-blue);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
         }
         
         .social-link i {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color: var(--cyber-blue);
         }
         
         .social-link span {
             font-size: 0.8rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* Contact Form */
+        /* Contact Form - Cyber Style */
         .contact-form-container {
             padding: 3rem;
         }
         
         .form-title {
             font-size: 2rem;
-            color: var(--contact-dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            border-left: 4px solid var(--matrix-green);
+            padding-left: 1rem;
         }
         
         .form-subtitle {
-            color: var(--contact-gray);
+            color: var(--text-secondary);
             margin-bottom: 2rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .contact-form {
@@ -257,8 +317,14 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--contact-dark);
+            color: var(--text-primary);
             font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .form-group label i {
+            color: var(--matrix-green);
+            margin-right: 8px;
         }
         
         .form-group input,
@@ -266,21 +332,22 @@
         .form-group select {
             width: 100%;
             padding: 1rem 1.5rem;
-            border: 2px solid #eee;
-            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 5px;
             font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             transition: all 0.3s ease;
-            background: #f8f9fa;
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--text-primary);
         }
         
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--contact-primary);
-            background: white;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.1);
+            border-color: var(--cyber-blue);
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
         
         .form-group textarea {
@@ -300,54 +367,62 @@
             }
         }
         
-        .submit-btn {
-            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
+        .priority-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .priority-options label {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 5px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
             transition: all 0.3s ease;
-            margin-top: 1rem;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+        .priority-options label:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--cyber-blue);
         }
         
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+        .priority-options input[type="radio"] {
+            width: auto;
+            margin: 0;
         }
         
-        /* Response Message */
+        .priority-options span {
+            color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        /* Response Message - Cyber Style */
         .response-message {
             padding: 1rem 1.5rem;
-            border-radius: 10px;
+            border-radius: 5px;
             margin-top: 1rem;
             display: none;
             animation: slideIn 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            border: 1px solid;
         }
         
         .response-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--matrix-green);
+            border-color: rgba(0, 255, 157, 0.3);
             display: block;
         }
         
         .response-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: rgba(255, 0, 85, 0.1);
+            color: var(--blood-red);
+            border-color: rgba(255, 0, 85, 0.3);
             display: block;
         }
         
@@ -362,22 +437,39 @@
             }
         }
         
-        /* Map Section */
+        /* Map Section - Cyber Style */
         .map-section {
             margin-top: 4rem;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .map-container {
             position: relative;
             height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(157, 78, 221, 0.1) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            overflow: hidden;
+        }
+        
+        .map-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
         }
         
         .map-content {
@@ -391,21 +483,39 @@
             font-size: 5rem;
             margin-bottom: 1rem;
             opacity: 0.8;
+            color: var(--cyber-blue);
+            text-shadow: 0 0 20px var(--cyber-blue);
         }
         
-        /* FAQ Section */
+        .map-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .map-content p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        /* FAQ Section - Cyber Style */
         .faq-section {
             margin-top: 4rem;
-            background: white;
+            background: rgba(26, 26, 36, 0.8);
             padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .faq-title {
             text-align: center;
             margin-bottom: 2rem;
-            color: var(--contact-dark);
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .faq-grid {
@@ -416,20 +526,30 @@
         
         .faq-item {
             padding: 1.5rem;
-            background: #f8f9fa;
+            background: rgba(0, 212, 255, 0.05);
             border-radius: 10px;
-            border-left: 4px solid var(--contact-primary);
+            border-left: 4px solid var(--neon-purple);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--neon-purple);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-5px);
         }
         
         .faq-item h3 {
-            color: var(--contact-dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
+            font-family: 'Orbitron', sans-serif;
         }
         
         .faq-item p {
-            color: var(--contact-gray);
+            color: var(--text-secondary);
             line-height: 1.6;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         /* Responsive Design */
@@ -459,6 +579,25 @@
             .faq-section {
                 padding: 2rem;
             }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+        
+        /* Email Highlight - Cyber Style */
+        .email-highlight {
+            color: var(--cyber-blue);
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--cyber-blue);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
         
         /* Loading Animation */
@@ -466,9 +605,9 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            border: 3px solid rgba(0, 212, 255, 0.3);
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: var(--cyber-blue);
             animation: spin 1s ease-in-out infinite;
         }
         
@@ -476,38 +615,72 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Email Animation */
-        .email-highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-            animation: pulse 2s infinite;
+        /* Scan Line Effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 212, 255, 0.05) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .glitch:hover {
+            animation: glitch 0.3s;
+        }
+        
+        /* Fade In Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-item {
+            animation: fadeInUp 0.6s ease forwards;
         }
     </style>
 </head>
 <body class="contact-page">
+    <!-- Cyber Scan Line -->
+    <div class="scan-line"></div>
+    
     <!-- Navigation -->
     <div id="nav-container"></div>
     
     <!-- Hero Section -->
     <section class="contact-hero">
         <div class="contact-hero-content">
-            <h1 class="contact-title"><i class="fas fa-envelope-open-text"></i> Get In Touch</h1>
+            <h1 class="contact-title"><i class="fas fa-envelope-open-text"></i> GET IN TOUCH</h1>
             <p class="contact-subtitle">
-                Have questions about my games? Want to collaborate on a project? 
+                Have questions about my cyber games? Want to collaborate on a project? 
                 Or just want to chat about game development? I'd love to hear from you!
             </p>
-            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; display: inline-block; margin-top: 1rem;">
-                <p style="margin: 0; font-size: 1.1rem;">
-                    <i class="fas fa-envelope"></i> Primary Email: 
+            <div style="background: rgba(26, 26, 36, 0.8); padding: 1rem; border-radius: 10px; display: inline-block; margin-top: 1rem; border: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px);">
+                <p style="margin: 0; font-size: 1.1rem; color: var(--text-secondary); font-family: 'Rajdhani', sans-serif;">
+                    <i class="fas fa-envelope" style="color: var(--matrix-green);"></i> PRIMARY EMAIL: 
                     <span class="email-highlight">syedabbasshah077@gmail.com</span>
                 </p>
             </div>
@@ -520,59 +693,59 @@
             <!-- Contact Info Sidebar -->
             <aside class="contact-info">
                 <div class="info-content">
-                    <h2 class="info-title">Contact Information</h2>
+                    <h2 class="info-title">CONTACT INFORMATION</h2>
                     
-                    <div class="info-item">
+                    <div class="info-item glitch">
                         <div class="info-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="info-details">
-                            <h3>Email Address</h3>
+                            <h3>EMAIL ADDRESS</h3>
                             <p>
                                 <a href="mailto:syedabbasshah077@gmail.com">
                                     syedabbasshah077@gmail.com
                                 </a>
                             </p>
-                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; font-family: 'Rajdhani', sans-serif;">
                                 I typically respond within 24 hours
                             </p>
                         </div>
                     </div>
                     
-                    <div class="info-item">
+                    <div class="info-item glitch">
                         <div class="info-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="info-details">
-                            <h3>Location</h3>
+                            <h3>LOCATION</h3>
                             <p>Available for remote work worldwide</p>
-                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
-                                Open to collaborations globally
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; font-family: 'Rajdhani', sans-serif;">
+                                Open to cyber collaborations globally
                             </p>
                         </div>
                     </div>
                     
-                    <div class="info-item">
+                    <div class="info-item glitch">
                         <div class="info-icon">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="info-details">
-                            <h3>Response Time</h3>
+                            <h3>RESPONSE TIME</h3>
                             <p>24-48 hours for initial response</p>
-                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; font-family: 'Rajdhani', sans-serif;">
                                 Faster for urgent game development inquiries
                             </p>
                         </div>
                     </div>
                     
-                    <div class="info-item">
+                    <div class="info-item glitch">
                         <div class="info-icon">
                             <i class="fas fa-code"></i>
                         </div>
                         <div class="info-details">
-                            <h3>Expertise Areas</h3>
-                            <p>HTML5 Game Development • JavaScript • C++ • Web Development</p>
-                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                            <h3>EXPERTISE AREAS</h3>
+                            <p>HTML5 Game Dev • JavaScript • C++ • Web Development</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; font-family: 'Rajdhani', sans-serif;">
                                 Game programming and educational content
                             </p>
                         </div>
@@ -580,23 +753,23 @@
                     
                     <!-- Social Links -->
                     <div class="social-links-container">
-                        <h3 class="social-title">Connect With Me</h3>
+                        <h3 class="social-title">CONNECT WITH ME</h3>
                         <div class="social-grid">
-                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link glitch">
                                 <i class="fab fa-github"></i>
-                                <span>GitHub</span>
+                                <span>GITHUB</span>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link glitch">
                                 <i class="fab fa-linkedin-in"></i>
-                                <span>LinkedIn</span>
+                                <span>LINKEDIN</span>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link glitch">
                                 <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
+                                <span>TWITTER</span>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link glitch">
                                 <i class="fab fa-youtube"></i>
-                                <span>YouTube</span>
+                                <span>YOUTUBE</span>
                             </a>
                         </div>
                     </div>
@@ -605,21 +778,21 @@
             
             <!-- Contact Form -->
             <div class="contact-form-container">
-                <h2 class="form-title">Send Me a Message</h2>
+                <h2 class="form-title">SEND ME A MESSAGE</h2>
                 <p class="form-subtitle">Fill out the form below and I'll get back to you as soon as possible.</p>
                 
                 <form id="contactForm" class="contact-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">
-                                <i class="fas fa-user"></i> Full Name *
+                                <i class="fas fa-user"></i> FULL NAME *
                             </label>
                             <input type="text" id="name" name="name" required placeholder="Enter your full name">
                         </div>
                         
                         <div class="form-group">
                             <label for="email">
-                                <i class="fas fa-envelope"></i> Email Address *
+                                <i class="fas fa-envelope"></i> EMAIL ADDRESS *
                             </label>
                             <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                         </div>
@@ -627,7 +800,7 @@
                     
                     <div class="form-group">
                         <label for="subject">
-                            <i class="fas fa-tag"></i> Subject *
+                            <i class="fas fa-tag"></i> SUBJECT *
                         </label>
                         <select id="subject" name="subject" required>
                             <option value="" disabled selected>Select a subject</option>
@@ -641,25 +814,25 @@
                     
                     <div class="form-group">
                         <label for="message">
-                            <i class="fas fa-comment-alt"></i> Your Message *
+                            <i class="fas fa-comment-alt"></i> YOUR MESSAGE *
                         </label>
                         <textarea id="message" name="message" required placeholder="Tell me about your project, question, or idea..."></textarea>
                     </div>
                     
                     <div class="form-group">
                         <label for="priority">
-                            <i class="fas fa-flag"></i> Priority Level
+                            <i class="fas fa-flag"></i> PRIORITY LEVEL
                         </label>
-                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <div class="priority-options">
+                            <label>
                                 <input type="radio" name="priority" value="low" checked>
                                 <span>Low Priority</span>
                             </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <label>
                                 <input type="radio" name="priority" value="medium">
                                 <span>Medium Priority</span>
                             </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <label>
                                 <input type="radio" name="priority" value="high">
                                 <span>High Priority</span>
                             </label>
@@ -668,8 +841,8 @@
                     
                     <div id="responseMessage" class="response-message"></div>
                     
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                    <button type="submit" class="cyber-btn" id="submitBtn" style="width: 100%; margin-top: 1rem;">
+                        <i class="fas fa-paper-plane"></i> SEND MESSAGE
                     </button>
                 </form>
             </div>
@@ -677,24 +850,24 @@
         
         <!-- FAQ Section -->
         <section class="faq-section">
-            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> FREQUENTLY ASKED QUESTIONS</h2>
             <div class="faq-grid">
-                <div class="faq-item">
+                <div class="faq-item glitch">
                     <h3>How quickly will you respond to my message?</h3>
                     <p>I typically respond within 24-48 hours. For urgent game development inquiries, I try to respond even faster.</p>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item glitch">
                     <h3>Do you take on freelance game development projects?</h3>
                     <p>Yes! I'm available for freelance HTML5 game development projects, educational game creation, and programming tutorials.</p>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item glitch">
                     <h3>Can I use your games for educational purposes?</h3>
                     <p>Absolutely! All my games are open for educational use. The source code is available on GitHub for learning purposes.</p>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item glitch">
                     <h3>Do you offer game development mentoring?</h3>
                     <p>Yes, I offer mentoring for beginners in game development. Contact me to discuss your learning goals.</p>
                 </div>
@@ -708,8 +881,8 @@
                     <div class="map-placeholder">
                         <i class="fas fa-globe-americas"></i>
                     </div>
-                    <h3 style="color: white; margin-bottom: 0.5rem;">Remote Collaboration Ready</h3>
-                    <p style="color: rgba(255,255,255,0.9); max-width: 500px; margin: 0 auto;">
+                    <h3>REMOTE COLLABORATION READY</h3>
+                    <p>
                         I work with clients and collaborators from all around the world. 
                         Timezone differences are not a problem!
                     </p>
@@ -735,7 +908,7 @@
                     const doc = parser.parseFromString(html, 'text/html');
                     
                     // Load Navigation
-                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    const nav = doc.querySelector('nav') || doc.querySelector('.cyber-nav');
                     if (nav) {
                         document.getElementById('nav-container').innerHTML = nav.outerHTML;
                         
@@ -743,14 +916,16 @@
                         document.querySelectorAll('.nav-link').forEach(link => {
                             if (link.getAttribute('href') === 'contact.html') {
                                 link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
                             }
                         });
                     } else {
-                        createBasicNav();
+                        createCyberNav();
                     }
                     
                     // Load Footer
-                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    const footer = doc.querySelector('footer') || doc.querySelector('.cyber-footer');
                     if (footer) {
                         document.getElementById('footer-container').innerHTML = footer.outerHTML;
                         
@@ -760,7 +935,7 @@
                             yearSpan.textContent = new Date().getFullYear();
                         }
                     } else {
-                        createBasicFooter();
+                        createCyberFooter();
                     }
                     
                     // Initialize contact page functionality
@@ -768,61 +943,49 @@
                 })
                 .catch(error => {
                     console.error('Error loading components:', error);
-                    createBasicNav();
-                    createBasicFooter();
+                    createCyberNav();
+                    createCyberFooter();
                     initContactPage();
                 });
             
-            function createBasicNav() {
+            function createCyberNav() {
                 document.getElementById('nav-container').innerHTML = `
-                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                    <nav class="cyber-nav">
+                        <div class="nav-container">
+                            <a href="index.html" class="nav-brand">
+                                <span class="text-gradient">SyedAbbasGames</span>
                             </a>
-                            <div>
-                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
-                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Projects</a>
-                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Blog</a>
-                                <a href="contact.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Contact</a>
-                            </div>
+                            <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav-menu">
+                                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                                <li><a href="projects.html" class="nav-link"><i class="fas fa-gamepad"></i> Projects</a></li>
+                                <li><a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+                                <li><a href="contact.html" class="nav-link active"><i class="fas fa-envelope"></i> Contact</a></li>
+                            </ul>
                         </div>
                     </nav>
                 `;
             }
             
-            function createBasicFooter() {
+            function createCyberFooter() {
                 document.getElementById('footer-container').innerHTML = `
-                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
-                        <div style="max-width: 1400px; margin: 0 auto;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Get In Touch</h3>
-                                    <p style="color: #b2bec3;">
-                                        <i class="fas fa-envelope"></i> syedabbasshah077@gmail.com
-                                    </p>
-                                    <p style="color: #b2bec3; margin-top: 0.5rem;">
-                                        Available for game development projects and collaborations
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
-                                    <a href="index.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Home</a>
-                                    <a href="projects.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Game Projects</a>
-                                    <a href="blog.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Development Blog</a>
-                                </div>
-                                <div>
-                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
-                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fab fa-github"></i> View Source Code
-                                    </a>
-                                    <a href="contact.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
-                                        <i class="fas fa-envelope"></i> Contact Form
+                    <footer class="cyber-footer">
+                        <div class="footer-content">
+                            <div class="footer-section">
+                                <h3>SyedAbbas Games</h3>
+                                <p class="footer-about">Creating cyber games with HTML5, CSS3, and JavaScript.</p>
+                                <div class="social-links">
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                                        <i class="fab fa-github"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
-                                <p>&copy; ${new Date().getFullYear()} Syed Abbas. All games are free to play.</p>
+                        </div>
+                        <div class="footer-bottom">
+                            <div class="copyright">
+                                &copy; ${new Date().getFullYear()} Syed Abbas. Cyber Game Developer.
                             </div>
                         </div>
                     </footer>
@@ -860,26 +1023,26 @@
                     
                     // Show loading state
                     const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+                    submitBtn.innerHTML = '<span class="loading"></span> SENDING...';
                     submitBtn.disabled = true;
                     
                     // Simulate form submission (in production, this would send to a server)
                     setTimeout(() => {
                         // Prepare email content
-                        const emailSubject = encodeURIComponent(`[Game Dev Contact] ${formData.subject} - ${formData.name}`);
+                        const emailSubject = encodeURIComponent(`[Cyber Game Dev Contact] ${formData.subject} - ${formData.name}`);
                         const emailBody = encodeURIComponent(
                             `Name: ${formData.name}\n` +
                             `Email: ${formData.email}\n` +
                             `Priority: ${formData.priority}\n\n` +
                             `Message:\n${formData.message}\n\n` +
-                            `---\nSent from SyedAbbas Games Contact Form`
+                            `---\nSent from SyedAbbas Cyber Games Contact Form`
                         );
                         
                         // Create mailto link
                         const mailtoLink = `mailto:syedabbasshah077@gmail.com?subject=${emailSubject}&body=${emailBody}`;
                         
                         // Open user's email client
-                        window.location.href = mailtoLink;
+                        window.open(mailtoLink, '_blank');
                         
                         // Show success message
                         showResponse('success', 
@@ -917,17 +1080,20 @@
                             position: fixed;
                             top: 20px;
                             right: 20px;
-                            background: #00b894;
-                            color: white;
+                            background: rgba(0, 212, 255, 0.9);
+                            color: var(--dark-1);
                             padding: 1rem 1.5rem;
                             border-radius: 10px;
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
                             z-index: 10000;
                             animation: slideInRight 0.3s ease;
+                            border: 1px solid rgba(0, 212, 255, 0.5);
+                            backdrop-filter: blur(10px);
+                            font-family: 'Rajdhani', sans-serif;
                         `;
                         notification.innerHTML = `
-                            <i class="fas fa-check-circle"></i> 
-                            Email copied to clipboard: ${email}
+                            <i class="fas fa-check-circle" style="color: var(--matrix-green);"></i> 
+                            Email copied to clipboard: <strong>${email}</strong>
                         `;
                         document.body.appendChild(notification);
                         
@@ -952,6 +1118,27 @@
                 `;
                 document.head.appendChild(style);
                 
+                // Add glitch effect to info items
+                const infoItems = document.querySelectorAll('.info-item');
+                infoItems.forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    item.style.opacity = '0';
+                    item.classList.add('animate-item');
+                    
+                    // Add click to copy for email
+                    if (item.querySelector('a[href^="mailto:"]')) {
+                        item.style.cursor = 'pointer';
+                        item.addEventListener('click', function(e) {
+                            if (!e.target.closest('a')) {
+                                const emailLink = this.querySelector('a[href^="mailto:"]');
+                                if (emailLink) {
+                                    emailLink.click();
+                                }
+                            }
+                        });
+                    }
+                });
+                
                 // Helper functions
                 function validateEmail(email) {
                     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -961,7 +1148,9 @@
                 function showResponse(type, message) {
                     responseMessage.className = `response-message ${type}`;
                     responseMessage.innerHTML = `
-                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}" 
+                           style="color: ${type === 'success' ? 'var(--matrix-green)' : 'var(--blood-red)'};">
+                        </i>
                         ${message}
                     `;
                     
@@ -1011,42 +1200,16 @@
                     document.body.removeChild(textarea);
                 }
                 
-                // Add animation to contact info items
-                const infoItems = document.querySelectorAll('.info-item');
-                infoItems.forEach((item, index) => {
-                    item.style.animationDelay = `${index * 0.1}s`;
-                    item.style.opacity = '0';
-                    item.style.animation = 'fadeInUp 0.6s ease forwards';
-                    
-                    // Add click to copy for email
-                    if (item.querySelector('a[href^="mailto:"]')) {
-                        item.style.cursor = 'pointer';
-                        item.addEventListener('click', function(e) {
-                            if (!e.target.closest('a')) {
-                                const emailLink = this.querySelector('a[href^="mailto:"]');
-                                if (emailLink) {
-                                    emailLink.click();
-                                }
-                            }
-                        });
-                    }
-                });
-                
-                // Add fadeInUp animation
-                const fadeStyle = document.createElement('style');
-                fadeStyle.textContent = `
-                    @keyframes fadeInUp {
-                        from {
-                            opacity: 0;
-                            transform: translateY(20px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-                `;
-                document.head.appendChild(fadeStyle);
+                // Add periodic glitch effect to email highlight
+                const emailHighlight = document.querySelector('.email-highlight');
+                if (emailHighlight) {
+                    setInterval(() => {
+                        emailHighlight.classList.remove('glitch');
+                        setTimeout(() => {
+                            emailHighlight.classList.add('glitch');
+                        }, 10);
+                    }, 10000);
+                }
             }
         });
     </script>
