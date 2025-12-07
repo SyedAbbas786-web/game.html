@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Syed Abbas - Game Developer & IT Student</title>
+    <meta name="description" content="Get in touch with Syed Abbas for game development projects, collaborations, or discussions about web development and programming.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Contact Page Specific Styles -->
+    <style>
+        /* ====== CONTACT PAGE STYLES ====== */
+        :root {
+            --contact-primary: #6a11cb;
+            --contact-secondary: #2575fc;
+            --contact-accent: #ff416c;
+            --contact-success: #00b894;
+            --contact-dark: #2d3436;
+            --contact-light: #f8f9fa;
+            --contact-gray: #636e72;
+        }
+        
+        .contact-page {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Contact Hero */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Contact Container */
+        .contact-container {
+            max-width: 1200px;
+            margin: -3rem auto 0;
+            padding: 0 2rem 4rem;
+        }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Contact Info Sidebar */
+        .contact-info {
+            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
+            color: white;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .info-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .info-icon {
+            font-size: 1.8rem;
+            min-width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .info-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .info-details p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .info-details a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .info-details a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Social Links */
+        .social-links-container {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .social-title {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .social-link i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-link span {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            padding: 3rem;
+        }
+        
+        .form-title {
+            font-size: 2rem;
+            color: var(--contact-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-subtitle {
+            color: var(--contact-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--contact-dark);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--contact-primary);
+            background: white;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--contact-primary), var(--contact-secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Response Message */
+        .response-message {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .response-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .response-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Map Section */
+        .map-section {
+            margin-top: 4rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .map-container {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .map-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+        }
+        
+        .map-placeholder {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .faq-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--contact-dark);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .faq-item {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--contact-primary);
+        }
+        
+        .faq-item h3 {
+            color: var(--contact-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .faq-item p {
+            color: var(--contact-gray);
+            line-height: 1.6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .contact-info,
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .info-title,
+            .form-title {
+                font-size: 1.8rem;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .faq-section {
+                padding: 2rem;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Email Animation */
+        .email-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="contact-page">
+    <!-- Navigation -->
+    <div id="nav-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1 class="contact-title"><i class="fas fa-envelope-open-text"></i> Get In Touch</h1>
+            <p class="contact-subtitle">
+                Have questions about my games? Want to collaborate on a project? 
+                Or just want to chat about game development? I'd love to hear from you!
+            </p>
+            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; display: inline-block; margin-top: 1rem;">
+                <p style="margin: 0; font-size: 1.1rem;">
+                    <i class="fas fa-envelope"></i> Primary Email: 
+                    <span class="email-highlight">syedabbasshah077@gmail.com</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Container -->
+    <div class="contact-container">
+        <div class="contact-wrapper">
+            <!-- Contact Info Sidebar -->
+            <aside class="contact-info">
+                <div class="info-content">
+                    <h2 class="info-title">Contact Information</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-details">
+                            <h3>Email Address</h3>
+                            <p>
+                                <a href="mailto:syedabbasshah077@gmail.com">
+                                    syedabbasshah077@gmail.com
+                                </a>
+                            </p>
+                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                                I typically respond within 24 hours
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-details">
+                            <h3>Location</h3>
+                            <p>Available for remote work worldwide</p>
+                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                                Open to collaborations globally
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-details">
+                            <h3>Response Time</h3>
+                            <p>24-48 hours for initial response</p>
+                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                                Faster for urgent game development inquiries
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="info-details">
+                            <h3>Expertise Areas</h3>
+                            <p>HTML5 Game Development • JavaScript • C++ • Web Development</p>
+                            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 0.5rem;">
+                                Game programming and educational content
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links-container">
+                        <h3 class="social-title">Connect With Me</h3>
+                        <div class="social-grid">
+                            <a href="https://github.com/SyedAbbas786-web" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h2 class="form-title">Send Me a Message</h2>
+                <p class="form-subtitle">Fill out the form below and I'll get back to you as soon as possible.</p>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user"></i> Full Name *
+                            </label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i> Email Address *
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">
+                            <i class="fas fa-tag"></i> Subject *
+                        </label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="game-development">Game Development Inquiry</option>
+                            <option value="collaboration">Project Collaboration</option>
+                            <option value="technical-help">Technical Help</option>
+                            <option value="feedback">Game Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">
+                            <i class="fas fa-comment-alt"></i> Your Message *
+                        </label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your project, question, or idea..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priority">
+                            <i class="fas fa-flag"></i> Priority Level
+                        </label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="radio" name="priority" value="low" checked>
+                                <span>Low Priority</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="radio" name="priority" value="medium">
+                                <span>Medium Priority</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="radio" name="priority" value="high">
+                                <span>High Priority</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="responseMessage" class="response-message"></div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How quickly will you respond to my message?</h3>
+                    <p>I typically respond within 24-48 hours. For urgent game development inquiries, I try to respond even faster.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you take on freelance game development projects?</h3>
+                    <p>Yes! I'm available for freelance HTML5 game development projects, educational game creation, and programming tutorials.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I use your games for educational purposes?</h3>
+                    <p>Absolutely! All my games are open for educational use. The source code is available on GitHub for learning purposes.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you offer game development mentoring?</h3>
+                    <p>Yes, I offer mentoring for beginners in game development. Contact me to discuss your learning goals.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Map/Contact Illustration -->
+        <section class="map-section">
+            <div class="map-container">
+                <div class="map-content">
+                    <div class="map-placeholder">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3 style="color: white; margin-bottom: 0.5rem;">Remote Collaboration Ready</h3>
+                    <p style="color: rgba(255,255,255,0.9); max-width: 500px; margin: 0 auto;">
+                        I work with clients and collaborators from all around the world. 
+                        Timezone differences are not a problem!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <script>
+        // Load navigation and footer from main site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navigation
+            fetch('index.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network error');
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Load Navigation
+                    const nav = doc.querySelector('nav') || doc.querySelector('.pro-nav') || doc.querySelector('.navbar');
+                    if (nav) {
+                        document.getElementById('nav-container').innerHTML = nav.outerHTML;
+                        
+                        // Update active link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            if (link.getAttribute('href') === 'contact.html') {
+                                link.classList.add('active');
+                            }
+                        });
+                    } else {
+                        createBasicNav();
+                    }
+                    
+                    // Load Footer
+                    const footer = doc.querySelector('footer') || doc.querySelector('.pro-footer');
+                    if (footer) {
+                        document.getElementById('footer-container').innerHTML = footer.outerHTML;
+                        
+                        // Update year in footer
+                        const yearSpan = document.getElementById('currentYear');
+                        if (yearSpan) {
+                            yearSpan.textContent = new Date().getFullYear();
+                        }
+                    } else {
+                        createBasicFooter();
+                    }
+                    
+                    // Initialize contact page functionality
+                    initContactPage();
+                })
+                .catch(error => {
+                    console.error('Error loading components:', error);
+                    createBasicNav();
+                    createBasicFooter();
+                    initContactPage();
+                });
+            
+            function createBasicNav() {
+                document.getElementById('nav-container').innerHTML = `
+                    <nav style="background: white; padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+                        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                            <a href="index.html" style="font-size: 1.5rem; font-weight: bold; color: #6a11cb; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-gamepad"></i> SyedAbbas Games
+                            </a>
+                            <div>
+                                <a href="index.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Home</a>
+                                <a href="projects.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Projects</a>
+                                <a href="blog.html" style="margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500;">Blog</a>
+                                <a href="contact.html" style="margin-left: 1.5rem; text-decoration: none; color: #6a11cb; font-weight: bold;">Contact</a>
+                            </div>
+                        </div>
+                    </nav>
+                `;
+            }
+            
+            function createBasicFooter() {
+                document.getElementById('footer-container').innerHTML = `
+                    <footer style="background: #2d3436; color: white; padding: 3rem 1rem 1.5rem; margin-top: 4rem;">
+                        <div style="max-width: 1400px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Get In Touch</h3>
+                                    <p style="color: #b2bec3;">
+                                        <i class="fas fa-envelope"></i> syedabbasshah077@gmail.com
+                                    </p>
+                                    <p style="color: #b2bec3; margin-top: 0.5rem;">
+                                        Available for game development projects and collaborations
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
+                                    <a href="index.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Home</a>
+                                    <a href="projects.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Game Projects</a>
+                                    <a href="blog.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">Development Blog</a>
+                                </div>
+                                <div>
+                                    <h3 style="color: white; margin-bottom: 1rem;">Connect</h3>
+                                    <a href="https://github.com/SyedAbbas786-web" target="_blank" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fab fa-github"></i> View Source Code
+                                    </a>
+                                    <a href="contact.html" style="color: #b2bec3; display: block; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-envelope"></i> Contact Form
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: #b2bec3;">
+                                <p>&copy; ${new Date().getFullYear()} Syed Abbas. All games are free to play.</p>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            }
+            
+            function initContactPage() {
+                const contactForm = document.getElementById('contactForm');
+                const submitBtn = document.getElementById('submitBtn');
+                const responseMessage = document.getElementById('responseMessage');
+                
+                // Form submission handler
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value.trim(),
+                        priority: document.querySelector('input[name="priority"]:checked').value
+                    };
+                    
+                    // Validate form
+                    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+                        showResponse('error', 'Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    if (!validateEmail(formData.email)) {
+                        showResponse('error', 'Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission (in production, this would send to a server)
+                    setTimeout(() => {
+                        // Prepare email content
+                        const emailSubject = encodeURIComponent(`[Game Dev Contact] ${formData.subject} - ${formData.name}`);
+                        const emailBody = encodeURIComponent(
+                            `Name: ${formData.name}\n` +
+                            `Email: ${formData.email}\n` +
+                            `Priority: ${formData.priority}\n\n` +
+                            `Message:\n${formData.message}\n\n` +
+                            `---\nSent from SyedAbbas Games Contact Form`
+                        );
+                        
+                        // Create mailto link
+                        const mailtoLink = `mailto:syedabbasshah077@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+                        
+                        // Open user's email client
+                        window.location.href = mailtoLink;
+                        
+                        // Show success message
+                        showResponse('success', 
+                            'Your message has been prepared! Your email client should open automatically. ' +
+                            'If it doesn\'t, please send your email to syedabbasshah077@gmail.com.'
+                        );
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Save form data to localStorage (for user convenience)
+                        saveFormData(formData);
+                        
+                    }, 1500); // Simulate network delay
+                });
+                
+                // Load saved form data if exists
+                loadSavedFormData();
+                
+                // Copy email to clipboard functionality
+                const emailElements = document.querySelectorAll('.info-details a[href^="mailto:"]');
+                emailElements.forEach(emailElement => {
+                    emailElement.addEventListener('click', function(e) {
+                        // Allow default mailto behavior, but also copy to clipboard
+                        const email = this.textContent.trim();
+                        copyToClipboard(email);
+                        
+                        // Show temporary notification
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #00b894;
+                            color: white;
+                            padding: 1rem 1.5rem;
+                            border-radius: 10px;
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                            z-index: 10000;
+                            animation: slideInRight 0.3s ease;
+                        `;
+                        notification.innerHTML = `
+                            <i class="fas fa-check-circle"></i> 
+                            Email copied to clipboard: ${email}
+                        `;
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.style.animation = 'slideOutRight 0.3s ease';
+                            setTimeout(() => notification.remove(), 300);
+                        }, 3000);
+                    });
+                });
+                
+                // Add CSS for notification animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Helper functions
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+                
+                function showResponse(type, message) {
+                    responseMessage.className = `response-message ${type}`;
+                    responseMessage.innerHTML = `
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                        ${message}
+                    `;
+                    
+                    // Auto-hide after 10 seconds
+                    setTimeout(() => {
+                        responseMessage.style.display = 'none';
+                    }, 10000);
+                }
+                
+                function saveFormData(data) {
+                    localStorage.setItem('contactFormData', JSON.stringify(data));
+                }
+                
+                function loadSavedFormData() {
+                    const savedData = localStorage.getItem('contactFormData');
+                    if (savedData) {
+                        try {
+                            const data = JSON.parse(savedData);
+                            document.getElementById('name').value = data.name || '';
+                            document.getElementById('email').value = data.email || '';
+                            // Don't restore message for privacy
+                        } catch (e) {
+                            console.log('No saved form data found');
+                        }
+                    }
+                }
+                
+                function copyToClipboard(text) {
+                    // Create temporary textarea
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    
+                    // Select and copy
+                    textarea.select();
+                    textarea.setSelectionRange(0, 99999); // For mobile devices
+                    
+                    try {
+                        document.execCommand('copy');
+                    } catch (err) {
+                        console.error('Copy failed:', err);
+                    }
+                    
+                    // Clean up
+                    document.body.removeChild(textarea);
+                }
+                
+                // Add animation to contact info items
+                const infoItems = document.querySelectorAll('.info-item');
+                infoItems.forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    item.style.opacity = '0';
+                    item.style.animation = 'fadeInUp 0.6s ease forwards';
+                    
+                    // Add click to copy for email
+                    if (item.querySelector('a[href^="mailto:"]')) {
+                        item.style.cursor = 'pointer';
+                        item.addEventListener('click', function(e) {
+                            if (!e.target.closest('a')) {
+                                const emailLink = this.querySelector('a[href^="mailto:"]');
+                                if (emailLink) {
+                                    emailLink.click();
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                // Add fadeInUp animation
+                const fadeStyle = document.createElement('style');
+                fadeStyle.textContent = `
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                `;
+                document.head.appendChild(fadeStyle);
+            }
+        });
+    </script>
+</body>
+</html>
